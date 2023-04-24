@@ -8,8 +8,12 @@ import { actions as cartActions } from './features/cartitems';
 import { auth, collection, db, getDocs } from './firebase';
 import { Shop } from './pages/shop/shop'
 import { Cart } from './pages/cart/cart'
+
+import Hero from './components/Joel/Hero'
+
 import {Login} from './pages/login/login'
 import {Profile} from './pages/profile/profile'
+
 
 
 function App() {
@@ -89,6 +93,8 @@ function App() {
     <div className="App">
       <Router>
         <Navbar />
+
+        <Hero />
 
         <Routes>
           <Route path="/" element={<Shop />} />
