@@ -4,7 +4,7 @@ import './App.css'
 import { HashRouter as Router, Routes, Route } from 'react-router-dom'
 import { Shop } from './pages/shop/shop'
 import { Cart } from './pages/cart/cart'
-
+import {Login} from './pages/login/login'
 function App() {
   const [count, setCount] = useState(0)
 
@@ -15,6 +15,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Shop />} />
           <Route path="/cart" element={<Cart />} />
+          <Route path="/login" element={<Login />} />
         </Routes>
       </Router>
     </div>
