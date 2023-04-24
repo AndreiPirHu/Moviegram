@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-
+import "../components/getPostersStyle.css";
 const GetMoviePosters = () => {
   const [movie3, setMovie3] = useState([]);
   const [movieName, setMovieName] = useState("");
@@ -26,15 +26,15 @@ const GetMoviePosters = () => {
   }, [movieName]);
 
   return (
-    <div className="App">
+    <div className="placeholder">
       <input
         type="text"
-        placeholder="Skriv in en filmtitel"
+        placeholder="Sök filmer här"
         value={movieName}
         onChange={handleMovieNameChange}
       />
       {movie3.map((movies) => (
-        <div>
+        <div className="searchImage">
           <img
             src={`https://image.tmdb.org/t/p/w500${movies.poster_path}`}
             alt="Movie poster"
