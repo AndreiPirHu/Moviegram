@@ -7,7 +7,9 @@ import { Cart } from './pages/cart/cart'
 import {Login} from './pages/login/login'
 import {Profile} from './pages/profile/profile'
 function App() {
-  const [count, setCount] = useState(0)
+
+
+  
 
   return (
     <div className="App">

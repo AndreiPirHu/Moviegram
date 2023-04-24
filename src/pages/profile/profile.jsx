@@ -17,11 +17,13 @@ export const Profile = () =>{
     email: 'mystore@example.com',
   };
 
+  //sign out user using firebase auth
+  //redirect to login page
   const handleSignOut = async () => {
     try {
-      await auth.signOut(); // call the signOut() method on the auth object
+      await auth.signOut(); 
       console.log('User signed out successfully');
-      dispatch(cartActions.clearItems())
+      
       navigate('/login');
     } catch (error) {
       console.log('Error signing out:', error);
@@ -35,15 +37,10 @@ return(
         <h1 className="profile-name">{user.name}</h1>
       </div>
       <div className="profile-details">
-        <div className="store-profile__contact-info">
           <p className="store-profile__address">{user.address}</p>
           <p className="store-profile__phone">{user.phone}</p>
           <p className="store-profile__email">{user.email}</p>
-          
           <button onClick={handleSignOut}>Log out</button>
-        </div>
-        
-        
       </div>
     </div>
 )
