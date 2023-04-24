@@ -1,5 +1,5 @@
 import { initializeApp } from 'firebase/app';
-import { getFirestore } from 'firebase/firestore';
+import { getFirestore, doc, collection, addDoc, query, getDocs, setDoc } from 'firebase/firestore';
 import { getAuth, signInWithEmailAndPassword} from 'firebase/auth';
 
 
@@ -10,7 +10,7 @@ const firebaseConfig = {
   projectId: "moviegram-884cc",
   storageBucket: "moviegram-884cc.appspot.com",
   messagingSenderId: "548929251026",
-  appId: "1:548929251026:web:d6eb415efb1abb8738ef0b"
+  appId: "1:548929251026:web:9410da7618ef0bc738ef0b"
 };
 
 
@@ -25,4 +25,4 @@ const auth = getAuth(app);
 
 
 
-export { db, auth, signInWithEmailAndPassword};
+export { db, auth, signInWithEmailAndPassword, doc, collection, addDoc, query, getDocs, setDoc};
