@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import "./cart.css"
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
 import { actions } from '../../features/cartitems';
 import { collection, db } from '../../firebase';
 import { deleteDoc, doc } from 'firebase/firestore';
