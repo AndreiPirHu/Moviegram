@@ -13,6 +13,7 @@ export const Shop = () => {
     const isLoggedIn = useSelector( state => state.login.loggedIn );
     const user = useSelector( state => state.login.user)
     const cart = useSelector(state => state.cartItems)
+    
     const dispatch = useDispatch();
 
 
