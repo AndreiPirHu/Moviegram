@@ -41,9 +41,9 @@ export const Shop = () => {
 
         //Add item to firestore
         await setDoc(itemDocRef, item);
-        console.log(`Document written with ID: ${item.id}`);
+        console.log(`Item added to firestore with ID: ${item.id}`);
     } catch (e) {
-        console.error('Error adding document:', e)
+        console.error('Error adding item to firestore:', e)
     }
     
     };

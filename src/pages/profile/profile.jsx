@@ -19,11 +19,12 @@ export const Profile = () =>{
 
   //sign out user using firebase auth
   //redirect to login page
+  //clears cart for offline mode
   const handleSignOut = async () => {
     try {
       await auth.signOut(); 
       console.log('User signed out successfully');
-      
+      dispatch(cartActions.clearItems())
       navigate('/login');
     } catch (error) {
       console.log('Error signing out:', error);
