@@ -10,10 +10,9 @@ import { actions } from '../../features/cartitems';
 export const Shop = () => {
     const [movie, setMovie] = useState([]);
 
-    const isLoggedIn = useSelector( state => state.login.loggedIn );
     const user = useSelector( state => state.login.user)
     const cart = useSelector(state => state.cartItems)
-    
+
     const dispatch = useDispatch();
 
 

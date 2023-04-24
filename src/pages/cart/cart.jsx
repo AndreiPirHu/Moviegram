@@ -10,7 +10,6 @@ import { deleteDoc, doc } from 'firebase/firestore';
 export const Cart = () => {
     const [totalPrice, setTotalPrice] = useState(0);
   
-    const isLoggedIn = useSelector( state => state.login.loggedIn );
     const cart = useSelector(state => state.cartItems)
     const user = useSelector( state => state.login.user)
   
