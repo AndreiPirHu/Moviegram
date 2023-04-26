@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import "./login.css"
-import { useNavigate} from 'react-router-dom';
+import { useNavigate, Link} from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { actions as loginActions} from '../../features/login';
 import { setDoc, collection, db, doc, auth, signInWithEmailAndPassword } from '../../firebase';
@@ -66,19 +66,37 @@ export const Login = () => {
 
 
   return(
+    <div className="container">
     <div className='form'>
       <h1>Login</h1>
       <form onSubmit={handleSignIn}>
+        
         <div>
-          <label htmlFor="email">Email:</label>
-          <input type="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+          <label htmlFor="email">Email</label>
+          <input 
+          type="email" 
+          id="email" 
+          value={email} 
+          onChange={(e) => setEmail(e.target.value)} 
+          required
+        />  
         </div>
         <div>
-          <label htmlFor="password">Password:</label>
-          <input type="password" id="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+          <label htmlFor="password">Password</label>
+          <input 
+          type="password" 
+          id="password" 
+          value={password} 
+          onChange={(e) => setPassword(e.target.value)} 
+          required
+        />
         </div>
         <button type="submit">Log In</button>
+        <Link to="/register">
+      <button className='register'>Register</button>
+      </Link>
       </form>
+    </div>
     </div>
   )
 }
