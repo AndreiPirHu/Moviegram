@@ -4,6 +4,7 @@
   align-items: center;
   justify-content: center;
   height: 100vh;
+  
 }
 
 .form {
@@ -13,6 +14,7 @@
   justify-content: center;
   width: 400px;
   padding: 40px;
+  padding-top: 0;
   border-radius: 8px;
   box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.2);
   background-color: #fff;
