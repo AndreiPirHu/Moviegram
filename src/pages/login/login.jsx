@@ -33,14 +33,16 @@ export const Login = () => {
     let offlineCart = JSON.parse(localStorage.getItem('cartItems'))||[];
 
     await offlineCart.forEach(item => {
-      handleUpload(item, user)
+      handleCartUpload(item, user)
     });
 
     localStorage.removeItem('cartItems');
   }
 
+
+
   //uploads all the offline cart items
-  const handleUpload = async (item, user) =>{
+  const handleCartUpload = async (item, user) =>{
     try{
     //reference to correct collection
     const cartItemsRef = collection(db, 'users', user, 'cartItems');
@@ -56,6 +58,8 @@ export const Login = () => {
    }
   }
 
+
+
   //redirects to new page if user logs in and if web address is written manually
   useEffect(() => {
     if (isLoggedIn === true) {
@@ -65,10 +69,11 @@ export const Login = () => {
   }, [isLoggedIn]);
 
 
+
   return(
     <div className="container">
     <div className='form'>
-      <h1>Login</h1>
+      <h1>Sign in</h1>
       <form onSubmit={handleSignIn}>
         
         <div>

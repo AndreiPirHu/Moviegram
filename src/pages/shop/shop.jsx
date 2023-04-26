@@ -31,12 +31,13 @@ export const Shop = () => {
         //adds item to cart
     dispatch(actions.addItem(item));
 
-    //TODO add so it ONLY adds when user is logged in
+    //Stops here if user is not signed in
     if (!user) {
         console.log('user is not logged in for firestore save');
         
         return;
     }
+    //if user is signed in it adds items to firestore
     try{
         //reference to correct collection
         const cartItemsRef = collection(db, 'users', user, 'cartItems');
