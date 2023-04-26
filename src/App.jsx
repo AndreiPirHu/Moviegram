@@ -95,7 +95,7 @@ function App() {
       <Router>
         <Navbar />
 
-        <Hero />
+        
 
         <Routes>
           <Route path="/" element={<Shop />} />

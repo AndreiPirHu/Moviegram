@@ -33,14 +33,17 @@ const GetMoviePosters = () => {
         value={movieName}
         onChange={handleMovieNameChange}
       />
+      <div className="searchImage">
+        
       {movie3.map((movies) => (
-        <div className="searchImage">
+        
           <img
             src={`https://image.tmdb.org/t/p/w500${movies.poster_path}`}
             alt="Movie poster"
           />
+          ))}
         </div>
-      ))}
+      
     </div>
   );
 };
