@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import "./login.css"
-import { useNavigate} from 'react-router-dom';
+import { useNavigate, Link} from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { actions as loginActions} from '../../features/login';
 import { setDoc, collection, db, doc, auth, signInWithEmailAndPassword } from '../../firebase';
@@ -33,14 +33,16 @@ export const Login = () => {
     let offlineCart = JSON.parse(localStorage.getItem('cartItems'))||[];
 
     await offlineCart.forEach(item => {
-      handleUpload(item, user)
+      handleCartUpload(item, user)
     });
 
     localStorage.removeItem('cartItems');
   }
 
+
+
   //uploads all the offline cart items
-  const handleUpload = async (item, user) =>{
+  const handleCartUpload = async (item, user) =>{
     try{
     //reference to correct collection
     const cartItemsRef = collection(db, 'users', user, 'cartItems');
@@ -56,6 +58,8 @@ export const Login = () => {
    }
   }
 
+
+
   //redirects to new page if user logs in and if web address is written manually
   useEffect(() => {
     if (isLoggedIn === true) {
@@ -65,20 +69,39 @@ export const Login = () => {
   }, [isLoggedIn]);
 
 
+
   return(
+    <div className="container">
     <div className='form'>
-      <h1>Login</h1>
+      <h1>Sign in</h1>
       <form onSubmit={handleSignIn}>
+        
         <div>
-          <label htmlFor="email">Email:</label>
-          <input type="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+          <label htmlFor="email">Email</label>
+          <input 
+          type="email" 
+          id="email" 
+          value={email} 
+          onChange={(e) => setEmail(e.target.value)} 
+          required
+        />  
         </div>
         <div>
-          <label htmlFor="password">Password:</label>
-          <input type="password" id="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+          <label htmlFor="password">Password</label>
+          <input 
+          type="password" 
+          id="password" 
+          value={password} 
+          onChange={(e) => setPassword(e.target.value)} 
+          required
+        />
         </div>
         <button type="submit">Log In</button>
+        <Link to="/register">
+      <button className='register'>Register</button>
+      </Link>
       </form>
+    </div>
     </div>
   )
 }

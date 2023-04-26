@@ -8,6 +8,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { useDispatch, useSelector } from 'react-redux';
 import { setDoc, collection, db, doc } from '../../firebase';
 import { actions } from '../../features/cartitems';
+import Hero from "../../components/Joel/Hero";
 
 
 
@@ -31,12 +32,13 @@ export const Shop = () => {
         //adds item to cart
     dispatch(actions.addItem(item));
 
-    //TODO add so it ONLY adds when user is logged in
+    //Stops here if user is not signed in
     if (!user) {
         console.log('user is not logged in for firestore save');
         
         return;
     }
+    //if user is signed in it adds items to firestore
     try{
         //reference to correct collection
         const cartItemsRef = collection(db, 'users', user, 'cartItems');
@@ -71,9 +73,11 @@ const FetchMovies = () => {
     FetchMovies();
   }, []);
     return (
+      
           <div className="shop">
+            
       <div className="shopTitle">
-        <h1>Moviegram</h1>
+      <Hero />
         <GetMoviePosters />
       </div>
 
@@ -85,16 +89,16 @@ const FetchMovies = () => {
               alt="Movie poster"
             />
             <div className='testShop'>
-<h1>Items for Sale</h1>
-<ul>
-        {items.map((item) => (
-<li key={item.id}>
-            {item.name} - ${item.price}
-<button onClick={() => addToCart(item)}>Add to Cart</button>
-</li>
-        ))}
-</ul>
-</div>
+              <h1>Items for Sale</h1>
+                <ul>
+                  {items.map((item) => (
+                  <li key={item.id}>
+                  {item.name} - ${item.price}
+                  <button onClick={() => addToCart(item)}>Add to Cart</button>
+                  </li>
+                  ))}
+                </ul>
+              </div>
           </div>
         ))}
       </div>

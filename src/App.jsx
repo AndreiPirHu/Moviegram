@@ -13,7 +13,7 @@ import Hero from './components/Joel/Hero'
 
 import {Login} from './pages/login/login'
 import {Profile} from './pages/profile/profile'
-
+import {Register} from './pages/register/register'
 
 
 function App() {
@@ -66,6 +66,7 @@ function App() {
   //if user is logged/logs in, starts fetching cart from firestore
   useEffect(() => {
       if (user){
+        console.log("Starting item fetch")
     handleDownload(user)
       }
   }, [user]);
@@ -94,13 +95,14 @@ function App() {
       <Router>
         <Navbar />
 
-        <Hero />
+        
 
         <Routes>
           <Route path="/" element={<Shop />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/login" element={<Login />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/register" element={<Register />} />
         </Routes>
       </Router>
     </div>
