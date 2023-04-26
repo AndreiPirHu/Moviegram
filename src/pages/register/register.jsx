@@ -12,6 +12,7 @@ export const Register = () => {
   const [password, setPassword] = useState("");
   
   const isLoggedIn = useSelector( state => state.login.loggedIn );
+  const isLoading = useSelector( state => state.login.loading);
 
   const dispatch = useDispatch();
   let navigate = useNavigate();
@@ -19,7 +20,7 @@ export const Register = () => {
   //Registers user to firestore auth
   const handleRegister = async (e) => {
       e.preventDefault();
-      
+      dispatch(loginActions.loginStart())
       createUserWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
       
@@ -31,6 +32,7 @@ export const Register = () => {
       handleSignIn()
     })
     .catch((error) => {
+      dispatch(loginActions.loginFailure())
       console.log(error.code)
       console.log(error.message)
     });
@@ -45,6 +47,7 @@ export const Register = () => {
       dispatch(loginActions.loginSuccess(user.uid))
     } catch (error) {
       console.log('Error logging in:', error);
+      dispatch(loginActions.loginFailure())
     }
   };
 
@@ -145,7 +148,24 @@ export const Register = () => {
         />
         
         </div>
-        <button type="submit">Create account</button>
+        {isLoading ? (
+        <button disabled type="submit" className='button-container loading-button' >
+        <div className="loader">
+          <div className="bar1"></div>
+          <div className="bar2"></div>
+          <div className="bar3"></div>
+          <div className="bar4"></div>
+          <div className="bar5"></div>
+          <div className="bar6"></div>
+          <div className="bar7"></div>
+          <div className="bar8"></div>
+          <div className="bar9"></div>
+          <div className="bar10"></div>
+          <div className="bar11"></div>
+          <div className="bar12"></div>
+        </div>
+        </button>
+        ) : (<button type="submit" className='button-container'>Create account</button>)}
         <p>Already have an account? <a href="/#/login" >Sign in</a></p>
       </form>
       </div>
