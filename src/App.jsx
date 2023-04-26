@@ -66,6 +66,7 @@ function App() {
   //if user is logged/logs in, starts fetching cart from firestore
   useEffect(() => {
       if (user){
+        console.log("Starting item fetch")
     handleDownload(user)
       }
   }, [user]);

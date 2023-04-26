@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import "./register.css"
-import { auth, createUserWithEmailAndPassword, signInWithEmailAndPassword, updateDoc } from '../../firebase';
+import { auth, collection, createUserWithEmailAndPassword, db, doc, setDoc, signInWithEmailAndPassword } from '../../firebase';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
-
+import { actions as loginActions} from '../../features/login';
 
 
 export const Register = () => {
@@ -26,7 +26,7 @@ export const Register = () => {
       const user = userCredential.user;
       console.log(user)
       //upload user info to firestore
-      handleUserInfoUpload()
+      handleUserInfoUpload(user.uid)
       //sign in the user after success
       handleSignIn()
     })
@@ -41,8 +41,8 @@ export const Register = () => {
     try {
       const {user} = await signInWithEmailAndPassword(auth, email, password); 
       console.log('User logged in successfully');
-      dispatch(loginActions.loginSuccess(user.uid))
       await handleOfflineCart(user.uid)
+      dispatch(loginActions.loginSuccess(user.uid))
     } catch (error) {
       console.log('Error logging in:', error);
     }
@@ -57,6 +57,9 @@ export const Register = () => {
     });
 
     localStorage.removeItem('cartItems');
+
+    //to update the cart info, update user
+    dispatch(loginActions.loginSuccess(user.uid))
   }
 
   //uploads all the offline cart items to firestore
@@ -78,17 +81,18 @@ export const Register = () => {
 
 
 // uploads name and email to firestore for the user doc
-  const handleUserInfoUpload = async () => {
+  const handleUserInfoUpload = async (user) => {
       //reference to correct collection
-      const userDocRef = collection(db, 'users', user);
+      const userDocRef = doc(db, 'users', user);
 
-      try{
-      
-      //Add info to firestore
-      await updateDoc(userDocRef, {
+      const userData = {
         email: email,
         name: name,
-      });
+      };
+
+      try{
+      //Add info to firestore
+      await setDoc(userDocRef, userData, {merge: true});
       console.log(`User info successfully added to firestore`);
      } catch (e) {
       console.error('Error adding user info to document:', e)
@@ -136,7 +140,10 @@ export const Register = () => {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           required
+          pattern=".{6,}"
+          title="Lösenordet måste vara minst 6 tecken lång"
         />
+        
         </div>
         <button type="submit">Create account</button>
         <p>Already have an account? <a href="/#/login" >Sign in</a></p>
