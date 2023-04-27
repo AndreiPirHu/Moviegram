@@ -1,6 +1,7 @@
 import React from "react";
 import "./shop.css";
 import { useEffect, useState } from "react";
+import { Link } from 'react-router-dom';
 
 import GetMoviePosters from "../../components/getPosters";
 
@@ -35,21 +36,12 @@ export const Shop = () => {
     }
 
     const addToCart = async (item) => {
-        /* const cartObject =
-        {
-            id: item[0],
-            name: item[1],
-            price: item[2]
-        }
-            ; */
-
         //adds item to cart
         dispatch(actions.addItem(item));
         console.log("data to localStorage", item)
         console.log("itemId: ", item.id)
         console.log("cartObject: ", cart)
 
-        //TODO add so it ONLY adds when user is logged in
         if (!user) {
             console.log('user is not logged in for firestore save');
 
@@ -77,15 +69,18 @@ export const Shop = () => {
                 return response.json();
             })
             .then((data) => {
+
                 /* console.log("fetchdata", data); */
                 setMovie(data.results);
             });
     };
     useEffect(() => {
         FetchMovies();
+
     }, []);
 
     return (
+
         <div className="shop">
             <div className="shopTitle">
                 <GetMoviePosters />
@@ -110,7 +105,7 @@ export const Shop = () => {
                     </div>
                 ))}
             </div>
-        </div>
+      </div>
     )
 }
 
