@@ -14,6 +14,8 @@ import Hero from "../../components/Joel/Hero";
 
 export const Shop = () => {
   const [movie, setMovie] = useState([]);
+  
+  const [poster, setPoster ] = useState([]);
 
 
     const user = useSelector( state => state.login.user)
@@ -73,7 +75,6 @@ const FetchMovies = () => {
     FetchMovies();
   }, []);
     return (
-      
           <div className="shop">
             
       <div className="shopTitle">
@@ -100,8 +101,6 @@ const FetchMovies = () => {
                 </ul>
               </div>
           </div>
-        ))}
-      </div>
     </div>
     )
 }
