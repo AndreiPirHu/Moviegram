@@ -37,6 +37,7 @@ const GetMoviePosters = () => {
         value={movieName}
         onChange={handleMovieNameChange}
       />
+
       {movie3.map((movies, index) => (
         <div className="searchImage">
           {/* joel: added index&onClick to navigate to individualPoster */}
@@ -45,8 +46,9 @@ const GetMoviePosters = () => {
             alt="Movie poster"
             onClick={()=>{navigate("/single/"+ movie3[index].id)}}
           />
+          ))}
         </div>
-      ))}
+      
     </div>
   );
 };
