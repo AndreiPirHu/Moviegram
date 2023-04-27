@@ -9,6 +9,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { useDispatch, useSelector } from 'react-redux';
 import { setDoc, collection, db, doc } from '../../firebase';
 import { actions } from '../../features/cartitems';
+import Hero from "../../components/Joel/Hero";
 
 
 
@@ -80,7 +81,6 @@ export const Shop = () => {
     }, []);
 
     return (
-
         <div className="shop">
             <div className="shopTitle">
                 <GetMoviePosters />
@@ -105,6 +105,7 @@ export const Shop = () => {
                     </div>
                 ))}
             </div>
+
       </div>
     )
 }

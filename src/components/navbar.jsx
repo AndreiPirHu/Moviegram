@@ -15,7 +15,7 @@ export const Navbar = () => {
     <div className="navbar">
       <div className="links">
         <Link to="/">Shop</Link>
-        {isLoggedIn ? (<Link to="/profile">Profile</Link>) : (<Link to="/login">Login</Link>)}
+        {isLoggedIn ? (<Link to="/profile">Profile</Link>) : (<Link to="/login">Sign in</Link>)}
         <Link to="/cart"><ShoppingCart size={32}  /> ({cart.length})
         </Link>
         <Nav>

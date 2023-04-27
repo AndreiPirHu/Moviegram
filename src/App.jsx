@@ -8,8 +8,12 @@ import { actions as cartActions } from './features/cartitems';
 import { auth, collection, db, getDocs } from './firebase';
 import { Shop } from './pages/shop/shop'
 import { Cart } from './pages/cart/cart'
+
+import Hero from './components/Joel/Hero'
+
 import {Login} from './pages/login/login'
 import {Profile} from './pages/profile/profile'
+import {Register} from './pages/register/register'
 
 
 function App() {
@@ -62,6 +66,7 @@ function App() {
   //if user is logged/logs in, starts fetching cart from firestore
   useEffect(() => {
       if (user){
+        console.log("Starting item fetch")
     handleDownload(user)
       }
   }, [user]);
@@ -94,6 +99,7 @@ function App() {
           <Route path="/cart" element={<Cart />} />
           <Route path="/login" element={<Login />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/register" element={<Register />} />
         </Routes>
       </Router>
     </div>
