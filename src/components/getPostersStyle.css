@@ -1,0 +1,42 @@
+.placeholder {
+  margin-top: 20px;
+  display: grid;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.input {
+  margin-bottom: 20px;
+}
+
+input[type="text"] {
+  padding: 10px;
+  font-size: 16px;
+  border: none;
+  border-radius: 4px;
+  background-color: #f2f2f2;
+  width: 300px;
+}
+
+.searchImage {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  padding: 10;
+  /* -webkit-overflow-scrolling: touch; */
+  /* flex-flow: row wrap; */
+  /* margin: 10px; */
+}
+
+.placeholder.active {
+  cursor: grabbing;
+  cursor: -webkit-grabbing;
+  transform: scale(1);
+}
+
+/* .movie-poster {
+  flex: 0 0 auto;
+  /* display: inline-block; */
+  width: 200px;
+  height: 300px;
+} */

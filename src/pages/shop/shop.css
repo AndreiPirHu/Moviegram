@@ -1,3 +1,8 @@
+
+.shop {
+    position: relative;
+    background-color: bisque;
+
 * {
     margin: 0;
     padding: 0;
@@ -23,8 +28,95 @@ body {
 }
 
 .shopTitle {
-    margin-top: 100px;
+    display: flex;
+    margin-top: 50px;
     text-align: center;
+    font-size: 24px;
+    background-color: blanchedalmond;
+}
+
+.trending {
+    display: flex;
+    position: center;
+}
+
+.products {
+    box-sizing: border-box;
+    display: grid;
+    padding: 2em;
+    max-width: 100%;
+    max-height: 100%;
+    height: auto;
+    width: fit-content;
+    position: center;
+    object-fit: inherit;
+    gap: 2em;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
+
+.products img {
+    margin: 0;
+    padding: 5px;
+    background-color: rgba(255, 255, 255, 0.15);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 0 20px #363530;
+    position: center;
+    overflow: hidden;
+    width: 200px;
+    max-height: 100%;
+    object-fit: fill;
+    height: auto;
+}
+
+.movie-poster {
+    margin: 0;
+    padding: 3px;
+    /* background-color: rgba(255, 255, 255, 0.15); */
+
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    /* box-shadow: 0 0 20px #363530; */
+    /* position: relative; */
+    overflow: hidden;
+    width: auto;
+    height: auto;
+    object-fit: inherit;
+    width: fit-content;
+    height: 450px;
+    /* display: flex; */
+    justify-content: center;
+    align-items: center;
+    background-color: #f8f8f8;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+}
+
+.products img:hover {
+    transform: none;
+    box-shadow: none;
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+@media screen and (max-width: 600px) {
+    .shopTitle {
+        font-size: 20px;
+    }
+
+    .products {
+        gap: 0.1em;
+        padding: 0.5em;
+    }
+
+    .products img {
+        padding: 4px;
+        border-radius: 10px;
+    }
+
+    .products img:hover {
+        transform: translateY(-3px) scale(1.02);
+    }
+
     font-size: 40px;
 }
 
