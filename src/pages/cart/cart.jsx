@@ -8,20 +8,17 @@ import { deleteDoc, doc } from 'firebase/firestore';
 
 export const Cart = () => {
     const [totalPrice, setTotalPrice] = useState(0);
-
+  
     const cart = useSelector(state => state.cartItems)
-    const user = useSelector(state => state.login.user)
-
+    const user = useSelector( state => state.login.user)
+  
     const dispatch = useDispatch()
-
-
 
     // Calculate the total price of all items in the cart
     useEffect(() => {
-        console.log("CartItems: ", cart)
         let total = 0;
         cart.forEach((item) => {
-            total += item.price;
+        total += item.price;
         });
         setTotalPrice(total);
     }, [cart]);
@@ -29,26 +26,25 @@ export const Cart = () => {
 
     const removeFromCart = async (item) => {
         //remove from localstorage
-        console.log("item.id =", item.id)
-        dispatch(actions.removeItem(item.id))
-
+          dispatch(actions.removeItem(item.id))
+    
         //Remove item from firestore if user is logged in
-        if (!user) {
-            console.log('user is not logged in for firestore remove');
-            return;
+        if (!user){
+          console.log('user is not logged in for firestore remove');
+          return;
         }
-        try {
-            //reference to correct collection
-            const cartItemsRef = collection(db, 'users', user, 'cartItems');
-
-            //delete thedocument
-            await deleteDoc(doc(cartItemsRef, item.id));
-            console.log(`Document with ID: ${item.id} successfully deleted`);
-        } catch (e) {
-            console.error('Error deleting document:', e)
-        }
-
-    };
+        try{
+          //reference to correct collection
+          const cartItemsRef = collection(db, 'users', user, 'cartItems');
+      
+          //delete thedocument
+          await deleteDoc(doc(cartItemsRef, item.id));
+          console.log(`Document with ID: ${item.id} successfully deleted`);
+         } catch (e) {
+          console.error('Error deleting document:', e)
+         }
+        
+      };
 
 
 
@@ -57,14 +53,11 @@ export const Cart = () => {
             <div>
                 <h1>Cart Items</h1>
                 <ul>
-                    {cart.map((item, index) => (
-                        <div key={index}>
-                            <li key={item.id}>
-                                {item.name} - ${item.price}
-                                <button onClick={() => removeFromCart(item)}>Remove from Cart</button>
-                            </li>
-                        </div>
-
+                    {cart.map((item) => (
+                        <li key={item.id}>
+                            {item.name} - ${item.price}
+                            <button onClick={() => removeFromCart(item)}>Remove from Cart</button>
+                        </li>
                     ))}
                     <li>Total Price: ${totalPrice}</li>
                 </ul>
