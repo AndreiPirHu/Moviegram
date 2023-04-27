@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import "./login.css"
 import { useNavigate, Link} from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { actions as loginActions} from '../../features/login';
+import { actions as loginActions } from '../../features/login';
 import { setDoc, collection, db, doc, auth, signInWithEmailAndPassword } from '../../firebase';
 
 
@@ -23,7 +23,7 @@ export const Login = () => {
     e.preventDefault();
     dispatch(loginActions.loginStart())
     try {
-      const {user} = await signInWithEmailAndPassword(auth, email, password); 
+      const { user } = await signInWithEmailAndPassword(auth, email, password);
       console.log('User logged in successfully');
       setLoginError(false)
       dispatch(loginActions.loginSuccess(user.uid))
@@ -37,9 +37,9 @@ export const Login = () => {
   };
 
   //sends offline cart to be uploaded and deletes it from localstorage
-  const handleOfflineCart = async (user) =>{
-    let offlineCart = JSON.parse(localStorage.getItem('cartItems'))||[];
-
+  const handleOfflineCart = async (user) => {
+    let offlineCart = JSON.parse(localStorage.getItem('cartItems')) || [];
+    console.log("handleOfflineCart ", offlineCart)
     await offlineCart.forEach(item => {
       handleCartUpload(item, user)
     });
@@ -50,20 +50,21 @@ export const Login = () => {
 
 
   //uploads all the offline cart items
+
   const handleCartUpload = async (item, user) =>{
     try{
     //reference to correct collection
     const cartItemsRef = collection(db, 'users', user, 'cartItems');
 
-    // Set the itemID as the doc name
-    const itemDocRef = doc(cartItemsRef, item.id);
+      // Set the itemID as the doc name
+      const itemDocRef = doc(cartItemsRef, item.id);
 
-    //Add item to firestore
-    await setDoc(itemDocRef, item);
-    console.log(`Document written with ID: ${item.id}`);
-   } catch (e) {
-    console.error('Error adding document:', e)
-   }
+      //Add item to firestore
+      await setDoc(itemDocRef, item);
+      console.log(`Document written with ID: ${item.id}`);
+    } catch (e) {
+      console.error('Error adding document:', e)
+    }
   }
 
 
@@ -75,7 +76,6 @@ export const Login = () => {
       console.log("Redirecting to profile")
     }
   }, [isLoggedIn]);
-
 
 
   return(

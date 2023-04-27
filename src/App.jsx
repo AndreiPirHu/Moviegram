@@ -94,9 +94,6 @@ function App() {
     <div className="App">
       <Router>
         <Navbar />
-
-        
-
         <Routes>
           <Route path="/" element={<Shop />} />
           <Route path="/cart" element={<Cart />} />
