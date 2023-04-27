@@ -13,6 +13,8 @@ import { actions } from '../../features/cartitems';
 
 export const Shop = () => {
   const [movie, setMovie] = useState([]);
+  
+  const [poster, setPoster ] = useState([]);
 
 
     const user = useSelector( state => state.login.user)
@@ -71,33 +73,31 @@ const FetchMovies = () => {
     FetchMovies();
   }, []);
     return (
-          <div className="shop">
-      <div className="shopTitle">
-        <h1>Moviegram</h1>
-        <GetMoviePosters />
-      </div>
-
-      <div className="products">
-        {movie.map((movies) => (
-          <div>
-            <img
-              src={`https://image.tmdb.org/t/p/w500${movies.poster_path}`}
-              alt="Movie poster"
-            />
-            <div className='testShop'>
-<h1>Items for Sale</h1>
-<ul>
-        {items.map((item) => (
-<li key={item.id}>
-            {item.name} - ${item.price}
-<button onClick={() => addToCart(item)}>Add to Cart</button>
-</li>
-        ))}
-</ul>
-</div>
+      <div className="shop">
+          <div className="shopTitle">
+            <GetMoviePosters />
           </div>
-        ))}
-      </div>
+
+          <div className="products">
+              {movie.map((movies) => (
+                <div>
+                  <img
+                    src={`https://image.tmdb.org/t/p/w500${movies.poster_path}`}
+                    alt="Movie poster"/>
+                  <div className='testShop'>
+                    <h1>Items for Sale</h1>
+                    <ul>
+                            {items.map((item) => (
+                      <li key={item.id}>
+                                {item.name} - ${item.price}
+                      <button onClick={() => addToCart(item)}>Add to Cart</button>
+                      </li>
+                            ))}
+                    </ul>
+                  </div>
+                </div>
+              ))}
+          </div>
     </div>
     )
 }

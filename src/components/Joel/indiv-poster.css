@@ -1,0 +1,35 @@
+
+.indivPosterDiv{
+    display: grid;
+    grid-template-rows: row;
+    align-items: center;
+}
+.posterDiv{
+    display: flex;
+    flex-flow: row wrap;
+    margin: 10px;
+}
+.posterDiv img{
+    margin: 0;
+    padding: 10px;
+    background-color: rgba(255, 255, 255, 0.15);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 0 20px #363530;
+    position: relative;
+    overflow: hidden;
+    object-fit: cover;
+}
+.posterDetails{
+    margin: 10px;
+    border : 2px solid black;
+    border-radius: 5px;
+}
+.buttonLink{
+    padding : 5px;
+    border : 2px solid black;
+    border-radius: 5px;
+}
+#addtocart{
+    margin: 5px;
+}

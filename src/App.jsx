@@ -13,6 +13,7 @@ import Hero from './components/Joel/Hero'
 
 import {Login} from './pages/login/login'
 import {Profile} from './pages/profile/profile'
+import IndividualPoster from './components/Joel/IndividualPoster';
 
 
 
@@ -101,6 +102,8 @@ function App() {
           <Route path="/cart" element={<Cart />} />
           <Route path="/login" element={<Login />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/single" element={<IndividualPoster />} />
+          <Route path="/single/:id" element={<IndividualPoster />} />
         </Routes>
       </Router>
     </div>

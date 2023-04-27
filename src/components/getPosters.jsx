@@ -1,8 +1,12 @@
 import { useEffect, useState } from "react";
 import "../components/getPostersStyle.css";
+import { useNavigate } from "react-router-dom";
 const GetMoviePosters = () => {
   const [movie3, setMovie3] = useState([]);
   const [movieName, setMovieName] = useState("");
+
+  //joel: added navigate/import
+  let navigate = useNavigate();
 
   const handleMovieNameChange = (event) => {
     setMovieName(event.target.value);
@@ -33,11 +37,13 @@ const GetMoviePosters = () => {
         value={movieName}
         onChange={handleMovieNameChange}
       />
-      {movie3.map((movies) => (
+      {movie3.map((movies, index) => (
         <div className="searchImage">
+          {/* joel: added index&onClick to navigate to individualPoster */}
           <img
             src={`https://image.tmdb.org/t/p/w500${movies.poster_path}`}
             alt="Movie poster"
+            onClick={()=>{navigate("/single/"+ movie3[index].id)}}
           />
         </div>
       ))}

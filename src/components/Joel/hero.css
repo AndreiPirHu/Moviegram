@@ -15,6 +15,7 @@
     border: 2px solid black;
 }
 .heroComponent img:hover{
+    width: 195px;
     box-shadow: 3px 2px 5px black ;
 }
 /* .heroTwo{
@@ -30,6 +31,10 @@
     }
     .heroComponent img{
         width: 100px;
+    }
+    .heroComponent img:hover{
+        margin: 0px;
+        width: 103px;
     }
     /* .heroTwo{
         position:unset;
