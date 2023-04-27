@@ -46,8 +46,9 @@ const GetMoviePosters = () => {
             alt="Movie poster"
             onClick={()=>{navigate("/single/"+ movie3[index].id)}}
           />
+          </div>
           ))}
-        </div>
+        
       
     </div>
   );

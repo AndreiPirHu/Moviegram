@@ -101,6 +101,8 @@ const FetchMovies = () => {
                 </ul>
               </div>
           </div>
+      ))}
+    </div>
     </div>
     )
 }
