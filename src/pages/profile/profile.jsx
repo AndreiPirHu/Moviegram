@@ -1,9 +1,10 @@
 import React from 'react';
-import './Profile.css'
+import './profile.css'
 import { auth } from '../../firebase';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { actions as cartActions} from '../../features/cartitems';
+import { v4 as uuidv4 } from 'uuid';
 
 export const Profile = () =>{
   
@@ -16,6 +17,21 @@ export const Profile = () =>{
     phone: '555-1234',
     email: 'mystore@example.com',
   };
+
+  const orders = [
+  {
+    id: uuidv4(),
+    date: '12 may',
+    items: {},
+    total: '£120',
+  },
+  {
+    id: uuidv4(),
+    date: '12 may',
+    items: {},
+    total: '£120',
+  }
+  ]
 
   //sign out user using firebase auth
   //redirect to login page
@@ -33,16 +49,41 @@ export const Profile = () =>{
 
 
 return(
-  <div className="profile">
-      <div className="profile-header">
-        <h1 className="profile-name">{user.name}</h1>
+<div className="profile">
+  <div className='user-info'>
+      <h1>Welcome {user.name}</h1>
+      <div className="user-details">
+        <ul>
+          <li>
+            <strong>Name:</strong> {user.name}
+          </li>
+          <li>
+            <strong>Email:</strong> {user.email}
+          </li>
+          <li>
+            <strong>Address:</strong> {user.address}
+          </li>
+        </ul>
       </div>
-      <div className="profile-details">
-          <p className="store-profile__address">{user.address}</p>
-          <p className="store-profile__phone">{user.phone}</p>
-          <p className="store-profile__email">{user.email}</p>
+      
+      <button>Edit Information</button>
+</div>
+<div className='user-info'>
+      <h2>Order History</h2>
+      <ul>
+        {orders.map(order => (
+          <li key={order.id}>
+            <div>Order #{order.id}</div>
+            <div>Date: {order.date}</div>
+            <div>Items: </div>
+            <div>Total: ${order.total}</div>
+          </li>
+        ))}
+      </ul>
+
+      </div>
           <button onClick={handleSignOut}>Log out</button>
-      </div>
+          
     </div>
 )
 
