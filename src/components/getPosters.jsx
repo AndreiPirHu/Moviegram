@@ -5,7 +5,7 @@ const GetMoviePosters = () => {
   const [movieGenre, setMovieGenre] = useState([]);
   const [movie3, setMovie3] = useState([]);
   const [movieName, setMovieName] = useState("");
-  const [movie_id, setMovie_id] = useState(36);
+  const [movie_id, setMovie_id] = useState("");
   const handleMovieNameChange = (event) => {
     setMovieName(event.target.value);
   };
@@ -85,9 +85,9 @@ const GetMoviePosters = () => {
           />
         ))}
 
-        {movieGenre.map((movies) => (
+        {movieGenre.map((movie) => (
           <img
-            src={`https://image.tmdb.org/t/p/w500${movies.poster_path}`}
+            src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
             alt="Movie poster"
           />
         ))}
