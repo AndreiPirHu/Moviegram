@@ -1,0 +1,49 @@
+.heroComponent{
+    display: flex;
+    flex-flow: row wrap;
+    background-color: rgb(2, 2, 80);
+}
+.title{
+    color: azure;
+    font-size: 7vw;
+    margin: 0%;
+}
+.heroComponent img{
+    width: 200px;
+    margin: 4px;
+    object-fit: cover;
+    border: 2px solid black;
+}
+.heroComponent img:hover{
+    width: 195px;
+    box-shadow: 3px 2px 5px black ;
+}
+/* .heroTwo{
+    position: relative;
+    left: 350px;
+    overflow: scroll;
+} */
+
+@media(max-width:600px){
+    .heroComponent{
+        display: grid;
+
+    }
+    .heroComponent img{
+        width: 100px;
+    }
+    .heroComponent img:hover{
+        margin: 0px;
+        width: 103px;
+    }
+    /* .heroTwo{
+        position:unset;
+    } */
+    .title{
+        color: white;
+        font-size: 15vw;
+        margin: 0%;
+        text-align: center;
+    }
+    
+}

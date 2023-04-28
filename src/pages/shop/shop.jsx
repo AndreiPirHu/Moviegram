@@ -1,16 +1,18 @@
 import React from "react";
 import "./shop.css";
 import { useEffect, useState } from "react";
-
 import GetMoviePosters from "../../components/getPosters";
+import { v4 as uuidv4 } from 'uuid';
+import { useDispatch, useSelector } from 'react-redux';
+import { setDoc, collection, db, doc } from '../../firebase';
+import { actions } from '../../features/cartitems';
+import Hero from "../../components/Joel/Hero";
 
-import { v4 as uuidv4 } from "uuid";
-import { useDispatch, useSelector } from "react-redux";
-import { setDoc, collection, db, doc } from "../../firebase";
-import { actions } from "../../features/cartitems";
 
 export const Shop = () => {
   const [movie, setMovie] = useState([]);
+  
+  const [poster, setPoster ] = useState([]);
 
   const user = useSelector((state) => state.login.user);
   const cart = useSelector((state) => state.cartItems);
@@ -27,15 +29,16 @@ export const Shop = () => {
     //adds item to cart
     dispatch(actions.addItem(item));
 
-    //TODO add so it ONLY adds when user is logged in
+    //Stops here if user is not signed in
     if (!user) {
       console.log("user is not logged in for firestore save");
 
       return;
     }
-    try {
-      //reference to correct collection
-      const cartItemsRef = collection(db, "users", user, "cartItems");
+    //if user is signed in it adds items to firestore
+    try{
+        //reference to correct collection
+        const cartItemsRef = collection(db, 'users', user, 'cartItems');
 
       // Set the itemID as the doc name
       const itemDocRef = doc(cartItemsRef, item.id);
@@ -65,10 +68,11 @@ export const Shop = () => {
   useEffect(() => {
     FetchMovies();
   }, []);
-  return (
-    <div className="shop">
+
+    return (
+          <div className="shop">
       <div className="shopTitle">
-        <h1>Moviegram</h1>
+      <Hero />
         <GetMoviePosters />
       </div>
 
@@ -79,7 +83,7 @@ export const Shop = () => {
               src={`https://image.tmdb.org/t/p/w500${movies.poster_path}`}
               alt="Movie poster"
             />
-            <div className="testShop">
+          <div className="testShop">
               <h1>Items for Sale</h1>
               <ul>
                 {items.map((item) => (
@@ -90,9 +94,10 @@ export const Shop = () => {
                 ))}
               </ul>
             </div>
+
           </div>
-        ))}
-      </div>
+      ))}
+    </div>
     </div>
   );
 };

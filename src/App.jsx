@@ -1,15 +1,19 @@
-import { useEffect } from "react";
-import { Navbar } from "./components/navbar";
-import "./App.css";
-import { HashRouter as Router, Routes, Route } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { actions as loginActions } from "./features/login";
-import { actions as cartActions } from "./features/cartitems";
-import { auth, collection, db, getDocs } from "./firebase";
-import { Shop } from "./pages/shop/shop";
-import { Cart } from "./pages/cart/cart";
-import { Login } from "./pages/login/login";
-import { Profile } from "./pages/profile/profile";
+
+import { useEffect } from 'react'
+import { Navbar } from './components/navbar'
+import './App.css'
+import { HashRouter as Router, Routes, Route } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux';
+import { actions as loginActions } from './features/login';
+import { actions as cartActions } from './features/cartitems';
+import { auth, collection, db, getDocs } from './firebase';
+import { Shop } from './pages/shop/shop'
+import { Cart } from './pages/cart/cart'
+import {Login} from './pages/login/login'
+import {Profile} from './pages/profile/profile'
+import IndividualPoster from './components/Joel/IndividualPoster';
+import {Register} from './pages/register/register'
+
 
 function App() {
   const cart = useSelector((state) => state.cartItems);
@@ -57,9 +61,11 @@ function App() {
 
   //if user is logged/logs in, starts fetching cart from firestore
   useEffect(() => {
-    if (user) {
-      handleDownload(user);
-    }
+
+      if (user){
+        console.log("Starting item fetch")
+    handleDownload(user)
+      }
   }, [user]);
 
   //fetch cart items from firestore on page reload if logged in
@@ -86,12 +92,14 @@ function App() {
     <div className="App">
       <Router>
         <Navbar />
-
         <Routes>
           <Route path="/" element={<Shop />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/login" element={<Login />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/single" element={<IndividualPoster />} />
+          <Route path="/single/:id" element={<IndividualPoster />} />
+          <Route path="/register" element={<Register />} />
         </Routes>
       </Router>
     </div>

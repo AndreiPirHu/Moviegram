@@ -1,11 +1,17 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import "../components/getPostersStyle.css";
+import { useNavigate } from "react-router-dom";
+
 const GetMoviePosters = () => {
   const [movieGenre, setMovieGenre] = useState([]);
   const [movie3, setMovie3] = useState([]);
   const [movieName, setMovieName] = useState("");
   const [movie_id, setMovie_id] = useState("");
+
+  //joel: added navigate/import
+  let navigate = useNavigate();
+
   const handleMovieNameChange = (event) => {
     setMovieName(event.target.value);
   };
@@ -78,13 +84,14 @@ const GetMoviePosters = () => {
       </div>
 
       <div className="searchImage">
-        {movie3.map((movies) => (
+        {movie3.map((movies, index) => (
+          {/* joel: added index&onClick to navigate to individualPoster */}
           <img
             src={`https://image.tmdb.org/t/p/w500${movies.poster_path}`}
             alt="Movie poster"
+            onClick={()=>{navigate("/single/"+ movie3[index].id)}}
           />
         ))}
-
         {movieGenre.map((movie) => (
           <img
             src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
@@ -95,4 +102,5 @@ const GetMoviePosters = () => {
     </div>
   );
 };
+
 export default GetMoviePosters;
