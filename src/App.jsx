@@ -8,9 +8,6 @@ import { actions as cartActions } from './features/cartitems';
 import { auth, collection, db, getDocs } from './firebase';
 import { Shop } from './pages/shop/shop'
 import { Cart } from './pages/cart/cart'
-
-import Hero from './components/Joel/Hero'
-
 import {Login} from './pages/login/login'
 import {Profile} from './pages/profile/profile'
 import IndividualPoster from './components/Joel/IndividualPoster';
@@ -96,9 +93,6 @@ function App() {
     <div className="App">
       <Router>
         <Navbar />
-
-        
-
         <Routes>
           <Route path="/" element={<Shop />} />
           <Route path="/cart" element={<Cart />} />
