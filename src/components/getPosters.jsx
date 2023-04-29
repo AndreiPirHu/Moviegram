@@ -85,19 +85,22 @@ const GetMoviePosters = () => {
 
       <div className="searchImage">
         {movie3.map((movies, index) => (
-          {/* joel: added index&onClick to navigate to individualPoster */}
           <img
             src={`https://image.tmdb.org/t/p/w500${movies.poster_path}`}
             alt="Movie poster"
-            onClick={()=>{navigate("/single/"+ movie3[index].id)}}
+            onClick={() => {
+              navigate("/single/" + movie3[index].id);
+            }}
           />
         ))}
-        {movieGenre.map((movie) => (
-          <img
-            src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-            alt="Movie poster"
-          />
-        ))}
+        <div className="genreStyle">
+          {movieGenre.map((movie) => (
+            <img
+              src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+              alt="Movie poster"
+            />
+          ))}
+        </div>
       </div>
     </div>
   );

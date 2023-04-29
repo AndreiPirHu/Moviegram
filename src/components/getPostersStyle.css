@@ -1,10 +1,6 @@
 .placeholder {
   margin-top: 20px;
-
-  display: grid;
-
   flex-wrap: wrap;
-
   justify-content: center;
 }
 
@@ -14,15 +10,10 @@
 
 input[type="text"] {
   padding: 10px;
-
   font-size: 16px;
-
   border: none;
-
   border-radius: 4px;
-
   background-color: #f2f2f2;
-
   width: 300px;
 }
 
@@ -52,4 +43,21 @@ button:hover {
   background-color: #f1c40f;
   color: #333;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+}
+.genreStyle {
+  display: flex;
+  overflow-x: scroll;
+}
+.genreStyle img {
+  flex: 0 0 10%; /* Ändra till 30% för att göra bilderna mindre */
+  height: auto;
+  margin-right: 10px;
+  height: auto;
+  margin-right: 10px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  transition: transform 0.2s ease-in-out;
+}
+.genreStyle img:hover {
+  transform: scale(1.1);
 }
