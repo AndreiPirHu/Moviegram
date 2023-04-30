@@ -40,7 +40,7 @@ const GetMoviePosters = () => {
 
       {movie3.map((movies, index) => (
         <div className="searchImage">
-          /* joel: added index&onClick to navigate to individualPoster */
+          {/* joel: added index&onClick to navigate to individualPoster */}
           <img
             src={`https://image.tmdb.org/t/p/w500${movies.poster_path}`}
             alt="Movie poster"
