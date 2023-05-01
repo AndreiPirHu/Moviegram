@@ -18,6 +18,7 @@ import {Register} from './pages/register/register'
 function App() {
   const cart = useSelector( state => state.cartItems)
   const user = useSelector( state => state.login.user)
+  const isLoggedIn = useSelector( state => state.login.loggedIn)
 
   const dispatch = useDispatch();
 
@@ -25,7 +26,7 @@ function App() {
   //saves and reads cart from previous offline session (localstorage) when webpage is loaded
   //Only while logged out
   useEffect(() => {
-    if(!user){
+    if(!isLoggedIn){
       let previousCart = JSON.parse(localStorage.getItem('cartItems'))||[];
       const timeoutId = setTimeout(() => {
         previousCart.forEach(item => {
@@ -39,7 +40,7 @@ function App() {
   //Update localstorage when cart changes by adding or removing
   //Only while logged out
   useEffect(() => {
-    if(!user){
+    if(!isLoggedIn){
       const timeoutId = setTimeout(() => {
         localStorage.setItem('cartItems', JSON.stringify(cart));
       }, 10);
@@ -47,12 +48,14 @@ function App() {
     }
   }, [cart]);
 
+
   //checks if user is logged in when dispatch is used
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(user => {
 
       if (user) {
         dispatch(loginActions.loginSuccess(user.uid));
+        console.log("user is logged in //dispatch used");
         
       } else {
         dispatch(loginActions.logout());
@@ -62,9 +65,10 @@ function App() {
     return () => unsubscribe();
   }, [dispatch]);
 
+
   //if user is logged/logs in, starts fetching cart from firestore
   useEffect(() => {
-      if (user){
+      if (isLoggedIn){
         console.log("Starting item fetch")
     handleDownload(user)
       }

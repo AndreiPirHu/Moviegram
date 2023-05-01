@@ -19,6 +19,7 @@ export const Shop = () => {
 
 
     const user = useSelector( state => state.login.user)
+    const isLoggedIn = useSelector( state => state.login.loggedIn)
     const cart = useSelector(state => state.cartItems)
 
     const dispatch = useDispatch();
@@ -35,7 +36,7 @@ export const Shop = () => {
     dispatch(actions.addItem(item));
 
     //Stops here if user is not signed in
-    if (!user) {
+    if (!isLoggedIn) {
         console.log('user is not logged in for firestore save');
         
         return;
