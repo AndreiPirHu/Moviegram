@@ -91,7 +91,7 @@ function App() {
         
       dispatch(cartActions.addItem(item));
     });
-  }
+  };
 
   //downloads userinfo from user firestore document when logged in
   const handleUserInfoDownload = (user) => {
@@ -111,7 +111,7 @@ function App() {
       .catch((error) => {
         console.log( error);
       });
-  }
+  };
 
 
   return (
