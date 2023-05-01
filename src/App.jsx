@@ -12,6 +12,7 @@ import {Login} from './pages/login/login'
 import {Profile} from './pages/profile/profile'
 import IndividualPoster from './components/Joel/IndividualPoster';
 import {Register} from './pages/register/register'
+import { doc, getDoc } from '@firebase/firestore';
 
 
 
@@ -56,7 +57,7 @@ function App() {
       if (user) {
         dispatch(loginActions.loginSuccess(user.uid));
         console.log("user is logged in //dispatch used");
-        
+        handleUserInfoDownload(user.uid);
       } else {
         dispatch(loginActions.logout());
         console.log("user is logged out");
@@ -90,6 +91,26 @@ function App() {
         
       dispatch(cartActions.addItem(item));
     });
+  }
+
+  //downloads userinfo from user firestore document when logged in
+  const handleUserInfoDownload = (user) => {
+    console.log(user)
+    const docRef = doc(db, "users", user);
+    getDoc(docRef)
+      .then((doc) => {
+        if (doc.exists()) {
+          const userData = doc.data();
+         
+          dispatch(loginActions.loginFetchInfo(userData))
+          //console.log(userData)
+          } else {
+            console.log("Could not retrieve user info");
+          }
+      })
+      .catch((error) => {
+        console.log( error);
+      });
   }
 
 
