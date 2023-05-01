@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setDoc, collection, db, doc } from '../../firebase';
 import { actions } from '../../features/cartitems';
 import Hero from "../../components/Joel/Hero";
+import { useNavigate } from "react-router-dom";
 
 
 export const Shop = () => {
@@ -18,6 +19,9 @@ export const Shop = () => {
   const cart = useSelector((state) => state.cartItems);
 
   const dispatch = useDispatch();
+
+  //joel: added navigate/import
+  let navigate = useNavigate();
 
   const items = [
     { id: uuidv4(), name: "Item 1", price: 10 },
@@ -77,11 +81,13 @@ export const Shop = () => {
       </div>
 
       <div className="products">
-        {movie.map((movies) => (
+        {/* joel: added index&onClick to navigate to individualPoster */}
+        {movie.map((movies, index) => (
           <div>
             <img
               src={`https://image.tmdb.org/t/p/w500${movies.poster_path}`}
               alt="Movie poster"
+              onClick={()=>{navigate("/single/"+ movie[index].id)}}
             />
           <div className="testShop">
               <h1>Items for Sale</h1>

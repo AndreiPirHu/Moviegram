@@ -1,6 +1,10 @@
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import "../Joel/indiv-poster.css"
+import CounterButton from "./CounterButton";
+import { v4 as uuidv4 } from 'uuid';
+import { useDispatch } from "react-redux";
+import { actions } from "../../features/cartitems";
 
 async function fetchPoster(id, setItem){
     
@@ -20,49 +24,49 @@ async function fetchPoster(id, setItem){
 const IndividualPoster = () => {
 
     const [item, setItem] = useState([]);
-    const [size, setSize] = useState('');
-    const [price, setPrice] = useState(0);
-
-    let selectedItems = [];
     const [selected, setSelected] = useState([]);
 
     const params = useParams();
     const id = params.id
-    const SMALL = "S", MEDIUM ="M", LARGE = "L";
+    //const SMALL = "S", MEDIUM ="M", LARGE = "L";
+    const dispatch = useDispatch();
+    let navigate = useNavigate();
 
     useEffect(()=>{
         //fetch and changes item to an object
         fetchPoster(id, setItem);
     }, []);
 
-    switch(size){
-        case SMALL:
-            addToCart(item, size, price);
-            break;
-        case MEDIUM:
-            addToCart(item, size, price);
-            break;
-        case LARGE:
-            addToCart(item, size, price);
-            break;
-    }
-    //with size/price, create an object and adds to selectedItems[]
-    function addToCart(poster, size, price){
-        let prototype = [];
+    function addToSelected(poster, size, price){
 
-        const item = { name : poster.title, size : size, price : price }
-        prototype.push(item);
-
-        /* useEffect(()=>{
-            setSelected([item, ...selected]);
-        }, [selected]) */
-        //setSelected([item, ...selected]);
-        //setSelected([...selectedItems, ...prototype]);
-        console.log("items selected", selectedItems.length);
-        console.log("total items added ",selected)
+        const item = { id: uuidv4(), name : poster.title, size : size, price : price }
+        setSelected([...selected, item]);
+        console.log("total items added ", selected.length + 1)
 
         //if not selected dont send
         //if clicked create object and send to cart/array
+    }
+    function remove(size){
+        if(selected.length != 0){
+            //index of first element with that size
+            let index = selected.findIndex((item)=> item.size == size);
+            //create new array not including element with index
+            if(selected[index].id != null){
+                const newArr = selected.filter((item) => item.id != selected[index].id);
+                //update cart
+                setSelected(newArr)
+                console.log("newArr:", newArr.length)
+            }
+            
+        }
+    }
+    function addToCart(){
+        //dispatch(actions.addItem(selected))
+        selected.forEach((item)=>{
+            dispatch(actions.addItem(item))
+        })
+        navigate("/cart")
+        //so far
     }
 
     return(
@@ -71,35 +75,31 @@ const IndividualPoster = () => {
                 <button >Home</button>
             </Link>
             <div className="posterDiv">
+                {/* `https://image.tmdb.org/t/p/w500${movies.poster_path}` */}
                 <img src={`https://image.tmdb.org/t/p/original${item.poster_path}`} 
                     alt="missing pic" height={600}/>
-
+                
                 <div className="posterDetails">
-                    <br />
                     <h2>{item.original_title}</h2>
-                    <label>
-                        <input type="radio" 
-                        onClick={()=> {setSize(SMALL); setPrice(10)}}/>Small size. 10$
-                    </label>
-                    <br />
-                    <label>
-                        <input type="radio" 
-                        onClick={()=> {setSize(MEDIUM); setPrice(15)}}/>Medium size. 15$
-                    </label>
-                    <br />
-                    <label>
-                        <input type="radio" 
-                        onClick={()=> {setSize(LARGE); setPrice(20)}}/>Large size. 20$
-                    </label>
+                    <p>{item.overview}</p>
+                    <CounterButton item={item} handleAdd={addToSelected} handleRemove={remove}/>
                 </div>
-
+                
             </div>
-            <button id="addtocart">Add to cart</button> 
+            <button id="addtocart" onClick={addToCart}>Add to cart</button> 
         </div>
     )
 }
 
 
+/* <label>
+                        <input type="radio" 
+                        onClick={()=> {setSize(SMALL); setPrice(10)}}/>Small size. 10$
+                        
+                        <input type="radio" 
+                        onClick={() => addToCart(item, SMALL, 10)}/>
+                        Small size. 10$ {selected.length}
+                    </label> */
 
 
 /* const arr1 = [1, 2, 3]
@@ -118,5 +118,18 @@ const arr2 = [0, ...arr1]
 const arr3 = [...arr1, 4]
 console.log(arr2) // [0, 1, 2, 3]
 console.log(arr3) // [1, 2, 3, 4] */
+
+// switch(size){
+    //     case SMALL:
+    //         addToCart(item, size, price);
+    //         break;
+    //     case MEDIUM:
+    //         addToCart(item, size, price);
+    //         break;
+    //     case LARGE:
+    //         addToCart(item, size, price);
+    //         break;
+    // }
+    //with size/price, create an object and adds to selectedItems[]
 
 export default IndividualPoster;
