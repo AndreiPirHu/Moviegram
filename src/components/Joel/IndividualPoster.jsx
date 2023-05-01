@@ -6,24 +6,31 @@ import { v4 as uuidv4 } from 'uuid';
 import { useDispatch } from "react-redux";
 import { actions } from "../../features/cartitems";
 
-async function fetchPoster(id, setItem){
+async function fetchPoster(id, setItem, setImg, setError){
     
     const apiKey = 'b5f72212d28ab0fe02704865f4b72213';
     const idEndPoint = `https://api.themoviedb.org/3/movie/${id}?api_key=${apiKey}&language=en-US`;
 
-    const response = await fetch(idEndPoint)
+    await fetch(idEndPoint)
         .then(res => res.json())
         .then(data => {
-            setItem(data)
-            return data
+            //console.log("data",data)
+            if(data && data.success ==false){
+                //console.log("error")
+                setError(true)
+            }else{
+                setItem(data);
+                setImg(true)
+            }
         })
-    //console.log("jojo data in func",response);
-    //console.log("jojo movieId",id);
 }
 
 const IndividualPoster = () => {
+    const [error, setError] = useState(false)
+    const [content, setContent] = useState("No info available")
 
     const [item, setItem] = useState([]);
+    const [img, setImg] = useState(false);
     const [selected, setSelected] = useState([]);
 
     const params = useParams();
@@ -34,7 +41,7 @@ const IndividualPoster = () => {
 
     useEffect(()=>{
         //fetch and changes item to an object
-        fetchPoster(id, setItem);
+        fetchPoster(id, setItem, setImg, setError);
     }, []);
 
     function addToSelected(poster, size, price){
@@ -42,9 +49,6 @@ const IndividualPoster = () => {
         const item = { id: uuidv4(), name : poster.title, size : size, price : price }
         setSelected([...selected, item]);
         console.log("total items added ", selected.length + 1)
-
-        //if not selected dont send
-        //if clicked create object and send to cart/array
     }
     function remove(size){
         if(selected.length != 0){
@@ -57,26 +61,19 @@ const IndividualPoster = () => {
                 setSelected(newArr)
                 console.log("newArr:", newArr.length)
             }
-            
         }
     }
     function addToCart(){
-        //dispatch(actions.addItem(selected))
         selected.forEach((item)=>{
             dispatch(actions.addItem(item))
         })
-        navigate("/cart")
-        //so far
+        if(selected.length > 0){
+            navigate("/cart")
+        }
     }
-
-    return(
-        <div className="indivPosterDiv">
-            <Link className="buttonLink" to='/'>
-                <button >Home</button>
-            </Link>
-            <div className="posterDiv">
-                {/* `https://image.tmdb.org/t/p/w500${movies.poster_path}` */}
-                <img src={`https://image.tmdb.org/t/p/original${item.poster_path}`} 
+    const container = ()=> {
+        <div className="posterDiv">
+                <img src={img ? `https://image.tmdb.org/t/p/original${(item.poster_path)}` : ""} 
                     alt="missing pic" height={600}/>
                 
                 <div className="posterDetails">
@@ -84,13 +81,39 @@ const IndividualPoster = () => {
                     <p>{item.overview}</p>
                     <CounterButton item={item} handleAdd={addToSelected} handleRemove={remove}/>
                 </div>
+            </div> 
+    }
+    
+
+    return(
+        <div className="indivPosterDiv">
+            <Link className="buttonLink" to='/'>
+                <button >Home</button>
+            </Link>
+            {/* {error ? content : container} */}
+            <div className="posterDiv">
+                <img src={img ? `https://image.tmdb.org/t/p/original${(item.poster_path)}` : ""} 
+                    alt="missing pic"/>
                 
+                <div className="posterDetails">
+                    <h2>{item.original_title}</h2>
+                    <p>{item.overview}</p>
+                    <CounterButton item={item} 
+                        handleAdd={addToSelected} 
+                        handleRemove={remove}/>
+                    <button id="addtocart" onClick={addToCart}>Add to cart</button>
+                </div>
             </div>
-            <button id="addtocart" onClick={addToCart}>Add to cart</button> 
         </div>
     )
 }
 
+/* .catch((error)=>setError(error)) */
+    /* fetch(api)
+      .then(res => res.json())
+      .then(data => data.record) //setData()
+      .catch((error)=> setError(error))
+      .finally(()=>{})  */
 
 /* <label>
                         <input type="radio" 
