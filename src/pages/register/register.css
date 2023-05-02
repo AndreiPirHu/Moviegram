@@ -1,4 +1,4 @@
-.container {
+.register-container {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -7,7 +7,7 @@
   
 }
 
-.form {
+.register-container .form {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -20,12 +20,12 @@
   background-color: #fff;
 }
 
-.form h2 {
+.register-container .form h2 {
   margin-bottom: 20px;
   text-align: center;
 }
 
-.form input {
+.register-container .form input {
   width: 100%;
   padding: 12px 20px;
   margin: 8px 0;
@@ -35,7 +35,7 @@
   font-size: 16px;
 }
 
-.form button {
+.register-container .form button {
   background-color: #000000;
   color: #fff;
   padding: 12px 20px;
@@ -47,21 +47,21 @@
   width: 400px;
 }
 
-.form button:hover {
+.register-container .form button:hover {
   background-color: #3e8e41;
 }
 
-.form p {
+.register-container .form p {
   margin-top: 16px;
   font-size: 14px;
 }
 
-.form p a {
+.register-container .form p a {
   color: #4caf50;
   font-weight: bold;
 }
 
-.form .register {
+.register-container .form .register {
   background-color: #ffffff;
   color: #000000;
   padding: 12px 20px;

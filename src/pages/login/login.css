@@ -1,4 +1,4 @@
-.container {
+.login-container {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -7,7 +7,7 @@
   
 }
 
-.form {
+.login-container .form {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -20,12 +20,12 @@
   background-color: #fff;
 }
 
-.form h2 {
+.login-container .form h2 {
   margin-bottom: 20px;
   text-align: center;
 }
 
-.form input {
+.login-container .form input {
   width: 100%;
   padding: 12px 20px;
   margin: 8px 0;
@@ -36,7 +36,7 @@
   
 }
 
-.form button {
+.login-container .form button {
   background-color: #000000;
   color: #fff;
   padding: 12px 20px;
@@ -48,21 +48,21 @@
   width: 400px;
 }
 
-.form button:hover {
+.login-container .form button:hover {
   background-color: #3e8e41;
 }
 
-.form p {
+.login-container .form p {
   margin-top: 16px;
   font-size: 14px;
 }
 
-.form p a {
+.login-container .form p a {
   color: #4caf50;
   font-weight: bold;
 }
 
-.form .register {
+.login-container .form .register {
   background-color: #ffffff;
   color: #000000;
   padding: 12px 20px;
@@ -75,14 +75,14 @@
 }
 
 
-.loader {
+.login-container .loader {
   position: relative;
   width: 54px;
   height: 54px;
   border-radius: 10px;
 }
 
-.loader div {
+.login-container .loader div {
   width: 8%;
   height: 24%;
   background: rgb(128, 128, 128);
@@ -105,67 +105,67 @@
   }
 }
 
-.loader .bar1 {
+.login-container .loader .bar1 {
   transform: rotate(0deg) translate(0, -130%);
   animation-delay: 0s;
 }
 
-.loader .bar2 {
+.login-container .loader .bar2 {
   transform: rotate(30deg) translate(0, -130%);
   animation-delay: -1.1s;
 }
 
-.loader .bar3 {
+.login-container .loader .bar3 {
   transform: rotate(60deg) translate(0, -130%);
   animation-delay: -1s;
 }
 
-.loader .bar4 {
+.login-container .loader .bar4 {
   transform: rotate(90deg) translate(0, -130%);
   animation-delay: -0.9s;
 }
 
-.loader .bar5 {
+.login-container .loader .bar5 {
   transform: rotate(120deg) translate(0, -130%);
   animation-delay: -0.8s;
 }
 
-.loader .bar6 {
+.login-container .loader .bar6 {
   transform: rotate(150deg) translate(0, -130%);
   animation-delay: -0.7s;
 }
 
-.loader .bar7 {
+.login-container .loader .bar7 {
   transform: rotate(180deg) translate(0, -130%);
   animation-delay: -0.6s;
 }
 
-.loader .bar8 {
+.login-container .loader .bar8 {
   transform: rotate(210deg) translate(0, -130%);
   animation-delay: -0.5s;
 }
 
-.loader .bar9 {
+.login-container .loader .bar9 {
   transform: rotate(240deg) translate(0, -130%);
   animation-delay: -0.4s;
 }
 
-.loader .bar10 {
+.login-container .loader .bar10 {
   transform: rotate(270deg) translate(0, -130%);
   animation-delay: -0.3s;
 }
 
-.loader .bar11 {
+.login-container .loader .bar11 {
   transform: rotate(300deg) translate(0, -130%);
   animation-delay: -0.2s;
 }
 
-.loader .bar12 {
+.login-container .loader .bar12 {
   transform: rotate(330deg) translate(0, -130%);
   animation-delay: -0.1s;
 }
 
-.button-container {
+.login-container .button-container {
   display: inline-block;
   position: relative;
   padding: 10px;
@@ -174,7 +174,7 @@
   border-radius: 5px;
 }
 
-.button-container .loader{
+.login-container .button-container .loader{
   display: block;
   position: absolute;
   top: 5px;
@@ -184,7 +184,7 @@
   height: 40px;
 }
 
-.button-container span {
+.login-container .button-container span {
   display: block;
   text-align: center;
   font-size: 16px;
@@ -192,7 +192,7 @@
   margin-top: 40px;
 }
 
-.loading-button{
+.login-container .loading-button{
   background-color: #802525;
   color: #00000015;
   padding: 12px 20px;
@@ -205,7 +205,7 @@
   height: 42px;
 }
 
-.loading-button:hover {
+.login-container .loading-button:hover {
   background-color: #ffffff;
   color: #ffffff1e;
   padding: 12px 20px;
@@ -217,7 +217,7 @@
   width: 400px;
 }
 
-.form .login-error{
+.login-container .form .login-error{
   color: red;
 
   margin-top: -5px;

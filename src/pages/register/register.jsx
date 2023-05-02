@@ -39,7 +39,7 @@ export const Register = () => {
   };
 
   //signs the user in when they register a new account  successfully
-  const handleSignIn = async (e) => {
+  const handleSignIn = async () => {
     try {
       const {user} = await signInWithEmailAndPassword(auth, email, password); 
       console.log('User logged in successfully');
@@ -105,7 +105,7 @@ export const Register = () => {
 
   //redirects to profile page if user is logged in and if web address is written manually
   useEffect(() => {
-    if (isLoggedIn === true) {
+    if (isLoggedIn) {
       navigate('/profile');
       console.log("Redirecting to profile")
     }
@@ -114,7 +114,7 @@ export const Register = () => {
 
 
   return (
-    <div className="container">
+    <div className="register-container">
       <div className="form">
       <form  onSubmit={handleRegister}>
         <h2>Create account</h2>
