@@ -52,9 +52,10 @@ const IndividualPoster = () => {
             name : poster.title,
             price : price,
             size : size,
-            img : `https://image.tmdb.org/t/p/original${(poster.poster_path)}`}
+            img : `https://image.tmdb.org/t/p/w500${poster.poster_path}`}
 
         setSelected([...selected, item]);
+        console.log("item",item)
         console.log("total items added ", selected.length + 1)
     }
     function remove(size){

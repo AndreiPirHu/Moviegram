@@ -5,7 +5,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 450px;
+    background: linear-gradient(0.25turn, #3f87a6, #ebf8e1, #f69d3c);
 }
 .posterDiv{ /* foto and details */
     display: flex;
@@ -51,14 +51,11 @@
 /* i was working with 600px */
 /* max-width: 500px > maximo 500 y menores */
 /* min-width: 155mm, at least 155 or bigger */
-@media(min-width: 155mm){
+@media(min-width: 816px){
     .indivPosterDiv{
         flex-flow: column wrap;
         justify-content: center;
-        position: absolute;
-        left: 200px;
         align-items: center;
-        width: 600px;
     }
     .posterDiv{
         flex-flow: row;
@@ -67,6 +64,7 @@
     }
     .posterDetails{
         width: 350px;
+        box-shadow: 0 0 20px #363530;
     }
     .posterDiv img{
         height: 600px;
