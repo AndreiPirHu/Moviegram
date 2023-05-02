@@ -9,9 +9,7 @@ async function fetchPosters(api,render){
 
     const response = await fetch(api)
         .then(res => res.json())
-        .then(data => {
-            return data.results
-        })
+        .then(data => data.results)
     //console.log("jojo",response);
     //response.results[0].backdrop_path
 
