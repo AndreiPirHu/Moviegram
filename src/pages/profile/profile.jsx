@@ -1,22 +1,19 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './profile.css'
 import { auth } from '../../firebase';
 import { useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { actions as cartActions} from '../../features/cartitems';
 import { v4 as uuidv4 } from 'uuid';
 
 export const Profile = () =>{
   
+  const isLoggedIn = useSelector( state => state.login.loggedIn );
+  const userInfo = useSelector( state => state.login.userInfo);
+
   const dispatch = useDispatch();
   let navigate = useNavigate();
 
-  const user = {
-    name: 'Namn',
-    address: '123 stockholm',
-    phone: '555-1234',
-    email: 'mystore@example.com',
-  };
 
   const orders = [
   {
@@ -47,42 +44,63 @@ export const Profile = () =>{
     }
   };
 
+  //redirects to new page if user logs in and if web address is written manually
+  useEffect(() => {
+    if (!isLoggedIn) {
+      navigate('/login');
+      console.log("Redirecting to login")
+    }
+  }, [isLoggedIn]);
+
 
 return(
 <div className="profile">
   <div className='user-info'>
-      <h1>Welcome {user.name}</h1>
-      <div className="user-details">
-        <ul>
-          <li>
-            <strong>Name:</strong> {user.name}
-          </li>
-          <li>
-            <strong>Email:</strong> {user.email}
-          </li>
-          <li>
-            <strong>Address:</strong> {user.address}
-          </li>
-        </ul>
-      </div>
+    
+  {userInfo ? (
+  <>
+    <h1>Welcome {userInfo.name}</h1>
+    <div className="user-details">
+      <ul>
+        <li>
+          <strong>Name:</strong> {userInfo.name}
+        </li>
+        <li>
+          <strong>Email:</strong> {userInfo.email}
+        </li>
+        <li>
+          <strong>Address:</strong> {userInfo.address}
+        </li>
+      </ul>
+    </div>
+  </>
+  ) : (
+    <p>Loading user information...</p>
+  )}
       
       <button>Edit Information</button>
 </div>
-<div className='user-info'>
+<div className='order-details-info'>
       <h2>Order History</h2>
       <ul>
         {orders.map(order => (
-          <li key={order.id}>
-            <div>Order #{order.id}</div>
+          <div className='user-order' >
+            <li key={order.id}>
+            <div>Order number: {order.id}</div>
             <div>Date: {order.date}</div>
             <div>Items: </div>
             <div>Total: ${order.total}</div>
           </li>
+          </div>
+          
         ))}
       </ul>
 
+      </div >
+      <div className='user-signout'>
+        <button onClick={handleSignOut}>Log out</button>
       </div>
-          <button onClick={handleSignOut}>Log out</button>
+          
           
     </div>
 )

@@ -105,7 +105,7 @@ export const Register = () => {
 
   //redirects to profile page if user is logged in and if web address is written manually
   useEffect(() => {
-    if (isLoggedIn === true) {
+    if (isLoggedIn) {
       navigate('/profile');
       console.log("Redirecting to profile")
     }
@@ -114,7 +114,7 @@ export const Register = () => {
 
 
   return (
-    <div className="container">
+    <div className="register-container">
       <div className="form">
       <form  onSubmit={handleRegister}>
         <h2>Create account</h2>

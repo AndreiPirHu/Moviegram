@@ -1,12 +1,28 @@
+
 .profile .user-info {
   background-color: #fff;
-  box-shadow: 1px 10px 20px rgba(0, 0, 0, 0.1);
+  box-shadow: 1px 10px 30px rgba(0, 0, 0, 0.1);
   padding: 1rem;
-  border-radius: 4px;
-  width: 80%;
+  width: 50%;
   margin: 0 auto;
   margin-top: 40px;
+  border: 1px solid rgb(187, 187, 187);
+  margin-bottom: 0px;
   
+}
+
+
+.order-details-info {
+  background-color: #fff;
+  box-shadow: 1px 10px 30px rgba(0, 0, 0, 0.1);
+  padding: 1rem;
+  width: 50%;
+  margin: 0 auto;
+  margin-top: 40px;
+  border: 1px solid rgb(187, 187, 187);
+  margin-bottom: 0px;
+  margin-top: -1px;
+  font-weight: bold;
 }
 
 .user-details {
@@ -35,4 +51,36 @@
 
 .order-history li {
   margin-bottom: 0.5rem;
+}
+
+.user-order{
+  background-color: #fff;
+  box-shadow: 1px 10px 30px rgba(0, 0, 0, 0.1);
+  padding: 1rem;
+  border-radius: 20px;
+  width: 80%;
+  list-style: none;
+  margin-top: 10px;
+  border: 1px solid rgb(187, 187, 187);
+}
+
+.profile button {
+  background-color: black;
+  color: white;
+  padding: 10px;
+  font-weight: bold;
+  border-style: none;
+  cursor: pointer;
+}
+
+
+.user-signout {
+  padding: 1rem;
+  text-align: center;
+}
+.user-signout button {
+  width: 40%;
+  max-width: 300px;
+  background-color: red;
+  border-radius: 2px;
 }
