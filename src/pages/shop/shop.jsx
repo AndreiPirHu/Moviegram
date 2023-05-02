@@ -15,10 +15,6 @@ export const Shop = () => {
   
   const [poster, setPoster ] = useState([]);
 
-  const user = useSelector((state) => state.login.user);
-  const cart = useSelector((state) => state.cartItems);
-
-
     const user = useSelector( state => state.login.user)
     const isLoggedIn = useSelector( state => state.login.loggedIn)
     const cart = useSelector(state => state.cartItems)
