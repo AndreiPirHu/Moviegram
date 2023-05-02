@@ -1,16 +1,21 @@
-
-.indivPosterDiv{
-    display: grid;
-    grid-template-rows: row;
+.indivPosterDiv{ /* link and poster */
+    /* display: grid;
+    grid-template-rows: row; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     align-items: center;
     width: 450px;
 }
-.posterDiv{
+.posterDiv{ /* foto and details */
     display: flex;
     flex-flow: column;
-    justify-content: center;
+    justify-content: start;
     margin: 10px;
 }
+/* align-items = on the cross axis. default is stretch (as much as tallest item) */
+/* justify-content = on the main axix. default is flex-start (aligns up at the start edge of container) */
+/* justify-items is ignored in flex */
 .posterDiv img{
     height: 450px;
     margin: 0;
@@ -26,11 +31,11 @@
     padding: 10px;
     border : 2px solid black;
     border-radius: 5px;
+    align-content: center;
 }
 .buttonLink, #addtocart{
-    display: flex;
-    justify-content: center;
-    margin: 10px;
+    width: 350px;
+    margin: 5px;
     padding : 5px;
     border : 2px solid black;
     border-radius: 5px;
@@ -39,12 +44,26 @@
 .countbutton button{
     border-radius: 10px;
 }
-
-@media(min-width:600px){
+/* when screen gets big */
+/* inches = in */
+/* ipad 10.9in */
+/* ipad 6.1 in */
+/* i was working with 600px */
+/* max-width: 500px > maximo 500 y menores */
+/* min-width: 155mm, at least 155 or bigger */
+@media(min-width: 155mm){
+    .indivPosterDiv{
+        flex-flow: column wrap;
+        justify-content: center;
+        position: absolute;
+        left: 200px;
+        align-items: center;
+        width: 600px;
+    }
     .posterDiv{
         flex-flow: row;
-        justify-content: center;
-        align-items: start;
+        justify-content: start;
+        align-items: center;
     }
     .posterDetails{
         width: 350px;
@@ -54,7 +73,5 @@
         object-fit: cover;
         
     }
-    .indivPosterDiv{
-        width: 600px;
-    }
+    
 }
