@@ -9,7 +9,7 @@
     margin: 0%;
 }
 .heroComponent img{
-    width: 200px;
+    width: 180px;
     margin: 4px;
     object-fit: cover;
     border: 2px solid black;
@@ -24,7 +24,7 @@
     overflow: scroll;
 } */
 
-@media(max-width:600px){
+@media(max-width:720px){
     .heroComponent{
         display: grid;
 

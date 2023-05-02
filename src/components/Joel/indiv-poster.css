@@ -43,7 +43,8 @@
 @media(min-width:600px){
     .posterDiv{
         flex-flow: row;
-        justify-content: space-between;
+        justify-content: center;
+        align-items: start;
     }
     .posterDetails{
         width: 350px;
