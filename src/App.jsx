@@ -1,3 +1,4 @@
+
 import { useEffect } from 'react'
 import { Navbar } from './components/navbar'
 import './App.css'
@@ -15,24 +16,25 @@ import {Register} from './pages/register/register'
 import { doc, getDoc } from '@firebase/firestore';
 
 
-
 function App() {
+
   const cart = useSelector( state => state.cartItems)
   const user = useSelector( state => state.login.user)
   const isLoggedIn = useSelector( state => state.login.loggedIn)
 
-  const dispatch = useDispatch();
 
+  const dispatch = useDispatch();
 
   //saves and reads cart from previous offline session (localstorage) when webpage is loaded
   //Only while logged out
   useEffect(() => {
+
     if(!isLoggedIn){
       let previousCart = JSON.parse(localStorage.getItem('cartItems'))||[];
       const timeoutId = setTimeout(() => {
-        previousCart.forEach(item => {
-        dispatch(cartActions.addItem(item));
-      });
+        previousCart.forEach((item) => {
+          dispatch(cartActions.addItem(item));
+        });
       }, 500);
       return () => clearTimeout(timeoutId);
     }
@@ -41,9 +43,10 @@ function App() {
   //Update localstorage when cart changes by adding or removing
   //Only while logged out
   useEffect(() => {
+
     if(!isLoggedIn){
       const timeoutId = setTimeout(() => {
-        localStorage.setItem('cartItems', JSON.stringify(cart));
+        localStorage.setItem("cartItems", JSON.stringify(cart));
       }, 10);
       return () => clearTimeout(timeoutId);
     }
@@ -52,8 +55,7 @@ function App() {
 
   //checks if user is logged in when dispatch is used
   useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged(user => {
-
+    const unsubscribe = auth.onAuthStateChanged((user) => {
       if (user) {
         dispatch(loginActions.loginSuccess(user.uid));
         console.log("user is logged in //dispatch used");
@@ -79,19 +81,22 @@ function App() {
   //TODO change query snapshot when real posters are added with more info
   const handleDownload = async (user) => {
     dispatch(cartActions.clearItems());
-    const querySnapshot = await getDocs(collection(db, 'users', user, 'cartItems'));
+    const querySnapshot = await getDocs(
+      collection(db, "users", user, "cartItems")
+    );
 
-      querySnapshot.forEach((doc) => {
-        const data = doc.data();
-        const item = {
-          id: doc.id,
-          name: data.name,
-          price: data.price
-        };
-        
+    querySnapshot.forEach((doc) => {
+      const data = doc.data();
+      const item = {
+        id: doc.id,
+        name: data.name,
+        price: data.price,
+      };
+
       dispatch(cartActions.addItem(item));
     });
   };
+
 
   //downloads userinfo from user firestore document when logged in
   const handleUserInfoDownload = (user) => {
