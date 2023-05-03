@@ -1,7 +1,6 @@
-
 .shop {
-    position: absolute;
-    background-color: bisque;
+    position: relative;
+    background-color: rgb(243, 234, 223);
 }
 
 .shop .shopTitle {
@@ -18,7 +17,7 @@
 }
 
 .products {
-    /* box-sizing: border-box; */
+    box-sizing: border-box;
     block-size: fit-content;
     display: grid;
     padding: 2em;
@@ -71,10 +70,10 @@
 }
 
 .products img:hover {
-  transform: none;
-  box-shadow: none;
-  transform: translateY(-5px) scale(1.02);
-  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
+    transform: none;
+    box-shadow: none;
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
 }
 
 .products h3 {
