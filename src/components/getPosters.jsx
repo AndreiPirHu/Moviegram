@@ -86,6 +86,7 @@ const GetMoviePosters = () => {
       <div className="searchImage">
         {/* joel: added index&onClick to navigate to individualPoster */}
         {movie3.map((movies, index) => (
+
           <img
             src={`https://image.tmdb.org/t/p/w500${movies.poster_path}`}
             alt="Movie poster"
@@ -99,6 +100,7 @@ const GetMoviePosters = () => {
             alt="Movie poster"
             onClick={()=>{navigate("/single/"+ movieGenre[index].id)}}
           />
+
         ))}
       </div>
     </div>

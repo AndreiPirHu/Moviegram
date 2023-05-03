@@ -1,6 +1,7 @@
 import React from "react";
 import "./shop.css";
 import { useEffect, useState } from "react";
+import { Link, Navigate } from 'react-router-dom';
 import GetMoviePosters from "../../components/getPosters";
 import { v4 as uuidv4 } from 'uuid';
 import { useDispatch, useSelector } from 'react-redux';
@@ -15,15 +16,12 @@ export const Shop = () => {
   
   const [poster, setPoster ] = useState([]);
 
-  /* const user = useSelector((state) => state.login.user);
-  const cart = useSelector((state) => state.cartItems); */
-
-
     const user = useSelector( state => state.login.user)
     const isLoggedIn = useSelector( state => state.login.loggedIn)
     const cart = useSelector(state => state.cartItems)
 
     const dispatch = useDispatch();
+
 
 
   //joel: added navigate/import
@@ -34,6 +32,7 @@ export const Shop = () => {
     { id: uuidv4(), name: "Item 2", price: 15 },
     { id: uuidv4(), name: "Item 3", price: 20 },
   ];
+
 
   const addToCart = async (item) => {
     //adds item to cart
@@ -60,6 +59,7 @@ export const Shop = () => {
       console.error("Error adding item to firestore:", e);
     }
   };
+
 
   const FetchMovies = () => {
     fetch(
@@ -103,9 +103,11 @@ export const Shop = () => {
                     {item.name} - ${item.price}
                     <button onClick={() => addToCart(item)}>Add to Cart</button>
                   </li>
+
                 ))}
               </ul>
             </div>
+
 
           </div>
       ))}
@@ -113,3 +115,4 @@ export const Shop = () => {
     </div>
   );
 };
+

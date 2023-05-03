@@ -16,6 +16,7 @@ import {Register} from './pages/register/register'
 import { doc, getDoc } from '@firebase/firestore';
 
 
+
 function App() {
 
   const cart = useSelector( state => state.cartItems)
