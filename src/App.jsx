@@ -92,6 +92,8 @@ function App() {
         id: doc.id,
         name: data.name,
         price: data.price,
+        size: data.size,
+        img: data.img
       };
 
       dispatch(cartActions.addItem(item));

@@ -3,8 +3,9 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import "../Joel/indiv-poster.css"
 import CounterButton from "./CounterButton";
 import { v4 as uuidv4 } from 'uuid';
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { actions } from "../../features/cartitems";
+import { setDoc, collection, db, doc } from '../../firebase';
 
 async function fetchPoster(id, setItem, setImg, setError){
     
@@ -14,20 +15,18 @@ async function fetchPoster(id, setItem, setImg, setError){
     await fetch(idEndPoint)
         .then(res => res.json())
         .then(data => {
-            //console.log("data",data)
-            if(data && data.success ==false){
-                //console.log("error")
-                setError(true)
-            }else{
-                setItem(data);
-                setImg(true)
-            }
+            console.log("data",data)
+            setItem(data);
+            //setImg(true)
+        })
+        .catch(error => {
+            setError(true)
         })
 }
 
 const IndividualPoster = () => {
     const [error, setError] = useState(false)
-    const [content, setContent] = useState("No info available")
+    //const [content, setContent] = useState("No info available")
 
     const [item, setItem] = useState([]);
     const [img, setImg] = useState(false);
@@ -36,6 +35,9 @@ const IndividualPoster = () => {
     const params = useParams();
     const id = params.id
     //const SMALL = "S", MEDIUM ="M", LARGE = "L";
+    const user = useSelector( state => state.login.user)
+    const isLoggedIn = useSelector( state => state.login.loggedIn)
+
     const dispatch = useDispatch();
     let navigate = useNavigate();
 
@@ -46,8 +48,14 @@ const IndividualPoster = () => {
 
     function addToSelected(poster, size, price){
 
-        const item = { id: uuidv4(), name : poster.title, size : size, price : price }
+        const item = { id: uuidv4(),
+            name : poster.title,
+            price : price,
+            size : size,
+            img : `https://image.tmdb.org/t/p/w500${poster.poster_path}`}
+
         setSelected([...selected, item]);
+        console.log("item",item)
         console.log("total items added ", selected.length + 1)
     }
     function remove(size){
@@ -63,26 +71,44 @@ const IndividualPoster = () => {
             }
         }
     }
-    function addToCart(){
+    async function addToCart(){ //async
         selected.forEach((item)=>{
             dispatch(actions.addItem(item))
+
+            if (!isLoggedIn) {
+                console.log('user is not logged in for firestore save');
+                return;
+            }
+            //if user is signed in it adds items to firestore
+            try{ //reference to correct collection
+            const cartItemsRef = collection(db, 'users', user, 'cartItems');
+              // Set the itemID as the doc name
+              const itemDocRef = doc(cartItemsRef, item.id);
+              //Add item to firestore
+              setDoc(itemDocRef, item);
+              console.log(`Item added to firestore with ID: ${item.id}`);
+            } catch (e) {
+              console.error("Error adding item to firestore:", e);
+            }
         })
         if(selected.length > 0){
             navigate("/cart")
         }
     }
-    const container = ()=> {
+    
+    const container = (
         <div className="posterDiv">
-                <img src={img ? `https://image.tmdb.org/t/p/original${(item.poster_path)}` : ""} 
-                    alt="missing pic" height={600}/>
+                <img src={`https://image.tmdb.org/t/p/original${(item.poster_path)}`} 
+                    alt="no info available" height={600}/>
                 
                 <div className="posterDetails">
                     <h2>{item.original_title}</h2>
                     <p>{item.overview}</p>
                     <CounterButton item={item} handleAdd={addToSelected} handleRemove={remove}/>
+                    <button id="addtocart" onClick={addToCart}>Add to cart</button>
                 </div>
             </div> 
-    }
+    )
     
 
     return(
@@ -90,8 +116,8 @@ const IndividualPoster = () => {
             <Link className="buttonLink" to='/'>
                 <button >Home</button>
             </Link>
-            {/* {error ? content : container} */}
-            <div className="posterDiv">
+            {error ? <p>"No info available"</p> : container}
+            {/* <div className="posterDiv">
                 <img src={img ? `https://image.tmdb.org/t/p/original${(item.poster_path)}` : ""} 
                     alt="missing pic"/>
                 
@@ -103,7 +129,7 @@ const IndividualPoster = () => {
                         handleRemove={remove}/>
                     <button id="addtocart" onClick={addToCart}>Add to cart</button>
                 </div>
-            </div>
+            </div> */}
         </div>
     )
 }
