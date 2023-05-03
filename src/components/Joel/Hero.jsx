@@ -1,17 +1,16 @@
 import { useEffect, useState } from "react";
 import "./hero.css";
 
-const urlBase = 'https://api.themoviedb.org/3/movie/popular?api_key=b5f72212d28ab0fe02704865f4b72213&language=en-US&page=1';
 const apiKey = 'b5f72212d28ab0fe02704865f4b72213';
+const urlBase = `https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&language=en-US&page=1`;
+
 
 async function fetchPosters(api,render){
 
     const response = await fetch(api)
         .then(res => res.json())
-        .then(data => {
-            return data.results
-        })
-    console.log("jojo",response);
+        .then(data => data.results)
+    //console.log("jojo",response);
     //response.results[0].backdrop_path
 
     const shuffled = [...response].sort(()=> Math.random() - 0.1);

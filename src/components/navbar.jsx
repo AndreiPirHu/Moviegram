@@ -5,10 +5,6 @@ import { List, ShoppingCart, X } from '@phosphor-icons/react';
 import "./navbar.css";
 import { useSelector } from 'react-redux';
 
-
-
-
-
 export const Navbar = () => {
   const cart = useSelector(state => state.cartItems)
   const isLoggedIn = useSelector(state => state.login.loggedIn);
@@ -50,6 +46,7 @@ export const Navbar = () => {
             </div>
           </div>
         </div>
+
       </div>
     </nav>
   );

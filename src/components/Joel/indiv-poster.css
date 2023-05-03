@@ -1,0 +1,60 @@
+
+.indivPosterDiv{
+    display: grid;
+    grid-template-rows: row;
+    align-items: center;
+    width: 450px;
+}
+.posterDiv{
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    margin: 10px;
+}
+.posterDiv img{
+    height: 450px;
+    margin: 0;
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 0 20px #363530;
+    overflow: hidden;
+    object-fit: contain;
+}
+.posterDetails{
+    margin: 10px;
+    padding: 10px;
+    border : 2px solid black;
+    border-radius: 5px;
+}
+.buttonLink, #addtocart{
+    display: flex;
+    justify-content: center;
+    margin: 10px;
+    padding : 5px;
+    border : 2px solid black;
+    border-radius: 5px;
+}
+
+.countbutton button{
+    border-radius: 10px;
+}
+
+@media(min-width:600px){
+    .posterDiv{
+        flex-flow: row;
+        justify-content: center;
+        align-items: start;
+    }
+    .posterDetails{
+        width: 350px;
+    }
+    .posterDiv img{
+        height: 600px;
+        object-fit: cover;
+        
+    }
+    .indivPosterDiv{
+        width: 600px;
+    }
+}

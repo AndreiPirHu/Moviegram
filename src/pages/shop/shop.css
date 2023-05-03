@@ -1,3 +1,4 @@
+
 .shop {
     position: absolute;
     background-color: bisque;
@@ -66,13 +67,14 @@
     background-color: #f8f8f8;
     border-radius: 10px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+
 }
 
 .products img:hover {
-    transform: none;
-    box-shadow: none;
-    transform: translateY(-5px) scale(1.02);
-    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
+  transform: none;
+  box-shadow: none;
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
 }
 
 .products h3 {
@@ -84,6 +86,7 @@
 }
 
 @media screen and (max-width: 600px) {
+
     .shopTitle {
         font-size: 10px;
     }
@@ -171,9 +174,5 @@
     line-height: 1.75rem;
     font-weight: 700;
     text-decoration: none;
-}
 
-.movie-vote {
-    --tw-text-opacity: 1;
-    color: rgb(148 163 184);
 }

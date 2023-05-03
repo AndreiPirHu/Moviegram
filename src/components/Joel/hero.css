@@ -10,12 +10,13 @@
     margin: 0%;
 }
 .heroComponent img{
-    width: 200px;
+    width: 180px;
     margin: 4px;
     object-fit: cover;
     border: 2px solid black;
 }
 .heroComponent img:hover{
+    width: 195px;
     box-shadow: 3px 2px 5px black ;
 }
 /* .heroTwo{
@@ -24,13 +25,17 @@
     overflow: scroll;
 } */
 
-@media(max-width:600px){
+@media(max-width:720px){
     .heroComponent{
         display: grid;
 
     }
     .heroComponent img{
         width: 100px;
+    }
+    .heroComponent img:hover{
+        margin: 0px;
+        width: 103px;
     }
     /* .heroTwo{
         position:unset;
