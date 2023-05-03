@@ -1,10 +1,41 @@
 .navbar {
+    display: grid;
+    position: sticky;
+    top: 0;
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
+    /* padding-left: 1.5rem;
+    padding-right: 3rem; */
+    z-index: 20;
     width: 100%;
     height: 80px;
     background-color: rgb(19, 19, 19);
-    display: flex;
     justify-content: flex-end;
     align-items: center;
+}
+
+@media screen and (min-width: 640px) {
+    .navbar {
+        padding-left: 4rem;
+        padding-right: 4rem;
+    }
+}
+
+
+.subNavbar {
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 80rem;
+}
+
+.moviegram {
+    display: flex;
+    align-items: center;
+    gap: 0.5;
 }
 
 .links {
@@ -15,7 +46,96 @@
 
 .links a {
     text-decoration: none;
-    color: white;
+    color: grey;
     margin-left: 20px;
+    margin-right: 25px;
     font-size: 25px;
+    font-weight: 500;
+}
+
+.links a:hover {
+    color: #ffffff;
+}
+
+.links ul {
+    display: none;
+    list-style-type: none;
+    flex-direction: row;
+    gap: 0.5rem;
+
+
+}
+
+.badge:after {
+    content: attr(value);
+    font-size: 14px;
+    position: relative;
+    left: -8px;
+    top: -10px;
+    opacity: 0.9;
+    background-color: rgb(103, 103, 236);
+    color: white;
+    padding: 0 5px;
+    text-align: center;
+    border-radius: 50%;
+
+}
+
+@media screen and (min-width: 640px) {
+    .navbar .links ul {
+        display: flex;
+    }
+}
+
+.links .small-Device {
+    display: flex;
+    flex: 1 1 0%;
+    justify-content: flex-end;
+    align-items: center;
+    color: white;
+
+
+}
+
+@media (min-width: 640px) {
+    .links .small-Device {
+        display: none;
+    }
+
+}
+
+.small-Device .burgerx {
+    object-fit: contain;
+    cursor: pointer;
+    width: 28px;
+    height: 28px;
+}
+
+.small-Device .hiddenMenu {
+    display: none;
+}
+
+.small-Device .showMenu {
+    display: flex;
+    position: absolute;
+    right: 0;
+    top: 5rem;
+    z-index: 10;
+    padding: 1.5rem;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    margin-left: 0.1rem;
+    margin-right: 1rem;
+    min-width: 140px;
+    border-radius: 0.75rem;
+    background: linear-gradient(to right, rgb(43, 38, 38) 0%, black 100%);
+}
+
+.small-Device .showMenu ul {
+    display: flex;
+    list-style-type: none;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-start;
+    gap: 1rem;
 }
