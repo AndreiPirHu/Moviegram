@@ -1,36 +1,56 @@
-import React from 'react'
+
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { ShoppingCart } from 'phosphor-react'
+import { List, ShoppingCart, X } from '@phosphor-icons/react';
 import "./navbar.css";
 import { useSelector } from 'react-redux';
-import { Nav, Dropdown, Badge } from 'react-bootstrap';
+
+
+
 
 
 export const Navbar = () => {
   const cart = useSelector(state => state.cartItems)
-  const isLoggedIn = useSelector( state => state.login.loggedIn );
+  const isLoggedIn = useSelector(state => state.login.loggedIn);
 
+  const [toggle, setToggle] = useState(false)
 
   return (
-    <div className="navbar">
-      <div className="links">
-        <Link to="/">Shop</Link>
-        {isLoggedIn ? (<Link to="/profile">Profile</Link>) : (<Link to="/login">Sign in</Link>)}
-        <Link to="/cart"><ShoppingCart size={32}  /> ({cart.length})
+    <nav className="navbar">
+      <div className="subNavbar">
+        <Link to="/" className="moviegram" onClick={() => { window.scrollTo(0, 0) }}>
+          
         </Link>
-        <Nav>
-          <Dropdown alignRight>
-            <Dropdown.Toggle variant="success">
-              <Link to="/cart"><ShoppingCart size={32} />
-              </Link>
-              <Badge>5</Badge>
-            </Dropdown.Toggle>
-            <Dropdown.Menu style={{ minWidth: 370 }}>
-              <span style={{ padding: 5 }}>Cart is Empty!</span>
-            </Dropdown.Menu>
-          </Dropdown>
-        </Nav>
+        <div className="links">
+          <ul>
+            <Link to="/">Shop</Link>
+            {isLoggedIn ? (<Link to="/profile">Profile</Link>) : (<Link to="/login">Sign in</Link>)}
+            <Link to="/cart" onClick={() => { setToggle(!toggle) }}>
+              <ShoppingCart size={32} />
+              <span className="badge" value={cart.length}>
+              </span>
+            </Link>
+          </ul>
+          <div className="small-Device">
+            <div className="burgerx">
+              {toggle ? (<X size={32} onClick={() => setToggle(!toggle)} />) : (<List size={32} onClick={() => setToggle(!toggle)} />)}
+            </div>
+            <div className={`${!toggle ? 'hiddenMenu' : 'showMenu'}`}>
+              <ul>
+                <Link to="/" onClick={() => { setToggle(!toggle) }}>Shop</Link>
+                {isLoggedIn ? (<Link to="/profile" onClick={() => { setToggle(!toggle) }}>Profile</Link>) : (<Link to="/login" onClick={() => { setToggle(!toggle) }}>Sign in</Link>)}
+                <Link to="/cart" onClick={() => { setToggle(!toggle) }}>
+                  <ShoppingCart size={32} />
+                  <span className="badge" value={cart.length}>
+                  </span>
+                </Link>
+
+
+              </ul>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
+    </nav>
   );
 };

@@ -1,33 +1,9 @@
-
 .shop {
-    position: relative;
+    position: absolute;
     background-color: bisque;
-
-* {
-    margin: 0;
-    padding: 0;
-    color-scheme: light dark;
-    color: rgb(226 232 240);
-    /* color: rgba(255, 255, 255, 0.87); */
-    /* background-color: #242424; */
-    font-synthesis: none;
-    /* text-rendering: optimizeLegibility; */
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    -webkit-text-size-adjust: 100%;
-    text-decoration: none;
 }
 
-body {
-    margin: 0;
-    font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
-    font-size: 17px;
-    color: #f1c69a;
-    border: #0e0d0c 1px solid;
-    /* line-height: 1.6; */
-}
-
-.shopTitle {
+.shop .shopTitle {
     display: flex;
     margin-top: 50px;
     text-align: center;
@@ -35,13 +11,14 @@ body {
     background-color: blanchedalmond;
 }
 
-.trending {
+.shop .trending {
     display: flex;
     position: center;
 }
 
 .products {
-    box-sizing: border-box;
+    /* box-sizing: border-box; */
+    block-size: fit-content;
     display: grid;
     padding: 2em;
     max-width: 100%;
@@ -57,7 +34,7 @@ body {
 .products img {
     margin: 0;
     padding: 5px;
-    background-color: rgba(255, 255, 255, 0.15);
+    background-color: rgba(183, 21, 21, 0.15);
     border-radius: 10px;
     border: 1px solid rgba(255, 255, 255, 0.2);
     box-shadow: 0 0 20px #363530;
@@ -98,9 +75,17 @@ body {
     box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
 }
 
+.products h3 {
+
+    @media screen {
+        font-size: 10px;
+        width: fit-content;
+    }
+}
+
 @media screen and (max-width: 600px) {
     .shopTitle {
-        font-size: 20px;
+        font-size: 10px;
     }
 
     .products {
@@ -117,7 +102,7 @@ body {
         transform: translateY(-3px) scale(1.02);
     }
 
-    font-size: 40px;
+    /* font-size: 40px; */
 }
 
 .shop-sec {
@@ -179,9 +164,9 @@ body {
 
 }
 
-.movie-name {
+.movie-poster h3 {
     margin-top: 1rem;
-    color: #ffffff;
+    color: #060606;
     font-size: 1.125rem;
     line-height: 1.75rem;
     font-weight: 700;

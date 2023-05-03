@@ -19,7 +19,7 @@ const GetMoviePosters = () => {
         return response.json();
       })
       .then((data) => {
-        console.log("getMovie data: ", data)
+        console.table("getMovie data: ", data)
         setMovie3(data.results);
       });
   };
@@ -47,10 +47,10 @@ const GetMoviePosters = () => {
             <h3 className="movie-name">
               {movies.original_title}
             </h3>
-            <li key={movies.id}>
+            {/* <li key={movies.id}>
               {movies.original_title} - $10
               <button onClick={() => addToCart(cartObject(movies.original_title))}>Add to Cart</button>
-            </li>
+            </li> */}
           </div>
         ))}
       </div>

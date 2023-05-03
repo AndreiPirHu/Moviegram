@@ -1,4 +1,5 @@
 .heroComponent{
+    position: relative;
     display: flex;
     flex-flow: row wrap;
     background-color: rgb(2, 2, 80);
