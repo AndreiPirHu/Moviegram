@@ -124,7 +124,7 @@ export const Cart = () => {
     
     return (
         <div className="cart">
-            <div>
+            
                 <h1>Cart Items</h1>
                 <ul>
                     {cart.map((item) => (
@@ -147,26 +147,37 @@ export const Cart = () => {
                 if (arrayLength >= 1) {
                     return (
                     <li key={key}>
-                        <p className='item-name'>{groupedCart[key][0].name}</p> 
-                        <p className='item-size'>{groupedCart[key][0].size}</p>
-                        <div className='item-amount-container'>
-                            <button onClick={() => reduceAmount(key)}><CaretLeft size={32} /></button>
-                            <p className='item-amount'>{groupedCart[key].length}</p>
-                            <button onClick={() => addToCart(key)}><CaretRight size={32} /></button>
-                            <p className='item-price'>${groupedCart[key][0].price * groupedCart[key].length}</p>
-                        </div>
+                      <div className='item-container'>
+  <div className='image-container'>
+    <img className='item-image' src={groupedCart[key][0].img} alt="" />
+  </div>
+  <div className='item-details-container'>
+    <div className='item-name-container'>
+      <p className='item-name'>{groupedCart[key][0].name}</p> 
+      <p className='item-size'>{groupedCart[key][0].size}</p>
+    </div>
+    
+      <div className='item-amount-container'>
+        <button onClick={() => reduceAmount(key)}><CaretLeft size={32} /></button>
+        <p className='item-amount'>{groupedCart[key].length}</p>
+        <button onClick={() => addToCart(key)}><CaretRight size={32} /></button>
+        <p className='item-price'>${groupedCart[key][0].price * groupedCart[key].length}</p>
+      </div>
+      
+    
+  </div>
+</div>
+                      
                     </li>
                     );
                 }
                 return null;
                 })}
 
-<li>Total Price: ${totalPrice}</li>
+<li className='total-price'>Total Price: ${totalPrice}</li>
 
-            </div>
-            <div className="cartitem">
-
-            </div>
+            
+            
         </div>
     )
 }
