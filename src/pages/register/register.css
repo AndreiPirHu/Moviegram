@@ -1,18 +1,19 @@
-.container {
+.register-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100vh;
+  min-height: 100vh;
   
 }
 
-.form {
+.register-container .form {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 400px;
+  width: 100%;
+  max-width: 400px;
   padding: 40px;
   padding-top: 0;
   border-radius: 8px;
@@ -20,12 +21,32 @@
   background-color: #fff;
 }
 
-.form h2 {
+@media screen and (max-width: 480px) {
+  .register-container .form {
+    padding: 20px;
+    width: 70%;
+  }
+  .register-container .input-container {
+    width: 100%;
+  }
+
+  .register-container .form .button-container {
+    width: 100%;
+  }
+
+  .register-container form{
+    width: 100%;
+  }
+
+  
+}
+
+.register-container .form h2 {
   margin-bottom: 20px;
   text-align: center;
 }
 
-.form input {
+.register-container .form input {
   width: 100%;
   padding: 12px 20px;
   margin: 8px 0;
@@ -35,7 +56,7 @@
   font-size: 16px;
 }
 
-.form button {
+.register-container .form button {
   background-color: #000000;
   color: #fff;
   padding: 12px 20px;
@@ -47,21 +68,21 @@
   width: 400px;
 }
 
-.form button:hover {
+.register-container .form button:hover {
   background-color: #3e8e41;
 }
 
-.form p {
+.register-container .form p {
   margin-top: 16px;
   font-size: 14px;
 }
 
-.form p a {
+.register-container .form p a {
   color: #4caf50;
   font-weight: bold;
 }
 
-.form .register {
+.register-container .form .register {
   background-color: #ffffff;
   color: #000000;
   padding: 12px 20px;
