@@ -39,6 +39,7 @@ display: flex;
   background-color: transparent ;
   color: black;
   padding: 5px;
+  border: none;
 }
 
 .item-details-container{
