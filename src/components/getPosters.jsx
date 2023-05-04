@@ -9,6 +9,8 @@ const GetMoviePosters = () => {
   const [movieName, setMovieName] = useState("");
   const [movie_id, setMovie_id] = useState("");
 
+  const searchMovieUrl = "https://api.themoviedb.org/3/search/movie?api_key=9bf8866aec070a01073c600a88bbefb5&query="
+  const genreUrl = "https://api.themoviedb.org/3/discover/movie?api_key=9bf8866aec070a01073c600a88bbefb5&with_genres="
   //joel: added navigate/import
   let navigate = useNavigate();
 
@@ -18,9 +20,7 @@ const GetMoviePosters = () => {
 
   // gets movie posters from api in a search (name, actors, titels)
   const FetchMovies = () => {
-    const apiUrl = `https://api.themoviedb.org/3/search/movie?api_key=9bf8866aec070a01073c600a88bbefb5&query=${encodeURIComponent(
-      movieName
-    )}`;
+    const apiUrl = `${searchMovieUrl}${encodeURIComponent(movieName)}`;
 
     fetch(apiUrl)
       .then((response) => {
@@ -32,9 +32,7 @@ const GetMoviePosters = () => {
       });
   }; //  api with diffrent genre
   useEffect(() => {
-    const apiUrl = `https://api.themoviedb.org/3/discover/movie?api_key=9bf8866aec070a01073c600a88bbefb5&with_genres=${encodeURIComponent(
-      movie_id
-    )} `;
+    const apiUrl = `${genreUrl}${encodeURIComponent(movie_id)}`;
     axios
       .get(apiUrl)
       .then((response) => {
@@ -51,9 +49,30 @@ const GetMoviePosters = () => {
 
   return (
     <div className="placeholder">
-      <div>
+      <div className="input">
+        <input
+          type="text"
+          placeholder="Sök filmer här"
+          value={movieName}
+          onChange={handleMovieNameChange}
+        />
+      </div>
+      <div className="searchImage">
+        {/* joel: added index&onClick to navigate to individualPoster */}
+        {movie3.map((movie, index) => (
+
+          <div key={index}>
+            <img
+              src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+              alt="Movie poster"
+              onClick={() => { navigate("/single/" + movie3[index].id) }}
+            />
+          </div>
+        ))}
+      </div>
+      <div className="genre">
         <button id="scinceF" onClick={() => setMovie_id(878)}>
-          Science Fiction{" "}
+          Sci-Fi{" "}
         </button>
         <button id="drama" onClick={() => setMovie_id(18)}>
           Drama{" "}
@@ -70,29 +89,20 @@ const GetMoviePosters = () => {
         <button id="Animation" onClick={() => setMovie_id(16)}>
           Animation
         </button>
-        <button id="Tv show" onClick={() => setMovie_id(16)}>
+        {/* <button id="Tv show" onClick={() => setMovie_id(16)}>
           Tv show
-        </button>
+        </button> */}
       </div>
-      <div className="input">
-        <input
-          type="text"
-          placeholder="Sök filmer här"
-          value={movieName}
-          onChange={handleMovieNameChange}
-        />
-      </div>
-
       <div className="searchImage">
         {/* joel: added index&onClick to navigate to individualPoster */}
         {movieGenre.map((movie, index) => (
 
           <div key={index}>
             <img
-            src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-            alt="Movie poster"
-            onClick={()=>{navigate("/single/"+ movieGenre[index].id)}}
-          />
+              src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+              alt="Movie poster"
+              onClick={() => { navigate("/single/" + movieGenre[index].id) }}
+            />
           </div>
         ))}
       </div>
