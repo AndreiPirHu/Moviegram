@@ -33,17 +33,92 @@
     border-radius: 5px;
     align-content: center;
 }
-.buttonLink, #addtocart{
-    width: 350px;
+/* .buttonLink, #addtocart{
+    padding : 5px;
+    border : 2px solid black;
+    border-radius: 5px;
+} */
+.downmenu{
     margin: 5px;
+    display: flex;
+    justify-content: space-around;
     padding : 5px;
     border : 2px solid black;
     border-radius: 5px;
 }
+.countbutton{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
 
 .countbutton button{
+    padding: 0;
+    width: 30px;
+    height: 30px;
+    font-weight: bold;
     border-radius: 10px;
+    text-decoration: none;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    background-color: initial;
+    background-image: linear-gradient(#fff 0, rgba(255, 255, 255, 0) 100%);
+    box-shadow: rgba(255, 255, 255, .2) 0 3px 15px inset, rgba(0, 0, 0, .1) 0 3px 5px, rgba(0, 0, 0, .1) 0 10px 13px;
+    transform: scale(1.05);
+    opacity: .7;
+    transition: all .3s;
 }
+.downmenu button{
+    width: 150px;
+    height: 30px;
+    font-weight: bold;
+    border-radius: 10px;
+    text-decoration: none;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    background-color: initial;
+    background-image: linear-gradient(#fff 0, rgba(255, 255, 255, 0) 100%);
+    box-shadow: rgba(255, 255, 255, .2) 0 3px 15px inset, rgba(0, 0, 0, .1) 0 3px 5px, rgba(0, 0, 0, .1) 0 10px 13px;
+    transform: scale(1.05);
+    opacity: .7;
+    transition: all .3s;
+}
+
+
+/* buttons CSS */
+/* .countbutton button{
+  border-radius: 56px;
+  font-size: 15px;
+  font-weight: 600;
+  outline: 0;
+  padding: 16px 21px;
+  text-decoration: none;
+  transition: all .3s;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.countbutton button{
+  background-color: initial;
+  background-image: linear-gradient(#fff 0, rgba(255, 255, 255, 0) 100%);
+  border-radius: 125px;
+  height: 10px;
+  left: 4%;
+  opacity: .5;
+  transition: all .3s;
+  width: 10px;
+}
+
+.countbutton button{
+  box-shadow: rgba(255, 255, 255, .2) 0 3px 15px inset, rgba(0, 0, 0, .1) 0 3px 5px, rgba(0, 0, 0, .1) 0 10px 13px;
+  transform: scale(1.05);
+} */
+
+
 /* when screen gets big */
 /* inches = in */
 /* ipad 10.9in */
