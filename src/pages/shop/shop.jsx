@@ -26,7 +26,7 @@ export const Shop = () => {
 
     //joel: added navigate/import
     let navigate = useNavigate();
-
+/* 
     const items = [
         { id: uuidv4(), name: "Item 1", price: 10 },
         { id: uuidv4(), name: "Item 2", price: 15 },
@@ -59,7 +59,7 @@ export const Shop = () => {
             console.error("Error adding item to firestore:", e);
         }
     };
-
+ */
 
     const FetchMovies = () => {
         fetch(
@@ -83,10 +83,10 @@ export const Shop = () => {
         <div className="shop">
                 <Hero />
                 <GetMoviePosters />
-            <div className="products">
+           { <div className="products">
                 {/* joel: added index&onClick to navigate to individualPoster */}
                 {movie.map((movies, index) => (
-                    <div key={index}>
+                    <div className="" key={index}>
                         <img
                             src={`https://image.tmdb.org/t/p/w500${movies.poster_path}`}
                             alt="Movie poster"
@@ -94,7 +94,7 @@ export const Shop = () => {
                         />
                     </div>
                 ))}
-            </div>
+            </div>}
         </div>
     );
 };
