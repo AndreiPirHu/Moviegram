@@ -17,7 +17,7 @@ async function fetchPosters(render){
     const sortedArr = response.filter((item) =>item.id != 1008005)
     //randomize and select 4 pics for hero
     const shuffled = [...sortedArr].sort(()=> Math.random() - 0.1);
-    const slicedArray = shuffled.slice(0, 4);
+    const slicedArray = shuffled.slice(0, 7);
 
     const heroPictures = [];
 
@@ -48,10 +48,10 @@ const Hero = () => {
 
     return(
         <div className="heroComponent">
-            <section >
+            <section className="sectiontitle" >
                 <h1 className="title">Moviegram</h1>
             </section>
-            <section className="heroTwo">
+            <section className="sectionpictures">
                 {posters}
             </section>
         </div>
