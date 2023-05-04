@@ -2,17 +2,16 @@ import React from "react";
 import "./shop.css";
 import { useEffect, useState } from "react";
 import GetMoviePosters from "../../components/getPosters";
-import { v4 as uuidv4 } from 'uuid';
-import { useDispatch, useSelector } from 'react-redux';
-import { setDoc, collection, db, doc } from '../../firebase';
-import { actions } from '../../features/cartitems';
+import { v4 as uuidv4 } from "uuid";
+import { useDispatch, useSelector } from "react-redux";
+import { setDoc, collection, db, doc } from "../../firebase";
+import { actions } from "../../features/cartitems";
 import Hero from "../../components/Joel/Hero";
-
 
 export const Shop = () => {
   const [movie, setMovie] = useState([]);
-  
-  const [poster, setPoster ] = useState([]);
+
+  const [poster, setPoster] = useState([]);
 
   const user = useSelector((state) => state.login.user);
   const cart = useSelector((state) => state.cartItems);
@@ -36,9 +35,9 @@ export const Shop = () => {
       return;
     }
     //if user is signed in it adds items to firestore
-    try{
-        //reference to correct collection
-        const cartItemsRef = collection(db, 'users', user, 'cartItems');
+    try {
+      //reference to correct collection
+      const cartItemsRef = collection(db, "users", user, "cartItems");
 
       // Set the itemID as the doc name
       const itemDocRef = doc(cartItemsRef, item.id);
@@ -69,22 +68,22 @@ export const Shop = () => {
     FetchMovies();
   }, []);
 
-    return (
-          <div className="shop">
+  return (
+    <div className="shop">
       <div className="shopTitle">
-      <Hero />
-        <GetMoviePosters />
+        <Hero />
+         <GetMoviePosters />
       </div>
 
       <div className="products">
         {movie.map((movies) => (
           <div>
-            <img
+            {/*      <img
               src={`https://image.tmdb.org/t/p/w500${movies.poster_path}`}
               alt="Movie poster"
-            />
-          <div className="testShop">
-              <h1>Items for Sale</h1>
+        /> */}
+            <div className="testShop">
+              {/*  <h1>Items for Sale</h1>
               <ul>
                 {items.map((item) => (
                   <li key={item.id}>
@@ -92,12 +91,11 @@ export const Shop = () => {
                     <button onClick={() => addToCart(item)}>Add to Cart</button>
                   </li>
                 ))}
-              </ul>
+                </ul> */}
             </div>
-
           </div>
-      ))}
-    </div>
+        ))}
+      </div>
     </div>
   );
 };

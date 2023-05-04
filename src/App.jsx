@@ -1,19 +1,17 @@
-
-import { useEffect } from 'react'
-import { Navbar } from './components/navbar'
-import './App.css'
-import { HashRouter as Router, Routes, Route } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux';
-import { actions as loginActions } from './features/login';
-import { actions as cartActions } from './features/cartitems';
-import { auth, collection, db, getDocs } from './firebase';
-import { Shop } from './pages/shop/shop'
-import { Cart } from './pages/cart/cart'
-import {Login} from './pages/login/login'
-import {Profile} from './pages/profile/profile'
-import IndividualPoster from './components/Joel/IndividualPoster';
-import {Register} from './pages/register/register'
-
+import { useEffect } from "react";
+import { Navbar } from "./components/navbar";
+import "./App.css";
+import { HashRouter as Router, Routes, Route } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { actions as loginActions } from "./features/login";
+import { actions as cartActions } from "./features/cartitems";
+import { auth, collection, db, getDocs } from "./firebase";
+import { Shop } from "./pages/shop/shop";
+import { Cart } from "./pages/cart/cart";
+import { Login } from "./pages/login/login";
+import { Profile } from "./pages/profile/profile";
+import IndividualPoster from "./components/Joel/IndividualPoster";
+import { Register } from "./pages/register/register";
 
 function App() {
   const cart = useSelector((state) => state.cartItems);
@@ -61,11 +59,10 @@ function App() {
 
   //if user is logged/logs in, starts fetching cart from firestore
   useEffect(() => {
-
-      if (user){
-        console.log("Starting item fetch")
-    handleDownload(user)
-      }
+    if (user) {
+      console.log("Starting item fetch");
+      handleDownload(user);
+    }
   }, [user]);
 
   //fetch cart items from firestore on page reload if logged in

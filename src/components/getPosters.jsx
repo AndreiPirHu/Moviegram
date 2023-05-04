@@ -4,22 +4,23 @@ import "../components/getPostersStyle.css";
 import { useNavigate } from "react-router-dom";
 
 const GetMoviePosters = () => {
-  const [movieGenre, setMovieGenre] = useState([]);
-  const [movie3, setMovie3] = useState([]);
-  const [movieName, setMovieName] = useState("");
-  const [movie_id, setMovie_id] = useState("");
-
+  // Ernesto: sätter state till den fetchade movieGenre objektet (discover)
+  const [dataMovieGenre, setDataMovieGenre] = useState([]);
+  // Ernest : ändrar state till den valda genre nummer t.ex. nummer 28 = drama
+  const [chosenGenre, setChosenGenre] = useState("");
+  // Ernesto: sätter data för fetchade url som har en sök api.
+  const [searchtMovieData, setSearchtMovieData] = useState([]);
+  //Ernesto: denna state det som sök i searchMovie
+  const [searchtMovieName, setSearchtMovieName] = useState("");
+  const [hasSearchResults, setHasSearchResults] = useState(false);
   //joel: added navigate/import
   let navigate = useNavigate();
-
-  const handleMovieNameChange = (event) => {
-    setMovieName(event.target.value);
-  };
+  // Ernesto: visar search bilden om inputen inte är null annars visar den genrebilder
 
   // gets movie posters from api in a search (name, actors, titels)
   const FetchMovies = () => {
     const apiUrl = `https://api.themoviedb.org/3/search/movie?api_key=9bf8866aec070a01073c600a88bbefb5&query=${encodeURIComponent(
-      movieName
+      searchtMovieName
     )}`;
 
     fetch(apiUrl)
@@ -27,83 +28,97 @@ const GetMoviePosters = () => {
         return response.json();
       })
       .then((data) => {
-        setMovie3(data.results);
-        console.log("visar bild 3", movie3);
+        setSearchtMovieData(data.results);
       });
   }; //  api with diffrent genre
   useEffect(() => {
     const apiUrl = `https://api.themoviedb.org/3/discover/movie?api_key=9bf8866aec070a01073c600a88bbefb5&with_genres=${encodeURIComponent(
-      movie_id
+      chosenGenre
     )} `;
     axios
       .get(apiUrl)
       .then((response) => {
-        setMovieGenre(response.data.results);
-        console.log("visar bild 3", movieGenre[1].backdrop_path);
+        setDataMovieGenre(response.data.results);
       })
       .catch((error) => {
         console.log(error);
       });
-  }, [movie_id]);
+  }, [chosenGenre]);
+  const handleMovieNameChange = (event) => {
+    //showRightImage !== null
+    // const showRightImage = event.target.value;
+    setSearchtMovieName(event.target.value);
+    if (event.target.value) {
+      setHasSearchResults(true);
+      console.log("inne i if");
+      // setSearchtMovieName(showRightImage);
+      setDataMovieGenre([]);
+    } else {
+      setHasSearchResults(false);
+      console.table("finns i else", dataMovieGenre);
+      setChosenGenre(28);
+    }
+  };
   useEffect(() => {
     FetchMovies();
-  }, [movieName]);
-
+  }, [searchtMovieName]);
   return (
     <div className="placeholder">
-      <div>
-        <button id="scinceF" onClick={() => setMovie_id(878)}>
-          Science Fiction{" "}
+      <div className="buttonGenre">
+        <button id="genreButtonGroup1" onClick={() => setChosenGenre(878)}>
+          Science Fiction
         </button>
-        <button id="drama" onClick={() => setMovie_id(18)}>
+        <button id="genreButtonGroup1" onClick={() => setChosenGenre(18)}>
           Drama{" "}
         </button>
-        <button id="crime" onClick={() => setMovie_id(80)}>
+        <button id="genreButtonGroup1" onClick={() => setChosenGenre(80)}>
           Crime
         </button>
-        <button id="romance" onClick={() => setMovie_id(10749)}>
+        <button id="genreButtonGroup2" onClick={() => setChosenGenre(10749)}>
           Romance
         </button>
-        <button id="action" onClick={() => setMovie_id(28)}>
+        <button id="genreButtonGroup2" onClick={() => setChosenGenre(28)}>
           Action
         </button>
-        <button id="Animation" onClick={() => setMovie_id(16)}>
+        <button id="genreButtonGroup2" onClick={() => setChosenGenre(16)}>
           Animation
-        </button>
-        <button id="Tv show" onClick={() => setMovie_id(16)}>
-          Tv show
         </button>
       </div>
       <div className="input">
         <input
           type="text"
           placeholder="Sök filmer här"
-          value={movieName}
+          value={searchtMovieName}
           onChange={handleMovieNameChange}
         />
       </div>
-
-      <div className="searchImage">
-        {movie3.map((movies, index) => (
-          <img
-            src={`https://image.tmdb.org/t/p/w500${movies.poster_path}`}
-            alt="Movie poster"
-            onClick={() => {
-              navigate("/single/" + movie3[index].id);
-            }}
-          />
-        ))}
-        <div className="genreStyle">
-          {movieGenre.map((movie) => (
-            <img
-              src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-              alt="Movie poster"
-            />
-          ))}
+      <div className="scroll-container">
+        <div className="searchImage">
+          {hasSearchResults ? (
+            searchtMovieData.map((movie, index) => (
+              <img
+                key={index}
+                src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+                alt="Movie poster"
+                onClick={() => {
+                  navigate("/single/" + movie.id);
+                }}
+              />
+            ))
+          ) : (
+            <div className="genreStyle">
+              {dataMovieGenre.map((movie, index) => (
+                <img
+                  key={index}
+                  src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+                  alt="Movie poster"
+                />
+              ))}
+            </div>
+          )}
         </div>
       </div>
     </div>
   );
 };
-
 export default GetMoviePosters;
