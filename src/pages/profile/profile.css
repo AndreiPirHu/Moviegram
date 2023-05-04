@@ -1,13 +1,17 @@
 
-.profile .user-info {
+.profile{
+  background-color: rgb(243, 234, 223);
+  min-height: 100vh;
+
+}
+
+.user-info {
   background-color: #fff;
   box-shadow: 1px 10px 30px rgba(0, 0, 0, 0.1);
   padding: 1rem;
   width: 50%;
   margin: 0 auto;
-  margin-top: 40px;
   border: 1px solid rgb(187, 187, 187);
-  margin-bottom: 0px;
   
 }
 

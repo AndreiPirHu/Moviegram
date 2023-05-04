@@ -9,164 +9,181 @@ import { CaretLeft, CaretRight } from 'phosphor-react';
 
 
 export const Cart = () => {
-    const [totalPrice, setTotalPrice] = useState(0);
-  
-
-    const [groupedCart, setGroupedCart] = useState({});
-    
-
-    const cart = useSelector(state => state.cartItems)
-    const user = useSelector( state => state.login.user)
-    const isLoggedIn = useSelector( state => state.login.loggedIn)
-    const dispatch = useDispatch()
-
-    // Calculate the total price of all items in the cart
-    useEffect(() => {
-        let total = 0;
-        cart.forEach((item) => {
-        total += item.price;
-        });
-        setTotalPrice(total);
-    }, [cart]);
+  const [totalPrice, setTotalPrice] = useState(0);
 
 
-    const removeFromCart = async (item) => {
-        //remove from localstorage
-          dispatch(actions.removeItem(item.id))
-    
-        //Remove item from firestore if user is logged in
-        if (!isLoggedIn){
-          console.log('user is not logged in for firestore remove');
-          return;
-        }
-        try{
-          //reference to correct collection
-          const cartItemsRef = collection(db, 'users', user, 'cartItems');
-      
-          //delete thedocument
-          await deleteDoc(doc(cartItemsRef, item.id));
-          console.log(`Document with ID: ${item.id} successfully deleted`);
-         } catch (e) {
-          console.error('Error deleting document:', e)
-         }
-      };
+  const [groupedCart, setGroupedCart] = useState({});
 
 
-      //adds a new object to cart with a different uuid
-      const addToCart = async (key) => {
-        //fetches old item with key and index position
-        const oldItem = groupedCart[key][0];
-        //creates a new item with a unique uuid to add to the cart
-        const item = { ...oldItem, id: uuidv4() };
- 
-        //adds item to cart
-         dispatch(actions.addItem(item));
-    
-        //Stops here if user is not signed in
-        if (!isLoggedIn) {
-            console.log('user is not logged in for firestore save');
-            return;
-        }
+  const cart = useSelector(state => state.cartItems)
+  const user = useSelector(state => state.login.user)
+  const isLoggedIn = useSelector(state => state.login.loggedIn)
+  const dispatch = useDispatch()
 
-        //if user is signed in it adds items to firestore
-        try{
-            //reference to correct collection
-            const cartItemsRef = collection(db, 'users', user, 'cartItems');
-    
-          // Set the itemID as the doc name
-          const itemDocRef = doc(cartItemsRef, item.id);
-    
-          //Add item to firestore
-          await setDoc(itemDocRef, item);
-          console.log(`Item added to firestore with ID: ${item.id}`);
-        } catch (e) {
-          console.error("Error adding item to firestore:", e);
-        } 
-      };
+  // Calculate the total price of all items in the cart
+  useEffect(() => {
+    let total = 0;
+    cart.forEach((item) => {
+      total += item.price;
+    });
+    setTotalPrice(total);
+  }, [cart]);
 
 
-      
-      //Makes a grouped cart from redux cart whenever cart changes or when entering shopping cart page
-      //Makes several arrays based on item name, size and price to group the same ones together
-      useEffect(() =>{
-        setGroupedCart(cart.reduce((acc, item) => {
-            const key = `${item.name}-${item.size}-${item.price}`;
-            if (!acc[key]) {
-              acc[key] = [];
-            }
-            acc[key].push(item);
-            return acc;
-          }, {}))
-      },[cart]);
+  const removeFromCart = async (item) => {
+    //remove from localstorage
+    dispatch(actions.removeItem(item.id))
+
+    //Remove item from firestore if user is logged in
+    if (!isLoggedIn) {
+      console.log('user is not logged in for firestore remove');
+      return;
+    }
+    try {
+      //reference to correct collection
+      const cartItemsRef = collection(db, 'users', user, 'cartItems');
+
+      //delete thedocument
+      await deleteDoc(doc(cartItemsRef, item.id));
+      console.log(`Document with ID: ${item.id} successfully deleted`);
+    } catch (e) {
+      console.error('Error deleting document:', e)
+    }
+  };
 
 
-      //remove item with index 0 from one of the arrays of duplicate items
-      const reduceAmount = async (key) =>{
-        const item = groupedCart[key][0];
+  //adds a new object to cart with a different uuid
+  const addToCart = async (key) => {
+    //fetches old item with key and index position
+    const oldItem = groupedCart[key][0];
+    //creates a new item with a unique uuid to add to the cart
+    const item = { ...oldItem, id: uuidv4() };
 
-        //tries to remove item from cart and firebase first
-        try{
-            await removeFromCart(item)
-        } catch (error) {
-            console.log(`Error removing item with id ${item.id}: ${error}`);
-            return;
-        }
+    //adds item to cart
+    dispatch(actions.addItem(item));
 
-        //removes the item with index 0 from grouped cart
-        groupedCart[key].shift();
+    //Stops here if user is not signed in
+    if (!isLoggedIn) {
+      console.log('user is not logged in for firestore save');
+      return;
+    }
 
-        console.log(`Removing item with id ${item.id}`);
+    //if user is signed in it adds items to firestore
+    try {
+      //reference to correct collection
+      const cartItemsRef = collection(db, 'users', user, 'cartItems');
 
-        //sets the new grouped cart without the item
-        setGroupedCart({...groupedCart});
+      // Set the itemID as the doc name
+      const itemDocRef = doc(cartItemsRef, item.id);
+
+      //Add item to firestore
+      await setDoc(itemDocRef, item);
+      console.log(`Item added to firestore with ID: ${item.id}`);
+    } catch (e) {
+      console.error("Error adding item to firestore:", e);
+    }
+  };
+
+
+
+  //Makes a grouped cart from redux cart whenever cart changes or when entering shopping cart page
+  //Makes several arrays based on item name, size and price to group the same ones together
+  useEffect(() => {
+    setGroupedCart(cart.reduce((acc, item) => {
+      const key = `${item.name}-${item.size}-${item.price}`;
+      if (!acc[key]) {
+        acc[key] = [];
       }
+      acc[key].push(item);
+      return acc;
+    }, {}))
+  }, [cart]);
 
-    
-    return (
-        <div className="cart">
-            <div>
-                <h1>Cart Items</h1>
-                <ul>
-                    {cart.map((item) => (
-                        <li key={item.id}>
-                            {item.name} - ${item.price}
-                            <button onClick={() => removeFromCart(item)}>Remove from Cart</button>
-                        </li>
-                    ))}
-                    <li>Total Price: ${totalPrice}</li>
-                </ul> 
 
-                <h1>New Cart Items</h1>
-                
-                 
+  //remove item with index 0 from one of the arrays of duplicate items
+  const reduceAmount = async (key) => {
+    const item = groupedCart[key][0];
 
-                {Object.keys(groupedCart) 
-                .sort((a, b) => a.localeCompare(b)) //sort alphabetically so arrays dont change position on change
-                .map((key) => {
-                const arrayLength = groupedCart[key].length;
-                if (arrayLength >= 1) {
-                    return (
-                    <li key={key}>
-                        <p className='item-name'>{groupedCart[key][0].name}</p> 
-                        <p className='item-size'>{groupedCart[key][0].size}</p>
-                        <div className='item-amount-container'>
-                            <button onClick={() => reduceAmount(key)}><CaretLeft size={32} /></button>
-                            <p className='item-amount'>{groupedCart[key].length}</p>
-                            <button onClick={() => addToCart(key)}><CaretRight size={32} /></button>
-                            <p className='item-price'>${groupedCart[key][0].price * groupedCart[key].length}</p>
-                        </div>
-                    </li>
-                    );
-                }
-                return null;
-                })}
+    //tries to remove item from cart and firebase first
+    try {
+      await removeFromCart(item)
+    } catch (error) {
+      console.log(`Error removing item with id ${item.id}: ${error}`);
+      return;
+    }
 
-<li>Total Price: ${totalPrice}</li>
+    //removes the item with index 0 from grouped cart
+    groupedCart[key].shift();
 
-            </div>
-            <div className="cartitem">
+    console.log(`Removing item with id ${item.id}`);
 
-            </div>
+    //sets the new grouped cart without the item
+    setGroupedCart({ ...groupedCart });
+  }
+
+
+  return (
+    <div className="cart">
+
+      <h1>Cart Items</h1>
+      <ul>
+        {cart.map((item) => (
+          <li key={item.id}>
+            {item.name} - ${item.price}
+            <button onClick={() => removeFromCart(item)}>Remove from Cart</button>
+          </li>
+        ))}
+        <li>Total Price: ${totalPrice}</li>
+      </ul>
+
+     
+
+
+      <div className='cart-items-container'>
+         <h1>New Cart Items</h1>
+      {Object.keys(groupedCart)
+        .sort((a, b) => a.localeCompare(b)) //sort alphabetically so arrays dont change position on change
+        .map((key) => {
+          const arrayLength = groupedCart[key].length;
+          if (arrayLength >= 1) {
+            return (
+              <li key={key}>
+                <div className='item-container'>
+                  <div className='image-container'>
+                    <img className='item-image' src={groupedCart[key][0].img} alt="" />
+                  </div>
+                  <div className='item-details-container'>
+                    <div className='item-name-container'>
+                      <p className='item-name'>{groupedCart[key][0].name}</p>
+                      <p className='item-size'>{groupedCart[key][0].size}</p>
+                    </div>
+
+                    <div className='item-amount-container'>
+                      <button onClick={() => reduceAmount(key)}><CaretLeft size={32} /></button>
+                      <p className='item-amount'>{groupedCart[key].length}</p>
+                      <button onClick={() => addToCart(key)}><CaretRight size={32} /></button>
+                      <p className='item-price'>${groupedCart[key][0].price * groupedCart[key].length}</p>
+                    </div>
+
+
+                  </div>
+                </div>
+              </li>
+            );
+          }
+          return null;
+        })}
+        <li className='total-price'>Total Price: ${totalPrice}</li>
         </div>
-    )
+        <div className='cart-checkout-container'>
+       
+        </div>
+        
+      
+      
+
+
+
+    </div>
+  )
 }
