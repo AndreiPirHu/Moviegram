@@ -105,7 +105,12 @@ const IndividualPoster = () => {
                     <h2>{item.original_title}</h2>
                     <p>{item.overview}</p>
                     <CounterButton item={item} handleAdd={addToSelected} handleRemove={remove}/>
-                    <button id="addtocart" onClick={addToCart}>Add to cart</button>
+                    <div className="downmenu">
+                        <Link to='/'>
+                            <button className="buttonLink">Home</button>
+                        </Link>
+                        <button id="addtocart" onClick={addToCart}>Add to cart</button>
+                    </div>
                 </div>
             </div> 
     )
@@ -113,9 +118,6 @@ const IndividualPoster = () => {
 
     return(
         <div className="indivPosterDiv">
-            <Link className="buttonLink" to='/'>
-                <button >Home</button>
-            </Link>
             {error ? <p>"No info available"</p> : container}
             {/* <div className="posterDiv">
                 <img src={img ? `https://image.tmdb.org/t/p/original${(item.poster_path)}` : ""} 

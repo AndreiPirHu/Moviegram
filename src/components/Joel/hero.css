@@ -23,6 +23,9 @@
 .heroComponent img:nth-of-type(5){
     display: none;
 }
+.heroComponent img:nth-of-type(4){
+    display: none;
+}
 .heroComponent img:hover{
     margin: 0px;
     width: 103px;
@@ -39,6 +42,11 @@
     text-align: center;
 }
 /* when it becomes big */
+@media(min-width:450px){
+    .heroComponent img:nth-of-type(4){
+        display:inline;
+    }
+}
 
 @media(min-width:816px){
     .heroComponent{
