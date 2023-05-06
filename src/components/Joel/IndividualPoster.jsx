@@ -15,7 +15,7 @@ async function fetchPoster(id, setItem, setImg, setError){
     await fetch(idEndPoint)
         .then(res => res.json())
         .then(data => {
-            console.log("data",data)
+            //console.log("data",data)
             setItem(data);
             //setImg(true)
         })
