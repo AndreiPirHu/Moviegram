@@ -70,7 +70,7 @@ export const Login = () => {
 
   //redirects to new page if user logs in and if web address is written manually
   useEffect(() => {
-    if (isLoggedIn === true) {
+    if (isLoggedIn) {
       navigate('/profile');
       console.log("Redirecting to profile")
     }
@@ -79,12 +79,12 @@ export const Login = () => {
 
 
   return(
-    <div className="container">
+    <div className="login-container">
     <div className='form'>
       <h1>Sign in</h1>
       <form onSubmit={handleSignIn}>
         
-        <div>
+        <div className='input-container'>
           <label htmlFor="email">Email</label>
           <input 
           type="email" 
@@ -94,7 +94,7 @@ export const Login = () => {
           required
         />  
         </div>
-        <div>
+        <div className='input-container'>
           <label htmlFor="password">Password</label>
           <input 
           type="password" 

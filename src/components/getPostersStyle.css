@@ -1,103 +1,77 @@
-.buttonGenre {
-  display: flex;
-  gap: 10px;
-  justify-content: center;
-  align-items: center;
-  border: none;
-  padding: 12px 24px;
-  font-size: 16px;
-  font-weight: 600;
-  text-transform: uppercase;
-  color: #fff;
-  background-color: #222;
 
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+.placeholder {
+  margin-top: 20px;
+  flex-grow: 1;
+  flex-basis: 100%;
 }
-.buttonGenre:hover {
-  color: #555;
+
+.genre {
+  position: center;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  padding: 1em;
+}
+
+.genre button {
+  background-color: #333;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  transition: all 0.3s ease-in-out;
+}
+
+.genre button:hover {
+  background-color: #f1c40f;
+  color: #333;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
 }
 
 .input {
-  flex-basis: 100%;
+  position: center;
+  padding: 1em;
   margin-bottom: 20px;
+  margin-top: 20px;
+
+}
+
+
+input[type="text"] {
+  padding: 10px;
+  font-size: 16px;
+  border: none;
+  border-radius: 4px;
+  background-color: #f2f2f2;
+  width: 300px;
 }
 
 .searchImage {
-  overflow-x: auto;
+  block-size: fit-content;
+  overflow: auto;
+  white-space: nowrap;
   display: flex;
-  justify-content: center;
-  scroll-behavior: smooth;
-  scroll-snap-type: x mandatory;
+  padding: 1em;
+  max-width: 100%;
+  max-height: 100%;
+  height: auto;
+  width: fit-content;
+  position: center;
+  object-fit: inherit;
+  gap: 2em;
 }
 
 .searchImage img {
-  max-width: 200px;
-  margin-right: 10px;
-  scroll-snap-align: center;
+  margin: 0;
+  padding: 5px;
+  background-color: rgba(183, 21, 21, 0.15);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 0 10px #363530;
+  position: center;
+  overflow: hidden;
+  width: 200px;
+  max-height: 100%;
+  object-fit: fill;
+  height: auto;
 }
 
-.genreStyle {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 20px;
-  overflow-x: auto;
-  scroll-behavior: smooth;
-  scroll-snap-type: x mandatory;
-}
-
-.genreStyle img {
-  max-width: 200px;
-  margin-right: 10px;
-  scroll-snap-align: center;
-}
-.scroll-container {
-  display: flex;
-  overflow-x: scroll;
-  margin-top: 20px;
-  margin-bottom: 20px;
-}
-
-.genreStyle {
-  display: flex;
-  flex-wrap: nowrap;
-}
-@media (max-width: 768px) {
-  .scroll-container {
-    margin-right: 5px;
-    width: 95%;
-  }
-
-  .genreStyle {
-    margin-left: 5px;
-    display: flex;
-    flex-wrap: nowrap;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    gap: 5px; /* Justera avståndet mellan bilderna */
-    padding: 10px; /* Lägg till extra utrymme runt varje bild */
-  }
-
-  .genreStyle img {
-    width: 50%;
-    margin-right: 10px;
-  }
-}
-
-@media (max-width: 640px) {
-  .buttonGenre {
-    gap: 10px;
-    font-size: 16px; /* Anpassa storleken efter behov */
-    display: flex;
-    overflow-x: auto;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    padding: 0 1rem;
-  }
-
-  .buttonGenre button {
-    font-size: 0.9rem;
-    margin-right: 0, 1rem;
-  }
-}

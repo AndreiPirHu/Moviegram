@@ -4,6 +4,7 @@ import "../components/getPostersStyle.css";
 import { useNavigate } from "react-router-dom";
 
 const GetMoviePosters = () => {
+
   // Ernesto: sätter state till den fetchade movieGenre objektet (discover)
   const [dataMovieGenre, setDataMovieGenre] = useState([]);
   // Ernest : ändrar state till den valda genre nummer t.ex. nummer 28 = drama
@@ -13,15 +14,24 @@ const GetMoviePosters = () => {
   //Ernesto: denna state det som sök i searchMovie
   const [searchtMovieName, setSearchtMovieName] = useState("");
   const [hasSearchResults, setHasSearchResults] = useState(false);
+  
+// Vlad constanter i stället för sträng
+ // const searchMovieUrl = "https://api.themoviedb.org/3/search/movie?api_key=9bf8866aec070a01073c600a88bbefb5&query="
+ // const genreUrl = "https://api.themoviedb.org/3/discover/movie?api_key=9bf8866aec070a01073c600a88bbefb5&with_genres="
+
   //joel: added navigate/import
   let navigate = useNavigate();
   // Ernesto: visar search bilden om inputen inte är null annars visar den genrebilder
 
   // gets movie posters from api in a search (name, actors, titels)
   const FetchMovies = () => {
+
     const apiUrl = `https://api.themoviedb.org/3/search/movie?api_key=9bf8866aec070a01073c600a88bbefb5&query=${encodeURIComponent(
       searchtMovieName
     )}`;
+
+    // const apiUrl = `${searchMovieUrl}${encodeURIComponent(movieName)}`;
+
 
     fetch(apiUrl)
       .then((response) => {
@@ -32,9 +42,13 @@ const GetMoviePosters = () => {
       });
   }; // : api with diffrent genre
   useEffect(() => {
+
     const apiUrl = `https://api.themoviedb.org/3/discover/movie?api_key=9bf8866aec070a01073c600a88bbefb5&with_genres=${encodeURIComponent(
       chosenGenre
     )} `;
+
+   // const apiUrl = `${genreUrl}${encodeURIComponent(movie_id)}`;
+
     axios
       .get(apiUrl)
       .then((response) => {
@@ -61,11 +75,12 @@ const GetMoviePosters = () => {
   useEffect(() => {
     FetchMovies();
   }, [searchtMovieName]);
+  
   return (
     <div className="placeholder">
-      <div className="buttonGenre">
-        <button id="genreButtonGroup1" onClick={() => setChosenGenre(878)}>
-          Science Fiction
+      <div className="genre">
+        <button id="scinceF" onClick={() => setMovie_id(878)}>
+          Sci-Fi{" "}
         </button>
         <button id="genreButtonGroup1" onClick={() => setChosenGenre(18)}>
           Drama{" "}
@@ -83,6 +98,7 @@ const GetMoviePosters = () => {
           Animation
         </button>
       </div>
+      
       <div className="input">
         <input
           type="text"
@@ -91,32 +107,36 @@ const GetMoviePosters = () => {
           onChange={handleMovieNameChange}
         />
       </div>
-      <div className="scroll-container">
-        <div className="searchImage">
           {hasSearchResults ? (
-            searchtMovieData.map((movie, index) => (
+          <div className="searchImage">
+            {searchtMovieData.map((movie, index) => (
+            <div key={index}>
               <img
                 key={index}
                 src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
                 alt="Movie poster"
                 onClick={() => {
-                  navigate("/single/" + movie.id);
+                  navigate(navigate("/single/" + searchtMovieData[index].id));
                 }}
               />
-            ))
+              </div>
+            ))}
+            </div>
           ) : (
-            <div className="genreStyle">
+            <div className="searchImage">
+            {/* joel: added index&onClick to navigate to individualPoster */}
               {dataMovieGenre.map((movie, index) => (
-                <img
-                  key={index}
-                  src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-                  alt="Movie poster"
-                />
+                <div key={index}>
+            <img
+              src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+              alt="Movie poster"
+              onClick={() => { navigate("/single/" + dataMovieGenre[index].id) }}
+            />
+          </div>
               ))}
             </div>
           )}
-        </div>
-      </div>
+
     </div>
   );
 };
