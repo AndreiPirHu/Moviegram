@@ -3,15 +3,15 @@ import "./shop.css";
 import { useEffect, useState } from "react";
 import { Link, Navigate } from 'react-router-dom';
 import GetMoviePosters from "../../components/getPosters";
-import { v4 as uuidv4 } from 'uuid';
-import { useDispatch, useSelector } from 'react-redux';
-import { setDoc, collection, db, doc } from '../../firebase';
-import { actions } from '../../features/cartitems';
+import { v4 as uuidv4 } from "uuid";
+import { useDispatch, useSelector } from "react-redux";
+import { setDoc, collection, db, doc } from "../../firebase";
+import { actions } from "../../features/cartitems";
 import Hero from "../../components/Joel/Hero";
 import { useNavigate } from "react-router-dom";
 
-
 export const Shop = () => {
+
     const [movie, setMovie] = useState([]);
 
     const [poster, setPoster] = useState([]);
@@ -97,5 +97,6 @@ export const Shop = () => {
             </div>}
         </div>
     );
+
 };
 

@@ -1,3 +1,4 @@
+
 .placeholder {
   margin-top: 20px;
   flex-grow: 1;
@@ -33,6 +34,7 @@
   margin-top: 20px;
 
 }
+
 
 input[type="text"] {
   padding: 10px;
@@ -72,3 +74,4 @@ input[type="text"] {
   object-fit: fill;
   height: auto;
 }
+
