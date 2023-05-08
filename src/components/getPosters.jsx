@@ -30,7 +30,7 @@ const GetMoviePosters = () => {
       .then((data) => {
         setSearchtMovieData(data.results);
       });
-  }; //  api with diffrent genre
+  }; // : api with diffrent genre
   useEffect(() => {
     const apiUrl = `https://api.themoviedb.org/3/discover/movie?api_key=9bf8866aec070a01073c600a88bbefb5&with_genres=${encodeURIComponent(
       chosenGenre
@@ -44,18 +44,17 @@ const GetMoviePosters = () => {
         console.log(error);
       });
   }, [chosenGenre]);
+  // Ernesto: kollar om något händer i input
   const handleMovieNameChange = (event) => {
-    //showRightImage !== null
-    // const showRightImage = event.target.value;
     setSearchtMovieName(event.target.value);
     if (event.target.value) {
       setHasSearchResults(true);
       console.log("inne i if");
-      // setSearchtMovieName(showRightImage);
+
       setDataMovieGenre([]);
     } else {
       setHasSearchResults(false);
-      console.table("finns i else", dataMovieGenre);
+      console.table("är inne  i else", dataMovieGenre);
       setChosenGenre(28);
     }
   };
