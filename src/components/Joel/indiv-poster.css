@@ -32,6 +32,7 @@
     border : 2px solid black;
     border-radius: 5px;
     align-content: center;
+    box-shadow: 0 0 20px #363530;
 }
 /* .buttonLink, #addtocart{
     padding : 5px;
@@ -86,6 +87,7 @@
     opacity: .7;
     transition: all .3s;
 }
+
 
 
 /* buttons CSS */

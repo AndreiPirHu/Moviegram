@@ -6,6 +6,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { useDispatch, useSelector } from "react-redux";
 import { actions } from "../../features/cartitems";
 import { setDoc, collection, db, doc } from '../../firebase';
+import Review from "./Review";
 
 async function fetchPoster(id, setItem, setImg, setError){
     
@@ -44,7 +45,7 @@ const IndividualPoster = () => {
     useEffect(()=>{
         //fetch and changes item to an object
         fetchPoster(id, setItem, setImg, setError);
-    }, []);
+    }, [item]);
 
     function addToSelected(poster, size, price){
 
@@ -81,12 +82,12 @@ const IndividualPoster = () => {
             }
             //if user is signed in it adds items to firestore
             try{ //reference to correct collection
-            const cartItemsRef = collection(db, 'users', user, 'cartItems');
+                const cartItemsRef = collection(db, 'users', user, 'cartItems');
               // Set the itemID as the doc name
-              const itemDocRef = doc(cartItemsRef, item.id);
+                const itemDocRef = doc(cartItemsRef, item.id);
               //Add item to firestore
-              setDoc(itemDocRef, item);
-              console.log(`Item added to firestore with ID: ${item.id}`);
+                setDoc(itemDocRef, item);
+                console.log(`Item added to firestore with ID: ${item.id}`);
             } catch (e) {
               console.error("Error adding item to firestore:", e);
             }
@@ -132,6 +133,7 @@ const IndividualPoster = () => {
                     <button id="addtocart" onClick={addToCart}>Add to cart</button>
                 </div>
             </div> */}
+            <Review filmID={id}/>
         </div>
     )
 }

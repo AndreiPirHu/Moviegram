@@ -1,0 +1,43 @@
+.review{
+    display: flex;
+    flex-flow: column;
+    width: 80%;
+    padding: 10px;
+    border : 2px solid black;
+    border-radius: 5px;
+    box-shadow: 0 0 20px #363530;
+    gap: 5px;
+}
+.review > div{
+}
+.reviewcontent{
+    width: 90%;
+    border : 2px solid black;
+    border-radius: 5px;
+}
+.showreview{
+    display: flex;
+    flex-direction: column;
+    overflow-x: scroll;
+    flex: 1 1 0;
+    gap: 5px;
+}
+.showreview div{
+    background-color: blanchedalmond;
+}
+.postreview{
+    display: flex;
+    flex-direction: column;
+}
+/* max 330 and smaller */
+@media(max-width: 330px){
+}
+/* min 330 or bigger */
+@media(min-width: 330px){
+    .review{
+        /* display: flex;
+        flex-flow: column;
+        background-color: aqua;
+        justify-content:space-between; */
+    }
+}

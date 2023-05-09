@@ -11,7 +11,7 @@ const initialState = [];
 
 const reducer = createReducer(initialState, builder =>{
     builder
-        .addCase(fetchReviews, (state, action)=>({}))
+        .addCase(fetchReviews, (state, action)=>({...state, content : action.payload}))
         .addCase(postReview, (state, action)=>({}))
         .addCase(deleteReview, (state, action)=>({}))
         .addCase(updateReview, (state, action)=>({}))
