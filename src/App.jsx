@@ -134,7 +134,7 @@ function App() {
           <Route path="/single" element={<IndividualPoster />} />
           <Route path="/single/:id" element={<IndividualPoster />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/register" element={<Register />} />
+          <Route path="/checkout" element={<Checkout />} />
         </Routes>
       </Router>
     </div>

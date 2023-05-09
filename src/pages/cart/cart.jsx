@@ -184,7 +184,8 @@ export const Cart = () => {
           <li className='total-price'><p className='price-description'>Order value</p> <p className='price-amount'>${totalPrice}</p></li>
           <li className='total-price'><p className='price-description'>Delivery fee</p> <p className='price-amount'>${deliveryFee}</p> </li>
           <li className='total-price total-sum' ><p className='price-description'>Total</p> <p className='price-amount'>${totalPrice + deliveryFee}</p></li>
-          <button className='checkout-button' onClick={navigateToCheckout}>Checkout</button>
+          <button className='checkout-button' onClick={navigateToCheckout} disabled={cart.length === 0}>Checkout</button>
+          
       </div>
     </div>
   )

@@ -11,6 +11,17 @@
   align-items: flex-start;
 }
 
+.cart button:hover{
+  cursor: pointer;
+
+}
+
+.cart button:disabled{
+  background-color: rgb(177, 175, 175);
+  color: black;
+  cursor: not-allowed;
+}
+
 .cart-items-container {
 display: flex;
 flex-direction: column;
@@ -134,6 +145,11 @@ width: 100%;
   font-weight: bold;
   display: flex;
 }
+
+.price-description, .price-amount{
+  margin: 6px;
+}
+
 .cart button{
   padding: 0;
 }
@@ -141,6 +157,7 @@ width: 100%;
 .total-sum{
  border-top: 1px solid rgb(7, 7, 7);
  color: black;
+ margin-top: 20px;
 }
 
 .checkout-button{
@@ -148,7 +165,9 @@ width: 100%;
   color: white;
   width: 100%;
   border-style: none;
-  height: 30px;
+  height: 40px;
+  font-weight: bold;
+  margin-top: 20px;
   
 }
 
