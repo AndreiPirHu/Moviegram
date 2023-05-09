@@ -13,6 +13,7 @@ import {Login} from './pages/login/login'
 import {Profile} from './pages/profile/profile'
 import IndividualPoster from './components/Joel/IndividualPoster';
 import {Register} from './pages/register/register'
+import { Checkout } from './pages/checkout/checkout';
 import { doc, getDoc } from '@firebase/firestore';
 
 
@@ -132,6 +133,7 @@ function App() {
           <Route path="/profile" element={<Profile />} />
           <Route path="/single" element={<IndividualPoster />} />
           <Route path="/single/:id" element={<IndividualPoster />} />
+          <Route path="/register" element={<Register />} />
           <Route path="/register" element={<Register />} />
         </Routes>
       </Router>
