@@ -23,11 +23,24 @@
     gap: 5px;
 }
 .showreview div{
-    background-color: blanchedalmond;
+    background: linear-gradient(0turn, #f1d9bf, #ebf8e1);
 }
 .postreview{
     display: flex;
     flex-direction: column;
+}
+.postreview > button{
+    align-self: center;
+    justify-content: center;
+    width: 70%;
+    font-weight: bold;
+    border-radius: 10px;
+    background-color: initial;
+    background-image: linear-gradient(#fff 0, rgba(255, 255, 255, 0) 100%);
+    box-shadow: rgba(255, 255, 255, .2) 0 3px 15px inset, rgba(0, 0, 0, .1) 0 3px 5px, rgba(0, 0, 0, .1) 0 10px 13px;
+    transform: scale(1.05);
+    opacity: .7;
+    transition: all .3s;
 }
 /* max 330 and smaller */
 @media(max-width: 330px){
