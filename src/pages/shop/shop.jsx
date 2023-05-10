@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setDoc, collection, db, doc } from "../../firebase";
 import { actions } from "../../features/cartitems";
 import Hero from "../../components/Joel/Hero";
+import Footer from "../../components/Joel/Footer";
 import { useNavigate } from "react-router-dom";
 
 export const Shop = () => {
@@ -95,6 +96,7 @@ export const Shop = () => {
                     </div>
                 ))}
             </div>}
+            <Footer/>
         </div>
     );
 

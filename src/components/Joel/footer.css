@@ -1,0 +1,22 @@
+.footercomponent{
+    display: flex;
+    flex-direction: column;
+    height: 350px;
+    background-color:rgb(66, 66, 66);
+}
+.review{
+    height: 175px;
+}
+.aboutus{
+    height: 175px;
+}
+.aboutus a{
+    color: white;
+    font-weight: bold;
+}
+.aboutus hr{
+    width: 70px;
+    border-width:0;
+    color: white;
+    background-color:gray;
+}
