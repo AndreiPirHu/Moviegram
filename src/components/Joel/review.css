@@ -1,14 +1,13 @@
 .review{
     display: flex;
     flex-flow: column;
+    height: 180px;
     width: 80%;
     padding: 10px;
     border : 2px solid black;
     border-radius: 5px;
     box-shadow: 0 0 20px #363530;
     gap: 5px;
-}
-.review > div{
 }
 .reviewcontent{
     width: 90%;
