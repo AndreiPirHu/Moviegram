@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setDoc, collection, db, doc } from "../../firebase";
 import { actions } from "../../features/cartitems";
 import Hero from "../../components/Joel/Hero";
+import Footer from "../../components/Joel/Footer";
 import { useNavigate } from "react-router-dom";
 
 export const Shop = () => {
@@ -58,44 +59,43 @@ export const Shop = () => {
     };
  */
 
-  const FetchMovies = () => {
-    fetch(
-      "https://api.themoviedb.org/3/trending/all/week?api_key=9bf8866aec070a01073c600a88bbefb5"
-    )
-      .then((response) => {
-        return response.json();
-      })
-      .then((data) => {
-        console.log(data);
-        setMovie(data.results);
-        console.log("här", movie);
-      });
-  };
 
-  useEffect(() => {
-    FetchMovies();
-  }, []);
+    const FetchMovies = () => {
+        fetch(
+            "https://api.themoviedb.org/3/trending/all/week?api_key=9bf8866aec070a01073c600a88bbefb5"
+        )
+            .then((response) => {
+                return response.json();
+            })
+            .then((data) => {
+                console.log(data);
+                setMovie(data.results);
+                console.log("här", movie);
+            });
+    };
 
-  return (
-    <div className="shop">
-      <Hero />
+    useEffect(() => {
+        FetchMovies();
+    }, []);
 
-      <GetMoviePosters id="genresButtonStyle" />
+    return (
+        <div className="shop">
+                <Hero />
+                <GetMoviePosters />
+           { <div className="products">
+                {/* joel: added index&onClick to navigate to individualPoster */}
+                {movie.map((movies, index) => (
+                    <div className="" key={index}>
+                        <img
+                            src={`https://image.tmdb.org/t/p/w500${movies.poster_path}`}
+                            alt="Movie poster"
+                            onClick={() => { navigate("/single/" + movie[index].id) }}
+                        />
+                    </div>
+                ))}
+            </div>}
+            <Footer/>
 
-      {
-        <div className="products">
-          {/* joel: added index&onClick to navigate to individualPoster */}
-          {movie.map((movies, index) => (
-            <div className="" key={index}>
-              <img
-                src={`https://image.tmdb.org/t/p/w500${movies.poster_path}`}
-                alt="Movie poster"
-                onClick={() => {
-                  navigate("/single/" + movie[index].id);
-                }}
-              />
-            </div>
-          ))}
         </div>
       }
     </div>
