@@ -4,19 +4,45 @@
     height: 350px;
     background-color:rgb(66, 66, 66);
 }
-.review{
-    height: 175px;
+.footercomponent > h2{
+    margin: 0%;
 }
-.aboutus{
-    height: 175px;
+.footerlinks{
+    height: 100px;
 }
-.aboutus a{
+.footerlinks a, .footerlinks li{
     color: white;
     font-weight: bold;
 }
-.aboutus hr{
+.footerlinks li:hover{
+    font-size: 30px;
+}
+.footerlinks hr{
     width: 70px;
     border-width:0;
     color: white;
     background-color:gray;
+}
+.aboutus{
+    height: 190px;
+    align-self: center;
+    justify-content: center;
+    width: 90%;
+    font-weight: bold;
+    border-radius: 10px;
+    background-color: initial;
+    background-image: linear-gradient(#fff 0, rgba(255, 255, 255, 0) 100%);
+    box-shadow: rgba(255, 255, 255, .2) 0 3px 15px inset, rgba(0, 0, 0, .1) 0 3px 5px, rgba(0, 0, 0, .1) 0 10px 13px;
+    transform: scale(1.05);
+    opacity: .7;
+    transition: all .3s;
+    
+}
+.aboutuspics{
+    display: flex;
+    justify-content: space-between;
+}
+.aboutuspics img{
+    padding: 10px;
+    border-radius: 40%;
 }

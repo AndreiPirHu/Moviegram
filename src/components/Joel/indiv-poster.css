@@ -139,6 +139,12 @@
         justify-content: start;
         align-items: center;
     }
+    /* .posterDiv  .review{
+        display: flex;
+        flex-flow: column;
+    } */
+    .review{
+    }
     .posterDetails{
         width: 350px;
         box-shadow: 0 0 20px #363530;

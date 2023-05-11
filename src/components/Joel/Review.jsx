@@ -13,7 +13,6 @@ const Review = (props) => {
     const [reviewsList, setReviewsList] = useState([]); //from firestore
     const [review, setReview] = useState('');//the one user posts
     const [reviewed, setReviewed] = useState(false);
-    //const [visible, setVisible] = useState('false');
 
     //fetch reviews, user or not user
     const fetchReviews = async ()=>{
@@ -42,21 +41,10 @@ const Review = (props) => {
 
     useEffect(()=>{
         fetchReviews();
-    
-        // if (reviewed) {
-        //     setVisible
-        // }
 
-        // if(!isLoggedIn || ( isLoggedIn && reviewed ) ){
-        //     setVisible('none')
-        //     console.log("got here")
-        // }else if(isLoggedIn){
-        //     console.log("change to block");
-        //     setVisible('block')
-        // }
     }, [])
 
-
+    //when fetch reviews then need to change the reviwsList from empty to full
     useEffect(() => {
         if(isLoggedIn){
             //console.log("logged in: " + userID);
@@ -71,12 +59,9 @@ const Review = (props) => {
 
     }, [reviewsList])
 
-    //reviewsList.find((item)=>{item.userID === userID});
-    
-
   return (
     <div className="review">
-        REVIEWS:
+        Tell us what you think:
         {/* read from firebase */}
         <div className='showreview'>
             {reviewsList.map( (review, index)=>(
