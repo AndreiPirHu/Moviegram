@@ -1,40 +1,60 @@
-
 .placeholder {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   margin-top: 20px;
-  flex-grow: 1;
-  flex-basis: 100%;
 }
 
-.genre {
-  position: center;
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: row;
+#genreButtonGroup1 {
+  justify-content: center;
+  align-items: center;
+
   padding: 1em;
 }
 
-.genre button {
+#genreButtonGroup1 {
+  width: 150px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background-color: #333;
   color: white;
   border: none;
   padding: 10px 20px;
   transition: all 0.3s ease-in-out;
+
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
+  margin: 5px;
+}
+#genreButtonGroup2 {
+  width: 150px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #333;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
+  margin: 5px;
 }
 
-.genre button:hover {
+#genreButtonGroup1:hover {
   background-color: #f1c40f;
   color: #333;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
 }
-
+#genreButtonGroup2:hover {
+  background-color: #f1c40f;
+  color: #333;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+}
 .input {
-  position: center;
   padding: 1em;
   margin-bottom: 20px;
   margin-top: 20px;
-
 }
-
 
 input[type="text"] {
   padding: 10px;
@@ -74,4 +94,3 @@ input[type="text"] {
   object-fit: fill;
   height: auto;
 }
-
