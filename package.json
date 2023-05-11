@@ -1,7 +1,7 @@
 {
   "name": "moviegram",
   "private": true,
-  "homepage": "https://andreipirhu.github.io/Moviegram", 
+  "homepage": "https://andreipirhu.github.io/AndreiPirHu/Moviegram", 
   "version": "0.0.0",
   "type": "module",
   "scripts": {
