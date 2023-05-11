@@ -1,7 +1,7 @@
 import React from "react";
 import "./shop.css";
 import { useEffect, useState } from "react";
-import { Link, Navigate } from 'react-router-dom';
+import { Link, Navigate } from "react-router-dom";
 import GetMoviePosters from "../../components/getPosters";
 import { v4 as uuidv4 } from "uuid";
 import { useDispatch, useSelector } from "react-redux";
@@ -12,22 +12,19 @@ import Footer from "../../components/Joel/Footer";
 import { useNavigate } from "react-router-dom";
 
 export const Shop = () => {
+  const [movie, setMovie] = useState([]);
 
-    const [movie, setMovie] = useState([]);
+  const [poster, setPoster] = useState([]);
 
-    const [poster, setPoster] = useState([]);
+  const user = useSelector((state) => state.login.user);
+  const isLoggedIn = useSelector((state) => state.login.loggedIn);
+  const cart = useSelector((state) => state.cartItems);
 
-    const user = useSelector(state => state.login.user)
-    const isLoggedIn = useSelector(state => state.login.loggedIn)
-    const cart = useSelector(state => state.cartItems)
+  const dispatch = useDispatch();
 
-    const dispatch = useDispatch();
-
-
-
-    //joel: added navigate/import
-    let navigate = useNavigate();
-/* 
+  //joel: added navigate/import
+  let navigate = useNavigate();
+  /* 
     const items = [
         { id: uuidv4(), name: "Item 1", price: 10 },
         { id: uuidv4(), name: "Item 2", price: 15 },
@@ -61,6 +58,7 @@ export const Shop = () => {
         }
     };
  */
+
 
     const FetchMovies = () => {
         fetch(
@@ -97,8 +95,9 @@ export const Shop = () => {
                 ))}
             </div>}
             <Footer/>
+
         </div>
-    );
-
+      }
+    </div>
+  );
 };
-
