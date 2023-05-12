@@ -40,13 +40,10 @@ export const Navbar = () => {
                   <span className="badge" value={cart.length}>
                   </span>
                 </Link>
-
-
               </ul>
             </div>
           </div>
         </div>
-
       </div>
     </nav>
   );

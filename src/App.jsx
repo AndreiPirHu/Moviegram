@@ -1,6 +1,6 @@
 
 import { useEffect } from 'react'
-import { Navbar } from './components/navbar'
+import { Navbar } from './components/Navbar'
 import './App.css'
 import { HashRouter as Router, Routes, Route } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux';

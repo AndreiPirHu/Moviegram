@@ -10,6 +10,7 @@ import { actions } from "../../features/cartitems";
 import Hero from "../../components/Joel/Hero";
 import Footer from "../../components/Joel/Footer";
 import { useNavigate } from "react-router-dom";
+import Rating from "../../components/Rating";
 
 export const Shop = () => {
 
@@ -27,40 +28,40 @@ export const Shop = () => {
 
     //joel: added navigate/import
     let navigate = useNavigate();
-/* 
-    const items = [
-        { id: uuidv4(), name: "Item 1", price: 10 },
-        { id: uuidv4(), name: "Item 2", price: 15 },
-        { id: uuidv4(), name: "Item 3", price: 20 },
-    ];
-
-
-    const addToCart = async (item) => {
-        //adds item to cart
-        dispatch(actions.addItem(item));
-
-        //Stops here if user is not signed in
-        if (!isLoggedIn) {
-            console.log('user is not logged in for firestore save');
-
-            return;
-        }
-        //if user is signed in it adds items to firestore
-        try {
-            //reference to correct collection
-            const cartItemsRef = collection(db, 'users', user, 'cartItems');
-
-            // Set the itemID as the doc name
-            const itemDocRef = doc(cartItemsRef, item.id);
-
-            //Add item to firestore
-            await setDoc(itemDocRef, item);
-            console.log(`Item added to firestore with ID: ${item.id}`);
-        } catch (e) {
-            console.error("Error adding item to firestore:", e);
-        }
-    };
- */
+    /* 
+        const items = [
+            { id: uuidv4(), name: "Item 1", price: 10 },
+            { id: uuidv4(), name: "Item 2", price: 15 },
+            { id: uuidv4(), name: "Item 3", price: 20 },
+        ];
+    
+    
+        const addToCart = async (item) => {
+            //adds item to cart
+            dispatch(actions.addItem(item));
+    
+            //Stops here if user is not signed in
+            if (!isLoggedIn) {
+                console.log('user is not logged in for firestore save');
+    
+                return;
+            }
+            //if user is signed in it adds items to firestore
+            try {
+                //reference to correct collection
+                const cartItemsRef = collection(db, 'users', user, 'cartItems');
+    
+                // Set the itemID as the doc name
+                const itemDocRef = doc(cartItemsRef, item.id);
+    
+                //Add item to firestore
+                await setDoc(itemDocRef, item);
+                console.log(`Item added to firestore with ID: ${item.id}`);
+            } catch (e) {
+                console.error("Error adding item to firestore:", e);
+            }
+        };
+     */
 
     const FetchMovies = () => {
         fetch(
@@ -82,9 +83,9 @@ export const Shop = () => {
 
     return (
         <div className="shop">
-                <Hero />
-                <GetMoviePosters />
-           { <div className="products">
+            <Hero />
+            <GetMoviePosters />
+            {<div className="products">
                 {/* joel: added index&onClick to navigate to individualPoster */}
                 {movie.map((movies, index) => (
                     <div className="" key={index}>
@@ -96,7 +97,7 @@ export const Shop = () => {
                     </div>
                 ))}
             </div>}
-            <Footer/>
+            <Footer />
         </div>
     );
 
