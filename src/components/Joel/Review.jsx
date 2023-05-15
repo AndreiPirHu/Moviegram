@@ -13,7 +13,7 @@ const Review = (props) => {
 
     const [reviewsList, setReviewsList] = useState([]); //from firestore
     const [review, setReview] = useState('');//the one user posts
-    const [reviewed, setReviewed] = useState(false);
+    const [reviewed, setReviewed] = useState(false); //to show the review component
 
     let localStars = localStorage.getItem("stars");
 
@@ -70,12 +70,10 @@ const Review = (props) => {
     }, [reviewsList])
 
 
-    //reviewsList.find((item)=>{item.userID === userID});
+  return (
+    <div className="review">
+        {isLoggedIn ? "Tell us what you think:" : "Log in to leave a comment!"}
 
-
-    return (
-        <div className="review">
-        Tell us what you think:
         {/* read from firebase */}
           {/*   <div className="reviewTitle">
             

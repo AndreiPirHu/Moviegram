@@ -52,6 +52,9 @@ const IndividualPoster = () => {
         fetchPoster(id, setItem, setError);
     }, [id]);
 
+    useEffect(()=>{
+        console.log("poster path", item.poster_path)
+    }, [item])
 
     function addToSelected(poster, size, price) {
 
@@ -101,18 +104,24 @@ const IndividualPoster = () => {
                 console.error("Error adding item to firestore:", e);
             }
         })
-        if (selected.length > 0) {
-            navigate("/cart")
+
+        if(selected.length > 0){
+            navigate("/")
         }
     }
 
     const container = (
         <div className="posterDiv">
-            <img src={`https://image.tmdb.org/t/p/original${(item.poster_path)}`} 
-                alt="no pic available" height={600}/>
+            {/* <img src={`https://image.tmdb.org/t/p/original${(item.poster_path)}`} 
+                alt="no pic available" height={600}/> */}
+            <div className="posterDiv2">
+                <h2>Poster: {item.original_title}.</h2>
+                <img src={`https://image.tmdb.org/t/p/original${item?.poster_path}`} 
+                    alt="no pic available" height={600}/>
+            </div>
                 
             <div className="posterDetails">
-                <h2>{item.original_title}</h2>
+                {/* <h2>Poster: {item.original_title}</h2> */}
                 <p>{item.overview}</p>
                 <CounterButton item={item} handleAdd={addToSelected} handleRemove={remove}/>
 
@@ -151,13 +160,13 @@ const IndividualPoster = () => {
   .finally(()=>{})  */
 
 /* <label>
-                        <input type="radio" 
-                        onClick={()=> {setSize(SMALL); setPrice(10)}}/>Small size. 10$
+    <input type="radio" 
+        onClick={()=> {setSize(SMALL); setPrice(10)}}/>Small size. 10$
                         
-                        <input type="radio" 
-                        onClick={() => addToCart(item, SMALL, 10)}/>
-                        Small size. 10$ {selected.length}
-                    </label> */
+        <input type="radio" 
+            onClick={() => addToCart(item, SMALL, 10)}/>
+            Small size. 10$ {selected.length}
+    </label> */
 
 
 /* const arr1 = [1, 2, 3]
