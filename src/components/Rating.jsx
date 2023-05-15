@@ -28,7 +28,7 @@ const Rating = () => {
 
     return (
 
-        <div className="container">
+        <div className="starContainer">
             <div className="stars">
                 <input type="radio" name="rate" id="rate-5" />
                 <label htmlFor="rate-5" className="fa fa-star" onClick={() =>starClick(5)}></label>

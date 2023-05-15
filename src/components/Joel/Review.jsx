@@ -90,11 +90,13 @@ const Review = (props) => {
                 ))}
             </div>
             
-            <div className="rating" style={{ display: reviewed ? "none" : "flex" }}>
-                {<Rating />}
-
                 <div className='postreview' style={{ display: isLoggedIn ? "flex" : "none" }}>
                     {/* write to firebase */}
+
+                    <div className="rating" style={{ display: reviewed ? "none" : "flex" }}>
+                        {<Rating />}
+                    </div>
+                    
                     <textarea style={{ display: reviewed ? "none" : "flex" }}
                         placeholder="max 100 char."
                         value={review}
@@ -103,7 +105,6 @@ const Review = (props) => {
                     <button type='submit' onClick={onSubmitReview} style={{ display: reviewed ? "none" : "flex" }}>Submit a review.</button>
 
                 </div>
-            </div>
         </div>
     )
 }
