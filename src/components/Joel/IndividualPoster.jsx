@@ -51,6 +51,10 @@ const IndividualPoster = () => {
         fetchPoster(id, setItem, setError);
     }, [id]);
 
+    useEffect(()=>{
+        console.log("poster path", item.poster_path)
+    }, [item])
+
     function addToSelected(poster, size, price){
 
         const item = { id: uuidv4(),
@@ -108,7 +112,7 @@ const IndividualPoster = () => {
                 alt="no pic available" height={600}/> */}
             <div className="posterDiv2">
                 <h2>Poster: {item.original_title}.</h2>
-                <img src={`https://image.tmdb.org/t/p/original${(item.poster_path)}`} 
+                <img src={`https://image.tmdb.org/t/p/original${item?.poster_path}`} 
                     alt="no pic available" height={600}/>
             </div>
                 

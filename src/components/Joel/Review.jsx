@@ -12,7 +12,7 @@ const Review = (props) => {
 
     const [reviewsList, setReviewsList] = useState([]); //from firestore
     const [review, setReview] = useState('');//the one user posts
-    const [reviewed, setReviewed] = useState(false);
+    const [reviewed, setReviewed] = useState(false); //to show the review component
 
     //fetch reviews, user or not user
     const fetchReviews = async ()=>{
