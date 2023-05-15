@@ -1,7 +1,7 @@
 import React from "react";
 import "./shop.css";
 import { useEffect, useState } from "react";
-import { Link, Navigate } from 'react-router-dom';
+import { Link, Navigate } from "react-router-dom";
 import GetMoviePosters from "../../components/getPosters";
 import { v4 as uuidv4 } from "uuid";
 import { useDispatch, useSelector } from "react-redux";
@@ -10,19 +10,21 @@ import { actions } from "../../features/cartitems";
 import Hero from "../../components/Joel/Hero";
 import Footer from "../../components/Joel/Footer";
 import { useNavigate } from "react-router-dom";
-import Rating from "../../components/Rating";
+
 
 export const Shop = () => {
+  const [movie, setMovie] = useState([]);
 
-    const [movie, setMovie] = useState([]);
+  const [poster, setPoster] = useState([]);
 
-    const [poster, setPoster] = useState([]);
+  const user = useSelector((state) => state.login.user);
+  const isLoggedIn = useSelector((state) => state.login.loggedIn);
+  const cart = useSelector((state) => state.cartItems);
 
-    const user = useSelector(state => state.login.user)
-    const isLoggedIn = useSelector(state => state.login.loggedIn)
-    const cart = useSelector(state => state.cartItems)
+  const dispatch = useDispatch();
 
-    const dispatch = useDispatch();
+
+    
 
     //joel: added navigate/import
     let navigate = useNavigate();
@@ -63,8 +65,7 @@ export const Shop = () => {
                 ))}
             </div>}
             <Footer />
-        </div>
-    );
 
+    </div>
+  );
 };
-

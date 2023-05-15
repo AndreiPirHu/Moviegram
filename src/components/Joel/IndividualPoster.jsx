@@ -8,6 +8,27 @@ import { actions } from "../../features/cartitems";
 import { setDoc, collection, db, doc } from '../../firebase';
 import Review from "./Review";
 
+async function fetchPoster(id, setItem, setError){
+    
+    const apiKey = 'b5f72212d28ab0fe02704865f4b72213';
+    const idEndPoint = `https://api.themoviedb.org/3/movie/${id}?api_key=${apiKey}&language=en-US`;
+
+    await fetch(idEndPoint)
+        .then(res => res.json())
+        .then(data => {
+            console.log("data",data)
+            if(data.success == false){
+                console.log("there was an error")
+                setError(true);
+            }else if(data.id){
+                console.log("item is set")
+                setItem(data);
+            }
+        })
+        .catch(error => {
+            console.log(error)
+        })
+}
 
 
 const IndividualPoster = () => {
@@ -15,7 +36,6 @@ const IndividualPoster = () => {
     //const [content, setContent] = useState("No info available")
 
     const [item, setItem] = useState([]);
-    const [img, setImg] = useState(false);
     const [selected, setSelected] = useState([]);
 
     const params = useParams();
@@ -27,27 +47,11 @@ const IndividualPoster = () => {
     const dispatch = useDispatch();
     let navigate = useNavigate();
 
-    async function fetchPoster(id, setItem, setImg, setError) {
+    useEffect(()=>{
+        //fetch and changes item to an object when id changes
+        fetchPoster(id, setItem, setError);
+    }, [id]);
 
-        const apiKey = 'b5f72212d28ab0fe02704865f4b72213';
-        const idEndPoint = `https://api.themoviedb.org/3/movie/${id}?api_key=${apiKey}&language=en-US`;
-
-        await fetch(idEndPoint)
-            .then(res => res.json())
-            .then(data => {
-                setItem(data);
-                //setImg(true)
-            })
-            .catch(error => {
-                setError(true)
-            })
-    }
-
-    useEffect(() => {
-        //fetch and changes item to an object
-        
-        fetchPoster(id, setItem, setImg, setError);
-    }, []);
 
     function addToSelected(poster, size, price) {
 
@@ -104,13 +108,14 @@ const IndividualPoster = () => {
 
     const container = (
         <div className="posterDiv">
-            <img src={`https://image.tmdb.org/t/p/original${(item.poster_path)}`}
-                alt="no info available" height={600} />
-
+            <img src={`https://image.tmdb.org/t/p/original${(item.poster_path)}`} 
+                alt="no pic available" height={600}/>
+                
             <div className="posterDetails">
                 <h2>{item.original_title}</h2>
                 <p>{item.overview}</p>
-                <CounterButton item={item} handleAdd={addToSelected} handleRemove={remove} />
+                <CounterButton item={item} handleAdd={addToSelected} handleRemove={remove}/>
+
                 <div className="downmenu">
                     <Link to='/'>
                         <button className="buttonLink">Home</button>
@@ -118,27 +123,22 @@ const IndividualPoster = () => {
                     <button id="addtocart" onClick={addToCart}>Add to cart</button>
                 </div>
             </div>
+
+        </div> 
+    )
+    const errorContainer = (
+        <div>
+            <p>"No info available"</p> 
+
         </div>
     )
 
 
     return (
         <div className="indivPosterDiv">
-            {error ? <p>"No info available"</p> : container}
-            {/* <div className="posterDiv">
-                <img src={img ? `https://image.tmdb.org/t/p/original${(item.poster_path)}` : ""} 
-                    alt="missing pic"/>
-                
-                <div className="posterDetails">
-                    <h2>{item.original_title}</h2>
-                    <p>{item.overview}</p>
-                    <CounterButton item={item} 
-                        handleAdd={addToSelected} 
-                        handleRemove={remove}/>
-                    <button id="addtocart" onClick={addToCart}>Add to cart</button>
-                </div>
-            </div> */}
-            <Review filmID={id} />
+            {error ? errorContainer : container}
+            <Review filmID={id}/>
+
         </div>
     )
 }

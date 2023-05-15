@@ -14,7 +14,9 @@ const Review = (props) => {
     const [reviewsList, setReviewsList] = useState([]); //from firestore
     const [review, setReview] = useState('');//the one user posts
     const [reviewed, setReviewed] = useState(false);
+
     let localStars = localStorage.getItem("stars");
+
 
     //fetch reviews, user or not user
     const fetchReviews = async () => {
@@ -47,10 +49,12 @@ const Review = (props) => {
 
     useEffect(() => {
         fetchReviews();
+
         console.log("fetchReviews: ", reviewsList)
+
     }, [])
 
-
+    //when fetch reviews then need to change the reviwsList from empty to full
     useEffect(() => {
         if (isLoggedIn) {
             //console.log("logged in: " + userID);
@@ -65,23 +69,25 @@ const Review = (props) => {
 
     }, [reviewsList])
 
+
     //reviewsList.find((item)=>{item.userID === userID});
 
 
     return (
         <div className="review">
-            REVIEWS:
+        Tell us what you think:
+        {/* read from firebase */}
           {/*   <div className="reviewTitle">
             
             <button type="submit" className="popupBtn">Add a review</button>
             </div> */}
             
-            {/* read from firebase */}
-            <div className="showreview">
-                {reviewsList.map((review, index) => (
-                    <div className="reviewcontent" key={index}>
-                        <h2>{review.userName}</h2>
-                        <p>{review.content}</p>
+    
+            <div className='showreview'>
+            {reviewsList.map( (review, index)=>(
+                <div className='reviewcontent' key={index}>
+                    <h2>{review.userName}</h2>
+                    <p>{review.content}</p>
                     </div>
                 ))}
             </div>
@@ -97,6 +103,7 @@ const Review = (props) => {
                         onChange={(e) => { setReview(e.target.value) }}>
                     </textarea>
                     <button type='submit' onClick={onSubmitReview} style={{ display: reviewed ? "none" : "flex" }}>Submit a review.</button>
+
                 </div>
             </div>
         </div>
