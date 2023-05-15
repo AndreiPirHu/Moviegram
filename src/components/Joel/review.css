@@ -1,13 +1,16 @@
 .review{
     display: flex;
     flex-flow: column;
-    height: 200px;
+    height: auto;
     width: 80%;
     padding: 10px;
     border : 2px solid black;
     border-radius: 5px;
     box-shadow: 0 0 20px #363530;
     gap: 5px;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
 }
 .reviewcontent{
     width: 90%;
@@ -53,3 +56,44 @@
         justify-content:space-between; */
     }
 }
+
+/* Hugo added */
+.review .rating {
+    width: 400px;
+    padding: 20px 30px;
+    border: 1px solid #444;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+}
+
+.review .popupBtn {
+    width: 150px;
+    height: 30px;
+    font-weight: bold;
+    border-radius: 10px;
+    text-decoration: none;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    background-color: initial;
+    background-image: linear-gradient(#fff 0, rgba(255, 255, 255, 0) 100%);
+    box-shadow: rgba(255, 255, 255, .2) 0 3px 15px inset, rgba(0, 0, 0, .1) 0 3px 5px, rgba(0, 0, 0, .1) 0 10px 13px;
+    transform: scale(1.05);
+    opacity: .7;
+    transition: all .3s;
+}
+.reviewTitle{
+    margin: 5px;
+    display: flex;
+    justify-content: space-around;
+    padding : 5px;
+    border : 2px solid black;
+    border-radius: 5px;
+}
+
+
+/* Hugo add */
