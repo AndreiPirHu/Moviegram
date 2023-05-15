@@ -1,7 +1,7 @@
 .review{
     display: flex;
     flex-flow: column;
-    height: 180px;
+    height: 200px;
     width: 80%;
     padding: 10px;
     border : 2px solid black;

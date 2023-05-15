@@ -61,7 +61,7 @@ const Review = (props) => {
 
   return (
     <div className="review">
-        Tell us what you think:
+        {isLoggedIn ? "Tell us what you think:" : "Log in to leave a comment!"}
         {/* read from firebase */}
         <div className='showreview'>
             {reviewsList.map( (review, index)=>(

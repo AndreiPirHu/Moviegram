@@ -31,16 +31,24 @@
     width: 103px;
     box-shadow: 3px 2px 5px black ;
 }
-.sectiontitle{
+/* .sectiontitle{
 }
-.sectionpictures{ 
-}
+.sectionpictures{
+} */
 .title{
     color: white;
     font-size: 15vw;
     margin: 0%;
     text-align: center;
 }
+.heroComponent h2{
+    color: white;
+    margin-top: 2px;
+    text-align: center;
+    margin-bottom: 0%;
+}
+
+
 /* when it becomes big */
 @media(min-width:450px){
     .heroComponent img:nth-of-type(4){
@@ -50,9 +58,10 @@
 
 @media(min-width:816px){
     .heroComponent{
-        height: 286px;
+        /* height: 286px; */
+        height: 100px;
         display: grid;
-        grid-template-columns: 1fr 3fr;
+        grid-template-columns: 1fr /* 1fr 3fr */;
         gap: 0px;
     }
     .title{
@@ -63,17 +72,17 @@
     .sectiontitle{
         display: grid;
         grid-template-columns: 1fr;
-        width: 100px;
-        transform: rotate(-90deg);
+        /* width: 100px; */
+        /* transform: rotate(-90deg); */
         justify-content: center;
         align-self:center;
     }
-    .sectionpictures{
+    /* .sectionpictures{
         display: flex;
         flex-direction: row;
         height: 286;
-       /*  width: 769px; */
-    }
+        width: 769px;
+    } */
     .heroComponent img{
         width: 180px;
     }
