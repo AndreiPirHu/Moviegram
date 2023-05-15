@@ -14,47 +14,40 @@ const Review = (props) => {
     const [reviewsList, setReviewsList] = useState([]); //from firestore
     const [review, setReview] = useState('');//the one user posts
     const [reviewed, setReviewed] = useState(false);
-    //const [visible, setVisible] = useState('false');
+    let localStars = localStorage.getItem("stars");
 
     //fetch reviews, user or not user
     const fetchReviews = async () => {
         try {
-            //const data = await getDocs(reviewsCollectionRef);
-            //const filterData = data.docs.map( (doc)=>({...doc.data(), id: doc.id}) )
-            //setReviewsList(filterData)
             onSnapshot(reviewsCollectionRef, (snapshot) => {
                 setReviewsList(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
             });
         } catch (err) {
             console.error("jojo err", err);
         }
+        console.log("from firebase fetchReview: ", reviewsList)
     }
     //if user is loggedin
     const onSubmitReview = async () => {
+        console.log("ReviewStars: ", localStars)
+        console.log("Rewiew: ", review)
+        const starsReview = localStars + review
+        console.log("starsReview: ", starsReview)
         if (isLoggedIn) {
             try {
-                await addDoc(reviewsCollectionRef, { userName: user.name, content: review, userID: auth?.currentUser?.uid });
+                await addDoc(reviewsCollectionRef, { userName: user.name, content: starsReview, userID: auth?.currentUser?.uid });
                 setReview('')
+                localStorage.removeItem("stars")
             } catch (err) {
                 console.error(err);
             }
+
         }
     }
 
     useEffect(() => {
         fetchReviews();
-
-        // if (reviewed) {
-        //     setVisible
-        // }
-
-        // if(!isLoggedIn || ( isLoggedIn && reviewed ) ){
-        //     setVisible('none')
-        //     console.log("got here")
-        // }else if(isLoggedIn){
-        //     console.log("change to block");
-        //     setVisible('block')
-        // }
+        console.log("fetchReviews: ", reviewsList)
     }, [])
 
 
@@ -78,28 +71,34 @@ const Review = (props) => {
     return (
         <div className="review">
             REVIEWS:
+          {/*   <div className="reviewTitle">
+            
+            <button type="submit" className="popupBtn">Add a review</button>
+            </div> */}
+            
             {/* read from firebase */}
-            <div className='showreview'>
+            <div className="showreview">
                 {reviewsList.map((review, index) => (
-                    <div className='reviewcontent' key={index}>
+                    <div className="reviewcontent" key={index}>
                         <h2>{review.userName}</h2>
                         <p>{review.content}</p>
                     </div>
                 ))}
             </div>
-            <div className="rating">
-                <Rating />
+            
+            <div className="rating" style={{ display: reviewed ? "none" : "flex" }}>
+                {<Rating />}
+
                 <div className='postreview' style={{ display: isLoggedIn ? "flex" : "none" }}>
                     {/* write to firebase */}
                     <textarea style={{ display: reviewed ? "none" : "flex" }}
                         placeholder="max 100 char."
                         value={review}
-                        onChange={(e) => setReview(e.target.value)}>
+                        onChange={(e) => { setReview(e.target.value) }}>
                     </textarea>
                     <button type='submit' onClick={onSubmitReview} style={{ display: reviewed ? "none" : "flex" }}>Submit a review.</button>
                 </div>
             </div>
-
         </div>
     )
 }

@@ -24,44 +24,9 @@ export const Shop = () => {
 
     const dispatch = useDispatch();
 
-
-
     //joel: added navigate/import
     let navigate = useNavigate();
-    /* 
-        const items = [
-            { id: uuidv4(), name: "Item 1", price: 10 },
-            { id: uuidv4(), name: "Item 2", price: 15 },
-            { id: uuidv4(), name: "Item 3", price: 20 },
-        ];
-    
-    
-        const addToCart = async (item) => {
-            //adds item to cart
-            dispatch(actions.addItem(item));
-    
-            //Stops here if user is not signed in
-            if (!isLoggedIn) {
-                console.log('user is not logged in for firestore save');
-    
-                return;
-            }
-            //if user is signed in it adds items to firestore
-            try {
-                //reference to correct collection
-                const cartItemsRef = collection(db, 'users', user, 'cartItems');
-    
-                // Set the itemID as the doc name
-                const itemDocRef = doc(cartItemsRef, item.id);
-    
-                //Add item to firestore
-                await setDoc(itemDocRef, item);
-                console.log(`Item added to firestore with ID: ${item.id}`);
-            } catch (e) {
-                console.error("Error adding item to firestore:", e);
-            }
-        };
-     */
+   
 
     const FetchMovies = () => {
         fetch(
@@ -71,9 +36,9 @@ export const Shop = () => {
                 return response.json();
             })
             .then((data) => {
-                console.log(data);
+                /* console.log(data); */
                 setMovie(data.results);
-                console.log("här", movie);
+                /* console.log("här", movie); */
             });
     };
 

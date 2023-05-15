@@ -8,22 +8,7 @@ import { actions } from "../../features/cartitems";
 import { setDoc, collection, db, doc } from '../../firebase';
 import Review from "./Review";
 
-async function fetchPoster(id, setItem, setImg, setError) {
 
-    const apiKey = 'b5f72212d28ab0fe02704865f4b72213';
-    const idEndPoint = `https://api.themoviedb.org/3/movie/${id}?api_key=${apiKey}&language=en-US`;
-
-    await fetch(idEndPoint)
-        .then(res => res.json())
-        .then(data => {
-            //console.log("data",data)
-            setItem(data);
-            //setImg(true)
-        })
-        .catch(error => {
-            setError(true)
-        })
-}
 
 const IndividualPoster = () => {
     const [error, setError] = useState(false)
@@ -42,10 +27,27 @@ const IndividualPoster = () => {
     const dispatch = useDispatch();
     let navigate = useNavigate();
 
+    async function fetchPoster(id, setItem, setImg, setError) {
+
+        const apiKey = 'b5f72212d28ab0fe02704865f4b72213';
+        const idEndPoint = `https://api.themoviedb.org/3/movie/${id}?api_key=${apiKey}&language=en-US`;
+
+        await fetch(idEndPoint)
+            .then(res => res.json())
+            .then(data => {
+                setItem(data);
+                //setImg(true)
+            })
+            .catch(error => {
+                setError(true)
+            })
+    }
+
     useEffect(() => {
         //fetch and changes item to an object
+        
         fetchPoster(id, setItem, setImg, setError);
-    }, [item]);
+    }, []);
 
     function addToSelected(poster, size, price) {
 
@@ -61,6 +63,7 @@ const IndividualPoster = () => {
         console.log("item", item)
         console.log("total items added ", selected.length + 1)
     }
+
     function remove(size) {
         if (selected.length != 0) {
             //index of first element with that size
