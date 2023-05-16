@@ -165,9 +165,10 @@ export const Profile = () => {
           <button onClick={handleSignOut}>Log out</button>
         </div>
       </div>
+
       <div className='order-details-info'>
         <h2>Order History</h2>
-        <ul>
+        
           {orders.map(order => (
             <div className='user-order' key={order.id}>
               <div className='order-number'>Order number: {order.id}</div>
@@ -205,7 +206,6 @@ export const Profile = () => {
               <div className='total-price'>Total: ${order.price}</div>
             </div>
           ))}
-        </ul>
 
       </div >
 
