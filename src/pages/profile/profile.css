@@ -60,7 +60,6 @@
   background-color: #fff;
   box-shadow: 1px 10px 30px rgba(0, 0, 0, 0.1);
   padding: 1rem;
-  border-radius: 20px;
   width: 90%;
   list-style: none;
   margin-top: 30px;
@@ -90,3 +89,33 @@
   padding-right: 90px;
 }
 
+.user-details {
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  margin-bottom: 0px;
+  max-width: 500px;
+  width: 90%;
+  font-weight: bold;
+}
+
+.user-details input {
+  display: flex;
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  border: none;
+  border-bottom: 2px solid #ccc;
+  font-size: 16px;
+
+
+}
+
+
+.user-details .input-container {
+  max-width: 400px;
+  width: 100%;
+
+}
