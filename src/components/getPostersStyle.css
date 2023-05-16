@@ -8,7 +8,6 @@
 #genreButtonGroup1 {
   justify-content: center;
   align-items: center;
-
   padding: 1em;
 }
 
@@ -51,18 +50,38 @@
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
 }
 .input {
-  padding: 1em;
-  margin-bottom: 20px;
-  margin-top: 20px;
+  padding: 0.8em;
+  border-radius: 20px;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+  border: none;
+  background-color: #f2f2f2;
+  width: 50%;
+  margin: 0 auto;
+}
+
+.input:focus {
+  outline: none;
+  box-shadow: 0px 0px 10px rgba(0, 191, 255, 0.8),
+    0px 0px 20px rgba(255, 255, 0, 0.8), 0px 0px 30px rgba(0, 191, 255, 0.8),
+    0px 0px 40px rgba(255, 255, 0, 0.8);
+  width: 250px;
+}
+
+.input:hover {
+  background-image: linear-gradient(0.25turn, #3f87a6, #ebf8e1, #f69d3c);
+  box-shadow: 0px 0px 10px rgba(63, 135, 166, 0.5),
+    0px 0px 20px rgba(235, 248, 225, 0.5), 0px 0px 30px rgba(246, 157, 60, 0.5),
+    0px 0px 40px rgba(63, 135, 166, 0.5);
+  transition: all 0.5s ease-in-out;
 }
 
 input[type="text"] {
-  padding: 10px;
+  padding: 2px;
   font-size: 16px;
   border: none;
   border-radius: 4px;
   background-color: #f2f2f2;
-  width: 300px;
+  width: 100%;
 }
 
 .searchImage {
@@ -93,4 +112,40 @@ input[type="text"] {
   max-height: 100%;
   object-fit: fill;
   height: auto;
+}
+
+.searchImage {
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+#genreButtonGroup1,
+#genreButtonGroup2 {
+  width: 120px;
+  padding: 8px 16px;
+}
+@media (max-width: 640px) {
+  #genreButtonGroup1,
+  #genreButtonGroup2 {
+    width: 120px;
+    padding: 8px 16px;
+  }
+}
+@media (min-width: 640px) {
+  #genreButtonGroup1,
+  #genreButtonGroup2 {
+    position: static;
+    left: auto;
+  }
+}
+
+@media (max-width: 640px) {
+  #genreButtonGroup1,
+  #genreButtonGroup2 {
+    cursor: pointer;
+  }
+
+  #genreButtonGroup1.show,
+  #genreButtonGroup2.show {
+    transform: translateX(150px);
+  }
 }

@@ -1,36 +1,31 @@
-.heroComponent{
-    display: grid;
-    grid-template-rows: 1fr;
-    justify-content: center;
-    background-color: rgb(2, 2, 80);
-    border-radius: 8px;
-    background: linear-gradient(0.25turn, #3f87a6, #ebf8e1, #f69d3c);
-    margin-top: 2px;
+.heroComponent {
+  display: grid;
+  grid-template-rows: 1fr;
+  justify-content: center;
+  background-color: rgb(2, 2, 80);
+  border-radius: 8px;
+  background: linear-gradient(0.25turn, #3f87a6, #ebf8e1, #f69d3c);
+  margin-bottom: 20px;
+
+  margin-top: 2px;
 }
-.heroComponent img{
-    width: 100px;
-    margin: 4px;
-    object-fit: cover;
-    border: 2px solid black;
-    border-radius: 8px;
+.heroComponent img {
+  width: 100px;
+  margin: 4px;
+  object-fit: cover;
+  border: 2px solid black;
+  border-radius: 8px;
 }
-.heroComponent img:nth-of-type(7){
-    display: none;
+.heroComponent img:nth-of-type(7) {
+  display: none;
 }
-.heroComponent img:nth-of-type(6){
-    display: none;
+.heroComponent img:nth-of-type(6) {
+  display: none;
 }
-.heroComponent img:nth-of-type(5){
-    display: none;
+.heroComponent img:nth-of-type(5) {
+  display: none;
 }
-.heroComponent img:nth-of-type(4){
-    display: none;
-}
-.heroComponent img:hover{
-    margin: 0px;
-    width: 103px;
-    box-shadow: 3px 2px 5px black ;
-}
+
 /* .sectiontitle{
 }
 .sectionpictures{
@@ -40,6 +35,7 @@
     font-size: 15vw;
     margin: 0%;
     text-align: center;
+
 }
 .heroComponent h2{
     color: white;
@@ -50,11 +46,12 @@
 
 
 /* when it becomes big */
-@media(min-width:450px){
-    .heroComponent img:nth-of-type(4){
-        display:inline;
-    }
+@media (min-width: 450px) {
+  .heroComponent img:nth-of-type(4) {
+    display: inline;
+  }
 }
+
 
 @media(min-width:816px){
     .heroComponent{
@@ -89,19 +86,25 @@
     .heroComponent img:hover{
         width: 185px;
     }
+
 }
-@media only screen and (max-width:810px) and (min-width:677px){
-    .heroComponent img:nth-of-type(5){
-        display:inline;
-    }
-    .heroComponent img:nth-of-type(6){
-        display:inline;
-    }
+@media only screen and (max-width: 640px) and (min-width: 677px) {
+  .heroComponent img:nth-of-type(5) {
+    display: inline;
+  }
+  .heroComponent img:nth-of-type(6) {
+    display: inline;
+  }
 }
-@media(min-width:783px){
-    .heroComponent img:nth-of-type(5){
-        display:inline;
-    }
+@media (min-width: 640px) {
+  .heroComponent {
+    overflow-x: hidden;
+    background: none;
+  }
+
+  .heroComponent img:nth-of-type(5) {
+    display: inline;
+  }
 }
 /* @media(min-width:634px){
     .heroComponent img:nth-of-type(6){
