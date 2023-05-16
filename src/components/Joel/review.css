@@ -1,32 +1,53 @@
 .review{
     display: flex;
     flex-flow: column;
-    height: 180px;
+    height: 240px;
     width: 80%;
     padding: 10px;
     border : 2px solid black;
     border-radius: 5px;
     box-shadow: 0 0 20px #363530;
     gap: 5px;
+    /* Hugo */
+    /* align-items: center;
+    justify-content: center;
+    flex-direction: column; */
 }
-.reviewcontent{
-    width: 90%;
-    border : 2px solid black;
-    border-radius: 5px;
-}
+
+/* where reviews land */
 .showreview{
     display: flex;
     flex-direction: column;
+    align-items: center;
     overflow-x: scroll;
+    border: 1px solid #444;
+    border-radius: 5px;
     flex: 1 1 0;
     gap: 5px;
 }
 .showreview div{
     background: linear-gradient(0turn, #f1d9bf, #ebf8e1);
 }
+.reviewcontent{
+    width: 95%;
+    border : 2px solid black;
+    border-radius: 5px;
+}
+/*div to leave a comment */
 .postreview{
     display: flex;
     flex-direction: column;
+    border: 1px solid #444;
+    border-radius: 5px;
+    /* align-items: center;
+    justify-content: center; */
+}
+textarea{
+    height: 60px;
+}
+.rating{
+    align-self: center;
+    justify-content: center;
 }
 .postreview > button{
     align-self: center;
@@ -53,3 +74,44 @@
         justify-content:space-between; */
     }
 }
+
+/* Hugo added */
+/* .review .rating {
+    width: 400px;
+    padding: 20px 30px;
+    border: 1px solid #444;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+} */
+
+/* .review .popupBtn {
+    width: 150px;
+    height: 200px;
+    font-weight: bold;
+    border-radius: 10px;
+    text-decoration: none;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    background-color: initial;
+    background-image: linear-gradient(#fff 0, rgba(255, 255, 255, 0) 100%);
+    box-shadow: rgba(255, 255, 255, .2) 0 3px 15px inset, rgba(0, 0, 0, .1) 0 3px 5px, rgba(0, 0, 0, .1) 0 10px 13px;
+    transform: scale(1.05);
+    opacity: .7;
+    transition: all .3s;
+} */
+/* .reviewTitle{
+    margin: 5px;
+    display: flex;
+    justify-content: space-around;
+    padding : 5px;
+    border : 2px solid black;
+    border-radius: 5px;
+} */
+
+
+/* Hugo add */

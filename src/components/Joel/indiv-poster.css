@@ -11,13 +11,15 @@
     display: flex;
     flex-flow: column;
     justify-content: start;
+    align-items: center;
     margin: 10px;
 }
 /* align-items = on the cross axis. default is stretch (as much as tallest item) */
 /* justify-content = on the main axix. default is flex-start (aligns up at the start edge of container) */
 /* justify-items is ignored in flex */
 .posterDiv img{
-    height: 450px;
+    /* height: 450px; */
+    width: 350px;
     margin: 0;
     padding: 10px;
     border-radius: 10px;
@@ -26,6 +28,16 @@
     overflow: hidden;
     object-fit: contain;
 }
+.posterDiv2{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+.posterDiv h2{
+    text-align: center;
+}
 .posterDetails{
     margin: 10px;
     padding: 10px;
@@ -33,6 +45,9 @@
     border-radius: 5px;
     align-content: center;
     box-shadow: 0 0 20px #363530;
+}
+.posterDetails p{
+    max-width: 610px;
 }
 /* .buttonLink, #addtocart{
     padding : 5px;
@@ -143,16 +158,19 @@
         display: flex;
         flex-flow: column;
     } */
-    .review{
-    }
     .posterDetails{
         width: 350px;
         box-shadow: 0 0 20px #363530;
     }
     .posterDiv img{
-        height: 600px;
+        /* height: 600px; */
+        width: 450px;
         object-fit: cover;
-        
+    }
+
+    .posterDiv h2{
+        position: relative;
+        left: 50%;
     }
     
 }

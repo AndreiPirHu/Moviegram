@@ -51,9 +51,10 @@ const Hero = () => {
             <section className="sectiontitle" >
                 <h1 className="title">Moviegram</h1>
             </section>
-            <section className="sectionpictures">
+            <h2>Find your favorite poster here!</h2>
+            {/* <section className="sectionpictures">
                 {posters}
-            </section>
+            </section> */}
         </div>
     );
 

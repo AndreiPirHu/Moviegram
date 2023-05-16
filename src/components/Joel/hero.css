@@ -25,21 +25,26 @@
 .heroComponent img:nth-of-type(5) {
   display: none;
 }
-.heroComponent img:nth-of-type(4) {
-  display: none;
+
+/* .sectiontitle{
 }
-.heroComponent img:hover {
-  margin: 0px;
-  width: 103px;
-  box-shadow: 3px 2px 5px black;
+.sectionpictures{
+} */
+.title{
+    color: white;
+    font-size: 15vw;
+    margin: 0%;
+    text-align: center;
+
+}
+.heroComponent h2{
+    color: white;
+    margin-top: 2px;
+    text-align: center;
+    margin-bottom: 0%;
 }
 
-.title {
-  color: white;
-  font-size: 15vw;
-  margin: 0%;
-  text-align: center;
-}
+
 /* when it becomes big */
 @media (min-width: 450px) {
   .heroComponent img:nth-of-type(4) {
@@ -47,38 +52,41 @@
   }
 }
 
-@media (min-width: 640px) {
-  .heroComponent {
-    height: 286px;
-    display: grid;
-    grid-template-columns: 1fr 3fr;
-    gap: 0px;
-  }
-  .title {
-    justify-content: flex-start;
-    color: azure;
-    font-size: 50px;
-  }
-  .sectiontitle {
-    display: grid;
-    grid-template-columns: 1fr;
-    width: 100px;
-    transform: rotate(-90deg);
-    justify-content: center;
-    align-self: center;
-  }
-  .sectionpictures {
-    display: flex;
-    flex-direction: row;
-    height: 286;
-    /*  width: 769px; */
-  }
-  .heroComponent img {
-    width: 180px;
-  }
-  .heroComponent img:hover {
-    width: 185px;
-  }
+
+@media(min-width:816px){
+    .heroComponent{
+        /* height: 286px; */
+        height: 100px;
+        display: grid;
+        grid-template-columns: 1fr /* 1fr 3fr */;
+        gap: 0px;
+    }
+    .title{
+        justify-content: flex-start;
+        color: azure;
+        font-size: 50px;
+    }
+    .sectiontitle{
+        display: grid;
+        grid-template-columns: 1fr;
+        /* width: 100px; */
+        /* transform: rotate(-90deg); */
+        justify-content: center;
+        align-self:center;
+    }
+    /* .sectionpictures{
+        display: flex;
+        flex-direction: row;
+        height: 286;
+        width: 769px;
+    } */
+    .heroComponent img{
+        width: 180px;
+    }
+    .heroComponent img:hover{
+        width: 185px;
+    }
+
 }
 @media only screen and (max-width: 640px) and (min-width: 677px) {
   .heroComponent img:nth-of-type(5) {
