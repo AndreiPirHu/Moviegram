@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { actions } from "../../features/cartitems";
 import { setDoc, collection, db, doc } from '../../firebase';
 import Review from "./Review";
+import Suggestion from "./Suggestion";
 
 async function fetchPoster(id, setItem, setError){
     
@@ -16,7 +17,7 @@ async function fetchPoster(id, setItem, setError){
     await fetch(idEndPoint)
         .then(res => res.json())
         .then(data => {
-            console.log("data",data)
+            //console.log("data",data)
             if(data.success == false){
                 console.log("there was an error")
                 setError(true);
@@ -146,6 +147,7 @@ const IndividualPoster = () => {
     return (
         <div className="indivPosterDiv">
             {error ? errorContainer : container}
+            <Suggestion/>
             <Review filmID={id}/>
 
         </div>
