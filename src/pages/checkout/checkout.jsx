@@ -79,7 +79,7 @@ export const Checkout = () => {
     dispatch(cartActions.clearItems())
     console.log("Purchase complete")
 
-    //TODO  add address to firebase user if logged in
+    addUserAddress()
   }
 
   //remove from firestore after purchase complete
@@ -91,6 +91,30 @@ export const Checkout = () => {
       await deleteDoc(doc.ref);
     });
   }
+
+
+  const addUserAddress = async () => {
+      //reference to correct collection
+      const userDocRef = doc(db, 'users', userID);
+      const userData = {
+        address: address
+      };
+
+      try {
+        //Add info to firestore
+        await setDoc(userDocRef, userData, { merge: true });
+        console.log(`User address successfully added to firestore`);
+
+      } catch (e) {
+        console.error('Error adding user address to document:', e)
+      }
+
+    
+
+
+  }
+
+
 
   // Calculate the total price of all items in the cart and delivery
   useEffect(() => {

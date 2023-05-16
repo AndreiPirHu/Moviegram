@@ -52,6 +52,10 @@
   padding: 0;
 }
 
+.order-number, .order-date{
+ padding-bottom: 20px;
+}
+
 .order-history li {
   margin-bottom: 0.5rem;
 }
