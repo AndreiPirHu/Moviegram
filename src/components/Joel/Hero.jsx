@@ -15,7 +15,7 @@ async function fetchPosters(render){
 
     //film 1008005, out of the hero, bad resolution
     const sortedArr = response.filter((item) =>item.id != 1008005)
-    //randomize and select 4 pics for hero
+    //randomize and select 7 pics for hero
     const shuffled = [...sortedArr].sort(()=> Math.random() - 0.1);
     const slicedArray = shuffled.slice(0, 7);
 
