@@ -84,7 +84,12 @@ const GetMoviePosters = () => {
       </div>
       <div className="placeholder">
         <div className="genre">
-          <button id="genreButtonGroup1" onClick={() => setMovie_id(878)}>
+          <button
+            id="genreButtonGroup1"
+            onClick={() => {
+              setMovie_id(878);
+            }}
+          >
             Sci-Fi{" "}
           </button>
           <button id="genreButtonGroup1" onClick={() => setChosenGenre(18)}>

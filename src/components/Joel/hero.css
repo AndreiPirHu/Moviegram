@@ -33,10 +33,7 @@
   width: 103px;
   box-shadow: 3px 2px 5px black;
 }
-.sectiontitle {
-}
-.sectionpictures {
-}
+
 .title {
   color: white;
   font-size: 15vw;
@@ -50,7 +47,7 @@
   }
 }
 
-@media (min-width: 816px) {
+@media (min-width: 640px) {
   .heroComponent {
     height: 286px;
     display: grid;
@@ -83,7 +80,7 @@
     width: 185px;
   }
 }
-@media only screen and (max-width: 810px) and (min-width: 677px) {
+@media only screen and (max-width: 640px) and (min-width: 677px) {
   .heroComponent img:nth-of-type(5) {
     display: inline;
   }
@@ -91,7 +88,12 @@
     display: inline;
   }
 }
-@media (min-width: 783px) {
+@media (min-width: 640px) {
+  .heroComponent {
+    overflow-x: hidden;
+    background: none;
+  }
+
   .heroComponent img:nth-of-type(5) {
     display: inline;
   }
