@@ -124,6 +124,10 @@ export const Cart = () => {
     navigate('/checkout')
   }
 
+  const navigateToSignIn = () =>{
+    navigate('/login')
+  }
+
 
   return (
     <div className="cart">
@@ -184,7 +188,13 @@ export const Cart = () => {
           <li className='total-price'><p className='price-description'>Order value</p> <p className='price-amount'>${totalPrice}</p></li>
           <li className='total-price'><p className='price-description'>Delivery fee</p> <p className='price-amount'>${deliveryFee}</p> </li>
           <li className='total-price total-sum' ><p className='price-description'>Total</p> <p className='price-amount'>${totalPrice + deliveryFee}</p></li>
-          <button className='checkout-button' onClick={navigateToCheckout} disabled={cart.length === 0}>Checkout</button>
+          {isLoggedIn ? <button className='checkout-button' onClick={navigateToCheckout} disabled={cart.length === 0}>Checkout</button> :
+          <>
+          <button className='checkout-button signin-button' onClick={navigateToSignIn}>Sign in</button>
+          <button className='checkout-button checkout-guest-button' onClick={navigateToCheckout} disabled={cart.length === 0}>Checkout as guest</button>
+          </>
+          }
+          
           
       </div>
     </div>
