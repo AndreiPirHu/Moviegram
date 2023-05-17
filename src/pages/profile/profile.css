@@ -93,7 +93,7 @@
   background-color: red;
 }
 
-.order-number, .order-date, .total-price{
+.order-number, .order-date, .profile .total-price{
   cursor: pointer;
 }
 

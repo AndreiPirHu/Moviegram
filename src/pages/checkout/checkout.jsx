@@ -18,6 +18,7 @@ export const Checkout = () => {
   const [selectedDelivery, setSelectedDelivery] = useState(0);
   const [totalPrice, setTotalPrice] = useState(0);
   const [purchaseComplete, setPurchaseComplete] = useState(false)
+  const [completedOrderID, setCompletedOrderID] = useState('')
 
   const [userInfo, setUserInfo] = useState(false);
   const [deliveryInfo, setDeliveryInfo] = useState(false);
@@ -35,7 +36,6 @@ export const Checkout = () => {
 
     setUserInfo((userInfo) => !userInfo);
     setDeliveryInfo(false)
-    //TODO if(isLoggedIn) save the address to firestore
 
   }
 
@@ -66,8 +66,10 @@ export const Checkout = () => {
         //Add item to firestore
         setDoc(itemDocRef, order);
         console.log(`Order added to firestore with ID: ${order}`);
-        setPurchaseComplete(true)
         await removeCartFromFirestore()
+
+        //add used address to profile
+        addUserAddress()
 
       } catch (e) {
         console.error("Error adding order to firestore:", e);
@@ -76,10 +78,10 @@ export const Checkout = () => {
       console.log('user is not logged in for firestore save');
     }
 
+    setCompletedOrderID(order.id)
+    setPurchaseComplete(true)
     dispatch(cartActions.clearItems())
     console.log("Purchase complete")
-
-    addUserAddress()
   }
 
   //remove from firestore after purchase complete
@@ -108,10 +110,10 @@ export const Checkout = () => {
       } catch (e) {
         console.error('Error adding user address to document:', e)
       }
+  }
 
-    
-
-
+  const gotoShop = () => {
+    navigate('/');
   }
 
 
@@ -149,11 +151,14 @@ export const Checkout = () => {
   return (
     <div className="checkout-container">
       {purchaseComplete ? (
+
         <div className="purchase-complete">
           <h2>Purchase Complete</h2>
+          <p>Order number: <strong>{completedOrderID}</strong> </p>
           <p>Thank you for your purchase!</p>
-
+            <button onClick={gotoShop}>Continue shopping</button>
         </div>
+
       ) : (
         <>
           <form className="userInfo-form" onSubmit={handleUserInfo}>
