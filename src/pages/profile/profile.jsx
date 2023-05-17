@@ -15,6 +15,7 @@ export const Profile = () => {
   const [email, setEmail] = useState('');
   const [name, setName] = useState('');
   const [address, setAddress] = useState('');
+  const [maximizedOrders, setMaximizedOrders] = useState([]);
 
   const userID = useSelector(state => state.login.user);
   const dispatch = useDispatch();
@@ -26,6 +27,8 @@ export const Profile = () => {
 
   const getOrderHistory = async () => {
     const querySnapshot = await getDocs(collection(db, "users", userID, "orderHistory"));
+
+
 
     const ordersData = querySnapshot.docs.map((doc) => {
       const data = doc.data();
@@ -39,6 +42,15 @@ export const Profile = () => {
 
     setOrders(ordersData)
   }
+
+  //toggle if order is minimized
+  const toggleOrder = (orderId) => {
+    if (maximizedOrders.includes(orderId)) {
+      setMaximizedOrders(maximizedOrders.filter(id => id !== orderId));
+    } else {
+      setMaximizedOrders([...maximizedOrders, orderId]);
+    }
+  };
 
   //sign out user using firebase auth
   //redirect to login page
@@ -107,108 +119,123 @@ export const Profile = () => {
     const timeoutId = setTimeout(() => {
       getUserInfo()
     }, 100);
+    return () => clearTimeout(timeoutId);
   }, [userInfo]);
 
 
   return (
     <div className="profile">
-      <div className='user-info'>
+      <div className='profile-container'>
+        <div className='user-info'>
 
-        {userInfo ? (
-          <>
-            <h1>Welcome {userInfo.name}</h1>
-            <div className="user-details">
+          {userInfo ? (
+            <>
+              <h1>Welcome {userInfo.name}</h1>
+              <div className="user-details">
 
-              <div className='input-container'>
-                <label htmlFor="name">Name</label>
-                <input
-                  type="name"
-                  id="name"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                  required
-                  disabled={!editingInfo}
-                />
+                <div className='input-container'>
+                  <label htmlFor="name">Name</label>
+                  <input
+                    type="name"
+                    id="name"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    required
+                    disabled={!editingInfo}
+                  />
+                </div>
+
+                <div className='input-container'>
+                  <label htmlFor="address">Address</label>
+                  <input
+                    type="address"
+                    id="address"
+                    value={address}
+                    onChange={(e) => setAddress(e.target.value)}
+                    required
+                    disabled={!editingInfo}
+                  />
+                </div>
+
+                <div className='input-container'>
+                  <label htmlFor="email">Email</label>
+                  <input
+                    type="email"
+                    id="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
+                    disabled
+                  />
+                </div>
               </div>
+            </>
+          ) : (
+            <p>Loading user information...</p>
+          )}
 
-              <div className='input-container'>
-                <label htmlFor="address">Address</label>
-                <input
-                  type="address"
-                  id="address"
-                  value={address}
-                  onChange={(e) => setAddress(e.target.value)}
-                  required
-                  disabled={!editingInfo}
-                />
-              </div>
-
-              <div className='input-container'>
-                <label htmlFor="email">Email</label>
-                <input
-                  type="email"
-                  id="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  required
-                  disabled
-                />
-              </div>
-            </div>
-          </>
-        ) : (
-          <p>Loading user information...</p>
-        )}
-
-        <button onClick={editUserInformation}>{!editingInfo ? 'Edit Information' : 'Save'}</button>
-        <div className='user-signout'>
-          <button onClick={handleSignOut}>Log out</button>
+          <button onClick={editUserInformation}>{!editingInfo ? 'Edit Information' : 'Save'}</button>
+          <div className='user-signout'>
+            <button onClick={handleSignOut}>Log out</button>
+          </div>
         </div>
+
+        <div className='order-details-info'>
+          <h2>Order History</h2>
+
+          {orders.map(order => {
+            const isMaximized = maximizedOrders.includes(order.id);
+
+            return (
+              <div className='user-order' key={order.id}>
+                <div className={`order-summary ${isMaximized ? 'maximized' : ''}`}onClick={() => toggleOrder(order.id)}>
+                  <div className='order-number'>Order number: {order.id}</div>
+                  <div className='order-date'>Date: {order.date}</div>
+                  <div className='total-price'>Total: ${order.price}</div>
+                </div>
+
+                {isMaximized && (
+                  <>
+                    {(() => {
+                      const groupedItems = {};
+                      order.items.forEach(item => {
+                        const key = `${item.name}-${item.size}-${item.price}`;
+                        if (!groupedItems[key]) {
+                          groupedItems[key] = {
+                            item,
+                            itemCount: 1
+                          };
+                        } else {
+                          groupedItems[key].itemCount++;
+                        }
+                      });
+                      return Object.values(groupedItems).map(({ item, itemCount }) => (
+                        <div className='item-container' key={item.id}>
+                          <div className='image-container'>
+                            <img className='item-image' src={item.img} alt={item.name} />
+                          </div>
+                          <div className='item-details-container'>
+                            <div className='item-name-container'>
+                              <p className='item-name'>{item.name}</p>
+                              <p className='item-size'>{item.size}</p>
+                            </div>
+                            <p className='item-amount'>{itemCount}</p>
+                            <p className='item-price'>${item.price * itemCount}</p>
+                          </div>
+                        </div>
+
+                      ));
+                    })()}
+                  </>
+                )}
+
+              </div>
+
+            );
+          })}
+
+        </div >
       </div>
-
-      <div className='order-details-info'>
-        <h2>Order History</h2>
-        
-          {orders.map(order => (
-            <div className='user-order' key={order.id}>
-              <div className='order-number'>Order number: {order.id}</div>
-              <div className='order-date'>Date: {order.date}</div>
-              {(() => {
-                const groupedItems = {};
-                order.items.forEach(item => {
-                  const key = `${item.name}-${item.size}-${item.price}`;
-                  if (!groupedItems[key]) {
-                    groupedItems[key] = {
-                      item,
-                      itemCount: 1
-                    };
-                  } else {
-                    groupedItems[key].itemCount++;
-                  }
-                });
-                return Object.values(groupedItems).map(({ item, itemCount }) => (
-                  <div className='item-container' key={item.id}>
-                    <div className='image-container'>
-                      <img className='item-image' src={item.img} alt={item.name} />
-                    </div>
-                    <div className='item-details-container'>
-                      <div className='item-name-container'>
-                        <p className='item-name'>{item.name}</p>
-                        <p className='item-size'>{item.size}</p>
-                      </div>
-                      <p className='item-amount'>{itemCount}</p>
-                      <p className='item-price'>${item.price * itemCount}</p>
-
-                    </div>
-                  </div>
-                ));
-              })()}
-              <div className='total-price'>Total: ${order.price}</div>
-            </div>
-          ))}
-
-      </div >
-
     </div>
   )
 
