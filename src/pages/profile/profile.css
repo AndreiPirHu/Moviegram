@@ -5,13 +5,16 @@
 
 }
 
+.profile-container{
+  padding: 1rem;
+}
+
 .user-info {
   background-color: #fff;
   padding: 1rem;
   width: 90%;
   max-width: 800px;
   margin: 0 auto;
-  
 }
 
 
@@ -78,8 +81,12 @@
   border-style: none;
   cursor: pointer;
   width: 200px;
+  
 }
 
+.profile button:hover{
+  background-color: #3e8e41;
+}
 
 .user-signout button {
   margin-top: 20px;
