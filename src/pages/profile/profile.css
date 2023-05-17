@@ -93,11 +93,8 @@
   background-color: red;
 }
 
-
-.profile .total-price{
-  padding: 1rem;
-  justify-content: right;
-  padding-right: 90px;
+.order-number, .order-date, .total-price{
+  cursor: pointer;
 }
 
 .user-details {
