@@ -143,9 +143,11 @@ export const Checkout = () => {
 
   //redirect to cart if no items in cart
   useEffect(() => {
-    if (cart.length === 0)
-    navigate('/cart');
-    console.log("Redirecting to login")
+    if (cart.length === 0){
+      navigate('/cart');
+      console.log("Redirecting to login")
+    }
+    
   }, [])
 
   return (
