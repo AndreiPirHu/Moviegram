@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import { List, ShoppingCart, X } from '@phosphor-icons/react';
 import "./navbar.css";
 import { useSelector } from 'react-redux';
+import logonb from '../assets'
 
 export const Navbar = () => {
   const cart = useSelector(state => state.cartItems)
@@ -15,7 +16,7 @@ export const Navbar = () => {
     <nav className="navbar">
       <div className="subNavbar">
         <Link to="/" className="moviegram" onClick={() => { window.scrollTo(0, 0) }}>
-          
+          <img src={logonb} alt="logo" className="logoImg" />
         </Link>
         <div className="links">
           <ul>

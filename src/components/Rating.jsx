@@ -28,7 +28,7 @@ const Rating = () => {
 
     return (
 
-        <div className="container">
+        <div className="starcontainer">
             <div className="stars">
                 <input type="radio" name="rate" id="rate-5" />
                 <label htmlFor="rate-5" className="fa fa-star" onClick={() =>starClick(5)}></label>
@@ -41,13 +41,6 @@ const Rating = () => {
                 <input type="radio" name="rate" id="rate-1" />
                 <label htmlFor="rate-1" className="fa fa-star" onClick={() =>starClick(1)}></label>
                 <form className="form-text" action="#">
-                    <header></header>
-                    {/*  <div className="textarea">
-                        <textarea cols="30" placeholder="Describe your experience..."></textarea>
-                    </div>
-                    <div className="submitButton">
-                        <button type="submit">Post</button>
-                    </div> */}
                 </form>
             </div>
 

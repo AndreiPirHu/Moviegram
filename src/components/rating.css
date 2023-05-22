@@ -1,4 +1,4 @@
-.container {
+.starcontainer {
     width: 400px;
     padding: 20px 30px;
     /* border: 1px solid #444; */
@@ -9,7 +9,7 @@
     flex-direction: column;
 }
 
-.container .stars input {
+.starcontainer .stars input {
     display: none;
 }
 
@@ -55,7 +55,7 @@ input:not(:checked)~label:hover~label {
     content: "I just love it! 🤩";
 }
 
-.container .form-text {
+.starcontainer .form-text {
     display: none;
 }
 

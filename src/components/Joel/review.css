@@ -1,37 +1,42 @@
-.review{
+.review {
     display: flex;
     flex-flow: column;
-    height: auto;
+    height: 300px;
     width: 80%;
     padding: 10px;
-    border : 2px solid black;
+    border: 2px solid black;
     border-radius: 5px;
     box-shadow: 0 0 20px #363530;
     gap: 5px;
-    align-items: center;
+    /* align-items: center;
     justify-content: center;
-    flex-direction: column;
+    flex-direction: column; */
 }
-.reviewcontent{
+
+.reviewcontent {
     width: 90%;
-    border : 2px solid black;
+    border: 2px solid black;
     border-radius: 5px;
 }
-.showreview{
+
+.showreview {
     display: flex;
     flex-direction: column;
     overflow-x: scroll;
     flex: 1 1 0;
     gap: 5px;
 }
-.showreview div{
+
+.showreview div {
     background: linear-gradient(0turn, #f1d9bf, #ebf8e1);
 }
-.postreview{
+
+.postreview {
     display: flex;
     flex-direction: column;
 }
-.postreview > button{
+
+.postreview>button {
     align-self: center;
     justify-content: center;
     width: 70%;
@@ -44,12 +49,13 @@
     opacity: .7;
     transition: all .3s;
 }
+
 /* max 330 and smaller */
-@media(max-width: 330px){
-}
+@media(max-width: 330px) {}
+
 /* min 330 or bigger */
-@media(min-width: 330px){
-    .review{
+@media(min-width: 330px) {
+    .review {
         /* display: flex;
         flex-flow: column;
         background-color: aqua;
@@ -86,12 +92,13 @@
     opacity: .7;
     transition: all .3s;
 }
-.reviewTitle{
+
+.reviewTitle {
     margin: 5px;
     display: flex;
     justify-content: space-around;
-    padding : 5px;
-    border : 2px solid black;
+    padding: 5px;
+    border: 2px solid black;
     border-radius: 5px;
 }
 
