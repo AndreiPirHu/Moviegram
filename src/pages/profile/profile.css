@@ -1,27 +1,33 @@
 
-.profile .user-info {
-  background-color: #fff;
-  box-shadow: 1px 10px 30px rgba(0, 0, 0, 0.1);
+.profile{
+  background-color: rgb(243, 234, 223);
+  min-height: 100vh;
+
+}
+
+.profile-container{
   padding: 1rem;
-  width: 50%;
+}
+
+.user-info {
+  background-color: #fff;
+  padding: 1rem;
+  width: 90%;
+  max-width: 800px;
   margin: 0 auto;
-  margin-top: 40px;
-  border: 1px solid rgb(187, 187, 187);
-  margin-bottom: 0px;
-  
 }
 
 
 .order-details-info {
   background-color: #fff;
-  box-shadow: 1px 10px 30px rgba(0, 0, 0, 0.1);
   padding: 1rem;
-  width: 50%;
+  width: 90%;
+  max-width: 800px;
   margin: 0 auto;
   margin-top: 40px;
-  border: 1px solid rgb(187, 187, 187);
+  border-top: 1px solid rgb(187, 187, 187);
   margin-bottom: 0px;
-  margin-top: -1px;
+  margin-top: 0px;
   font-weight: bold;
 }
 
@@ -49,6 +55,10 @@
   padding: 0;
 }
 
+.order-number, .order-date{
+ padding-bottom: 20px;
+}
+
 .order-history li {
   margin-bottom: 0.5rem;
 }
@@ -57,10 +67,9 @@
   background-color: #fff;
   box-shadow: 1px 10px 30px rgba(0, 0, 0, 0.1);
   padding: 1rem;
-  border-radius: 20px;
-  width: 80%;
+  width: 90%;
   list-style: none;
-  margin-top: 10px;
+  margin-top: 30px;
   border: 1px solid rgb(187, 187, 187);
 }
 
@@ -71,16 +80,50 @@
   font-weight: bold;
   border-style: none;
   cursor: pointer;
+  width: 200px;
+  
 }
 
-
-.user-signout {
-  padding: 1rem;
-  text-align: center;
+.profile button:hover{
+  background-color: #3e8e41;
 }
+
 .user-signout button {
-  width: 40%;
-  max-width: 300px;
+  margin-top: 20px;
   background-color: red;
-  border-radius: 2px;
+}
+
+.order-number, .order-date, .profile .total-price{
+  cursor: pointer;
+}
+
+.user-details {
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  margin-bottom: 0px;
+  max-width: 500px;
+  width: 90%;
+  font-weight: bold;
+}
+
+.user-details input {
+  display: flex;
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  border: none;
+  border-bottom: 2px solid #ccc;
+  font-size: 16px;
+
+
+}
+
+
+.user-details .input-container {
+  max-width: 400px;
+  width: 100%;
+
 }

@@ -1,18 +1,25 @@
-
-.indivPosterDiv{
-    display: grid;
-    grid-template-rows: row;
+.indivPosterDiv{ /* link and poster */
+    /* display: grid;
+    grid-template-rows: row; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     align-items: center;
-    width: 450px;
+    background: linear-gradient(0.25turn, #3f87a6, #ebf8e1, #f69d3c);
 }
-.posterDiv{
+.posterDiv{ /* foto and details */
     display: flex;
     flex-flow: column;
-    justify-content: center;
+    justify-content: start;
+    align-items: center;
     margin: 10px;
 }
+/* align-items = on the cross axis. default is stretch (as much as tallest item) */
+/* justify-content = on the main axix. default is flex-start (aligns up at the start edge of container) */
+/* justify-items is ignored in flex */
 .posterDiv img{
-    height: 450px;
+    /* height: 450px; */
+    width: 350px;
     margin: 0;
     padding: 10px;
     border-radius: 10px;
@@ -21,40 +28,149 @@
     overflow: hidden;
     object-fit: contain;
 }
+.posterDiv2{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+.posterDiv h2{
+    text-align: center;
+}
 .posterDetails{
     margin: 10px;
     padding: 10px;
     border : 2px solid black;
     border-radius: 5px;
+    align-content: center;
+    box-shadow: 0 0 20px #363530;
 }
-.buttonLink, #addtocart{
+.posterDetails p{
+    max-width: 610px;
+}
+/* .buttonLink, #addtocart{
+    padding : 5px;
+    border : 2px solid black;
+    border-radius: 5px;
+} */
+.downmenu{
+    margin: 5px;
     display: flex;
-    justify-content: center;
-    margin: 10px;
+    justify-content: space-around;
     padding : 5px;
     border : 2px solid black;
     border-radius: 5px;
 }
-
-.countbutton button{
-    border-radius: 10px;
+.countbutton{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
 }
 
-@media(min-width:600px){
+.countbutton button{
+    padding: 0;
+    width: 30px;
+    height: 30px;
+    font-weight: bold;
+    border-radius: 10px;
+    text-decoration: none;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    background-color: initial;
+    background-image: linear-gradient(#fff 0, rgba(255, 255, 255, 0) 100%);
+    box-shadow: rgba(255, 255, 255, .2) 0 3px 15px inset, rgba(0, 0, 0, .1) 0 3px 5px, rgba(0, 0, 0, .1) 0 10px 13px;
+    transform: scale(1.05);
+    opacity: .7;
+    transition: all .3s;
+}
+.downmenu button{
+    width: 150px;
+    height: 30px;
+    font-weight: bold;
+    border-radius: 10px;
+    text-decoration: none;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    background-color: initial;
+    background-image: linear-gradient(#fff 0, rgba(255, 255, 255, 0) 100%);
+    box-shadow: rgba(255, 255, 255, .2) 0 3px 15px inset, rgba(0, 0, 0, .1) 0 3px 5px, rgba(0, 0, 0, .1) 0 10px 13px;
+    transform: scale(1.05);
+    opacity: .7;
+    transition: all .3s;
+}
+
+
+
+/* buttons CSS */
+/* .countbutton button{
+  border-radius: 56px;
+  font-size: 15px;
+  font-weight: 600;
+  outline: 0;
+  padding: 16px 21px;
+  text-decoration: none;
+  transition: all .3s;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.countbutton button{
+  background-color: initial;
+  background-image: linear-gradient(#fff 0, rgba(255, 255, 255, 0) 100%);
+  border-radius: 125px;
+  height: 10px;
+  left: 4%;
+  opacity: .5;
+  transition: all .3s;
+  width: 10px;
+}
+
+.countbutton button{
+  box-shadow: rgba(255, 255, 255, .2) 0 3px 15px inset, rgba(0, 0, 0, .1) 0 3px 5px, rgba(0, 0, 0, .1) 0 10px 13px;
+  transform: scale(1.05);
+} */
+
+
+/* when screen gets big */
+/* inches = in */
+/* ipad 10.9in */
+/* ipad 6.1 in */
+/* i was working with 600px */
+/* max-width: 500px > maximo 500 y menores */
+/* min-width: 155mm, at least 155 or bigger */
+@media(min-width: 816px){
+    .indivPosterDiv{
+        flex-flow: column wrap;
+        justify-content: center;
+        align-items: center;
+    }
     .posterDiv{
         flex-flow: row;
-        justify-content: center;
-        align-items: start;
+        justify-content: start;
+        align-items: center;
     }
+    /* .posterDiv  .review{
+        display: flex;
+        flex-flow: column;
+    } */
     .posterDetails{
         width: 350px;
+        box-shadow: 0 0 20px #363530;
     }
     .posterDiv img{
-        height: 600px;
+        /* height: 600px; */
+        width: 450px;
         object-fit: cover;
-        
     }
-    .indivPosterDiv{
-        width: 600px;
+
+    .posterDiv h2{
+        position: relative;
+        left: 50%;
     }
+    
 }
