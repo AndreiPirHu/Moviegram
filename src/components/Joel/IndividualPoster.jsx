@@ -9,6 +9,9 @@ import { setDoc, collection, db, doc } from '../../firebase';
 import Review from "./Review";
 import Suggestion from "./Suggestion";
 
+const apiKey = 'b5f72212d28ab0fe02704865f4b72213';
+const urlBase = `https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&language=en-US&page=1`;
+
 async function fetchPoster(id, setItem, setError){
     
     const apiKey = 'b5f72212d28ab0fe02704865f4b72213';
@@ -31,17 +34,15 @@ async function fetchPoster(id, setItem, setError){
         })
 }
 
-
 const IndividualPoster = () => {
     const [error, setError] = useState(false)
     //const [content, setContent] = useState("No info available")
-
     const [item, setItem] = useState([]);
+
     const [selected, setSelected] = useState([]);
 
     const params = useParams();
-    const id = params.id
-    //const SMALL = "S", MEDIUM ="M", LARGE = "L";
+    const id = params.id;
     const user = useSelector(state => state.login.user)
     const isLoggedIn = useSelector(state => state.login.loggedIn)
 
@@ -53,9 +54,9 @@ const IndividualPoster = () => {
         fetchPoster(id, setItem, setError);
     }, [id]);
 
-    useEffect(()=>{
+    /* useEffect(()=>{
         console.log("poster path", item.poster_path)
-    }, [item])
+    }, [item]) */
 
     function addToSelected(poster, size, price) {
 
@@ -71,7 +72,6 @@ const IndividualPoster = () => {
         console.log("item", item)
         console.log("total items added ", selected.length + 1)
     }
-
     function remove(size) {
         if (selected.length != 0) {
             //index of first element with that size
@@ -113,8 +113,7 @@ const IndividualPoster = () => {
 
     const container = (
         <div className="posterDiv">
-            {/* <img src={`https://image.tmdb.org/t/p/original${(item.poster_path)}`} 
-                alt="no pic available" height={600}/> */}
+
             <div className="posterDiv2">
                 <h2>Poster: {item.original_title}.</h2>
                 <img src={`https://image.tmdb.org/t/p/original${item?.poster_path}`} 
@@ -122,7 +121,6 @@ const IndividualPoster = () => {
             </div>
                 
             <div className="posterDetails">
-                {/* <h2>Poster: {item.original_title}</h2> */}
                 <p>{item.overview}</p>
                 <CounterButton item={item} handleAdd={addToSelected} handleRemove={remove}/>
 
@@ -142,14 +140,35 @@ const IndividualPoster = () => {
 
         </div>
     )
+    /* 
+    //sugestions code
+    const [posts, setPosts] = useState([]);
+    const [currentPage, setCurrentPage]= useState(1)
+    const [postPerPage, setPostPerPage]= useState(5)
 
+    useEffect(()=>{
+
+        fetch(urlBase)
+        .then(res => res.json())
+        .then(data => {
+            setPosts(data.results)
+        })
+        .catch(err => console.log("sugestion error", err))
+
+    }, []);
+
+    //get current posts
+    const indexOfLastPost = currentPage * postPerPage;
+    const indexOfFirstPost = indexOfLastPost - postPerPage;
+    const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost)
+ */
 
     return (
         <div className="indivPosterDiv">
             {error ? errorContainer : container}
-            <Suggestion/>
+            {/* <Suggestion posts={currentPosts}/> */}
             <Review filmID={id}/>
-
+            <Suggestion />
         </div>
     )
 }

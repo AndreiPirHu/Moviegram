@@ -6,7 +6,6 @@
   border-radius: 8px;
   background: linear-gradient(0.25turn, #3f87a6, #ebf8e1, #f69d3c);
   margin-bottom: 20px;
-
   margin-top: 2px;
 }
 .heroComponent img {
@@ -96,6 +95,8 @@
     display: inline;
   }
 }
+/* ernesto
+
 @media (min-width: 640px) {
   .heroComponent {
     overflow-x: hidden;
@@ -105,7 +106,8 @@
   .heroComponent img:nth-of-type(5) {
     display: inline;
   }
-}
+} */
+
 /* @media(min-width:634px){
     .heroComponent img:nth-of-type(6){
         display: grid;
