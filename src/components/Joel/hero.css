@@ -109,7 +109,9 @@
   }
 }
 
-/* @media (min-width: 640px) {
+/* ernesto
+
+@media (min-width: 640px) {
   .heroComponent {
     overflow-x: hidden;
     background: none;
@@ -119,6 +121,7 @@
     display: inline;
   }
 } */
+
 /* @media(min-width:634px){
     .heroComponent img:nth-of-type(6){
         display: grid;

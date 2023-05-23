@@ -19,7 +19,7 @@ const Footer = ()=>{
         break;
         default:
             content = (<div className="aboutus">
-                    <p>We are a start-up that sells your favorite movie posters</p>
+                    <p>We are a start-up that sells your favorite movie posters!</p>
                     <div className="aboutuspics">
                         <img src="src/assets/delivery.png" alt="no pic" />
                         <img src="src/assets/shipping.png" alt="no pic" />
