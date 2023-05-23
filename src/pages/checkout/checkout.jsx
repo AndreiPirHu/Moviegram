@@ -46,7 +46,8 @@ export const Checkout = () => {
 
 
 
-  const handlePurchase = async () => {
+  const handlePurchase = async (e) => {
+    e.preventDefault();
     const currentDate = new Date();
     const formattedDate = currentDate.toLocaleString('en-GB', {
       year: 'numeric',
@@ -296,7 +297,7 @@ export const Checkout = () => {
             </div>
             <p className="total-cost"> Total cost</p>
             <p className="total-price">${totalPrice}</p>
-            <button className='purchase-button'>Purchase</button>
+            <button type="submit" className='purchase-button'>Purchase</button>
           </form>) : (<div className="payment-form">
             <h2 >Payment</h2>
           </div>
