@@ -46,7 +46,8 @@ export const Checkout = () => {
 
 
 
-  const handlePurchase = async () => {
+  const handlePurchase = async (e) => {
+    e.preventDefault();
     const currentDate = new Date();
     const formattedDate = currentDate.toLocaleString('en-GB', {
       year: 'numeric',
