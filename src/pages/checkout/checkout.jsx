@@ -297,7 +297,7 @@ export const Checkout = () => {
             </div>
             <p className="total-cost"> Total cost</p>
             <p className="total-price">${totalPrice}</p>
-            <button className='purchase-button'>Purchase</button>
+            <button type="submit" className='purchase-button'>Purchase</button>
           </form>) : (<div className="payment-form">
             <h2 >Payment</h2>
           </div>
