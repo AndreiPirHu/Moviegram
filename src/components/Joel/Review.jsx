@@ -70,41 +70,41 @@ const Review = (props) => {
     }, [reviewsList])
 
 
-  return (
-    <div className="review">
-        {isLoggedIn ? "Tell us what you think:" : "Log in to leave a comment!"}
+    return (
+        <div className="review">
+            {isLoggedIn ? "Tell us what you think:" : "Log in to leave a comment!"}
 
-        {/* read from firebase */}
-          {/*   <div className="reviewTitle">
+            {/* read from firebase */}
+            {/*   <div className="reviewTitle">
             
             <button type="submit" className="popupBtn">Add a review</button>
             </div> */}
-            
-    
+
+
             <div className='showreview'>
-            {reviewsList.map( (review, index)=>(
-                <div className='reviewcontent' key={index}>
-                    <h2>{review.userName}</h2>
-                    <p>{review.content}</p>
+                {reviewsList.map((review, index) => (
+                    <div className='reviewcontent' key={index}>
+                        <h2>{review.userName}</h2>
+                        <p>{review.content}</p>
                     </div>
                 ))}
             </div>
-            
-                <div className='postreview' style={{ display: isLoggedIn ? "flex" : "none" }}>
-                    {/* write to firebase */}
 
-                    <div className="rating" style={{ display: reviewed ? "none" : "flex" }}>
-                        {<Rating />}
-                    </div>
-                    
-                    <textarea style={{ display: reviewed ? "none" : "flex" }}
-                        placeholder="max 100 char."
-                        value={review}
-                        onChange={(e) => { setReview(e.target.value) }}>
-                    </textarea>
-                    <button type='submit' onClick={onSubmitReview} style={{ display: reviewed ? "none" : "flex" }}>Submit a review.</button>
+            <div className='postreview' style={{ display: isLoggedIn ? "flex" : "none" }}>
+                {/* write to firebase */}
 
+                <div className="rating" style={{ display: reviewed ? "none" : "flex" }}>
+                    {<Rating />}
                 </div>
+
+                <textarea style={{ display: reviewed ? "none" : "flex" }}
+                    placeholder="max 100 char."
+                    value={review}
+                    onChange={(e) => { setReview(e.target.value) }}>
+                </textarea>
+                <button type='submit' onClick={onSubmitReview} style={{ display: reviewed ? "none" : "flex" }}>Submit a review.</button>
+
+            </div>
         </div>
     )
 }

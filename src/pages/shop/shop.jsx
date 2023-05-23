@@ -10,25 +10,28 @@ import { actions } from "../../features/cartitems";
 import Hero from "../../components/Joel/Hero";
 import Footer from "../../components/Joel/Footer";
 import { useNavigate } from "react-router-dom";
+import { CaretLeft, CaretRight } from "@phosphor-icons/react";
 
 
 export const Shop = () => {
-  const [movie, setMovie] = useState([]);
-
-  const [poster, setPoster] = useState([]);
-
-  const user = useSelector((state) => state.login.user);
-  const isLoggedIn = useSelector((state) => state.login.loggedIn);
-  const cart = useSelector((state) => state.cartItems);
-
-  const dispatch = useDispatch();
-
-
-    
-
+    const [movie, setMovie] = useState([]);
+    const [poster, setPoster] = useState([]);
+    const user = useSelector((state) => state.login.user);
+    const isLoggedIn = useSelector((state) => state.login.loggedIn);
+    const cart = useSelector((state) => state.cartItems);
+    const dispatch = useDispatch();
     //joel: added navigate/import
     let navigate = useNavigate();
-   
+
+    const slideLeft = () => {
+        var slider = document.getElementById('slider');
+        slider.scrollLeft = slider.scrollLeft - 500;
+    };
+
+    const slideRight = () => {
+        var slider = document.getElementById('slider');
+        slider.scrollLeft = slider.scrollLeft + 500;
+    };
 
     const FetchMovies = () => {
         fetch(
@@ -52,20 +55,25 @@ export const Shop = () => {
         <div className="shop">
             <Hero />
             <GetMoviePosters />
-            {<div className="products">
-                {/* joel: added index&onClick to navigate to individualPoster */}
-                {movie.map((movies, index) => (
-                    <div className="" key={index}>
-                        <img
-                            src={`https://image.tmdb.org/t/p/w500${movies.poster_path}`}
-                            alt="Movie poster"
-                            onClick={() => { navigate("/single/" + movie[index].id) }}
-                        />
-                    </div>
-                ))}
-            </div>}
+            <div className="productcontainer">
+                <CaretLeft className="chevron" onClick={slideLeft} size={150} />
+                <div id="slider" className="products">
+
+                    {/* joel: added index&onClick to navigate to individualPoster */}
+                    {movie.map((movies, index) => (
+                        <div className="" key={index}>
+                            <img
+                                src={`https://image.tmdb.org/t/p/w500${movies.poster_path}`}
+                                alt="Movie poster"
+                                onClick={() => { navigate("/single/" + movie[index].id) }}
+                            />
+                        </div>
+                    ))}
+                </div>
+                <CaretRight className="chevron" onClick={slideRight} size={150} />
+            </div>
             <Footer />
 
-    </div>
-  );
+        </div>
+    );
 };
