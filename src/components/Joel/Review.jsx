@@ -75,11 +75,6 @@ const Review = (props) => {
             {isLoggedIn ? "Tell us what you think:" : "Log in to leave a comment!"}
 
             {/* read from firebase */}
-            {/*   <div className="reviewTitle">
-            
-            <button type="submit" className="popupBtn">Add a review</button>
-            </div> */}
-
 
             <div className='showreview'>
                 {reviewsList.map((review, index) => (

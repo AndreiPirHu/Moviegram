@@ -61,24 +61,6 @@ const CounterButton = (props)=>{
                     {large}
                 <button onClick={()=>{add("L"); props.handleAdd(props.item, "L", 20)}}>+</button>
             </div>
-            {/* <div className="countbutton">
-                <h3>Small size (20x30 cm). 10$</h3>     
-                <button onClick={()=>{minus("S"); props.handleRemove("S")}}>-</button>
-                    <h3>{small}</h3>
-                <button onClick={()=>{add("S"); props.handleAdd(props.item, "S", 10)}}>+</button>
-            </div>
-            <div className="countbutton">
-                <h3>Medium size (40x50 cm). 15$</h3>
-                <button onClick={()=>{minus("M"); ; props.handleRemove("M")}}>-</button>
-                    <h3>{medium}</h3>
-                <button onClick={()=>{add("M"); props.handleAdd(props.item, "M", 15)}}>+</button>
-            </div>
-            <div className="countbutton">
-                <h3>Large size (60x90 cm). 20$</h3>
-                <button onClick={()=>{minus("L")}}>-</button>
-                    <h3>{large}</h3>
-                <button onClick={()=>{add("L"); props.handleAdd(props.item, "L", 20)}}>+</button>
-            </div> */}
         </div>
 
     )
