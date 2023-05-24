@@ -97,9 +97,13 @@ export const Profile = () => {
 
 
   const getUserInfo = () => {
+    if (userInfo){
     setName(userInfo.name)
     setAddress(userInfo.address)
     setEmail(userInfo.email)
+    }
+    
+    
   }
 
   //downloads userinfo from user firestore document when logged in
@@ -113,6 +117,7 @@ export const Profile = () => {
 
           dispatch(loginActions.loginFetchInfo(userData))
           //console.log(userData)
+          getUserInfo()
         } else {
           console.log("Could not retrieve user info");
         }
@@ -126,9 +131,8 @@ export const Profile = () => {
 
   useEffect(() => {
     const timeoutId = setTimeout(() => {
-      handleUserInfoDownload(userID)
       getOrderHistory()
-    }, 50);
+    }, 100);
     return () => clearTimeout(timeoutId);
   }, [])
 

@@ -23,16 +23,18 @@ export const Register = () => {
       e.preventDefault();
       dispatch(loginActions.loginStart())
       createUserWithEmailAndPassword(auth, email, password)
-    .then((userCredential) => {
+    .then( async (userCredential) => {
       
       const user = userCredential.user;
       console.log(user)
       //upload user info to firestore
-      handleUserInfoUpload(user.uid)
+      await handleUserInfoUpload(user.uid)
+
       //sign in the user after success
-      handleSignIn()
-      //downloads the user info
-      handleUserInfoDownload(user.uid)
+      await handleSignIn()
+      
+     
+      window.location.reload(false);
     })
     .catch((error) => {
       dispatch(loginActions.loginFailure())
@@ -47,6 +49,7 @@ export const Register = () => {
       const {user} = await signInWithEmailAndPassword(auth, email, password); 
       console.log('User logged in successfully');
       await handleOfflineCart(user.uid)
+
       dispatch(loginActions.loginSuccess(user.uid))
     } catch (error) {
       console.log('Error logging in:', error);
@@ -95,11 +98,12 @@ export const Register = () => {
         email: email,
         name: name,
       };
-
+      
       try{
       //Add info to firestore
       await setDoc(userDocRef, userData, {merge: true});
       console.log(`User info successfully added to firestore`);
+      handleUserInfoDownload(user)
      } catch (e) {
       console.error('Error adding user info to document:', e)
      }
