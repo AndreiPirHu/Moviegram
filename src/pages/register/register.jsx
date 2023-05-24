@@ -4,6 +4,7 @@ import { auth, collection, createUserWithEmailAndPassword, db, doc, setDoc, sign
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
 import { actions as loginActions} from '../../features/login';
+import { getDoc } from 'firebase/firestore';
 
 
 export const Register = () => {
@@ -30,6 +31,8 @@ export const Register = () => {
       handleUserInfoUpload(user.uid)
       //sign in the user after success
       handleSignIn()
+      //downloads the user info
+      handleUserInfoDownload(user.uid)
     })
     .catch((error) => {
       dispatch(loginActions.loginFailure())
@@ -111,7 +114,25 @@ export const Register = () => {
     }
   }, [isLoggedIn]);
 
+  //downloads userinfo from user firestore document when logged in
+  const handleUserInfoDownload = (user) => {
+    /* console.log(user) */
+    const docRef = doc(db, "users", user);
+    getDoc(docRef)
+      .then((doc) => {
+        if (doc.exists()) {
+          const userData = doc.data();
 
+          dispatch(loginActions.loginFetchInfo(userData))
+          //console.log(userData)
+        } else {
+          console.log("Could not retrieve user info");
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
   return (
     <div className="register-container">
