@@ -4,6 +4,7 @@ import { auth, collection, createUserWithEmailAndPassword, db, doc, setDoc, sign
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
 import { actions as loginActions} from '../../features/login';
+import { getDoc } from 'firebase/firestore';
 
 
 export const Register = () => {
@@ -22,14 +23,18 @@ export const Register = () => {
       e.preventDefault();
       dispatch(loginActions.loginStart())
       createUserWithEmailAndPassword(auth, email, password)
-    .then((userCredential) => {
+    .then( async (userCredential) => {
       
       const user = userCredential.user;
       console.log(user)
       //upload user info to firestore
-      handleUserInfoUpload(user.uid)
+      await handleUserInfoUpload(user.uid)
+
       //sign in the user after success
-      handleSignIn()
+      await handleSignIn()
+      
+     
+      window.location.reload(false);
     })
     .catch((error) => {
       dispatch(loginActions.loginFailure())
@@ -44,6 +49,7 @@ export const Register = () => {
       const {user} = await signInWithEmailAndPassword(auth, email, password); 
       console.log('User logged in successfully');
       await handleOfflineCart(user.uid)
+
       dispatch(loginActions.loginSuccess(user.uid))
     } catch (error) {
       console.log('Error logging in:', error);
@@ -92,11 +98,12 @@ export const Register = () => {
         email: email,
         name: name,
       };
-
+      
       try{
       //Add info to firestore
       await setDoc(userDocRef, userData, {merge: true});
       console.log(`User info successfully added to firestore`);
+      handleUserInfoDownload(user)
      } catch (e) {
       console.error('Error adding user info to document:', e)
      }
@@ -111,7 +118,25 @@ export const Register = () => {
     }
   }, [isLoggedIn]);
 
+  //downloads userinfo from user firestore document when logged in
+  const handleUserInfoDownload = (user) => {
+    /* console.log(user) */
+    const docRef = doc(db, "users", user);
+    getDoc(docRef)
+      .then((doc) => {
+        if (doc.exists()) {
+          const userData = doc.data();
 
+          dispatch(loginActions.loginFetchInfo(userData))
+          //console.log(userData)
+        } else {
+          console.log("Could not retrieve user info");
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
   return (
     <div className="register-container">
