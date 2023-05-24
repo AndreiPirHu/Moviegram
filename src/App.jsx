@@ -72,11 +72,13 @@ function App() {
 
   //if user is logged/logs in, starts fetching cart from firestore
   useEffect(() => {
-    if (isLoggedIn) {
+    if (isLoggedIn && user) {
       /*  console.log("Starting item fetch") */
       handleDownload(user)
     }
   }, [user]);
+
+
 
   //fetch cart items from firestore on page reload if logged in
   //TODO change query snapshot when real posters are added with more info
