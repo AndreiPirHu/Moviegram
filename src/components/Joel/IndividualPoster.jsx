@@ -12,8 +12,7 @@ import Suggestion from "./Suggestion";
 const apiKey = 'b5f72212d28ab0fe02704865f4b72213';
 const urlBase = `https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&language=en-US&page=1`;
 
-async function fetchPoster(id, setItem, setError){
-    
+async function fetchPoster(id, setItem, setError, resetSelected, resetBtns){
     const apiKey = 'b5f72212d28ab0fe02704865f4b72213';
     const idEndPoint = `https://api.themoviedb.org/3/movie/${id}?api_key=${apiKey}&language=en-US`;
 
@@ -27,6 +26,9 @@ async function fetchPoster(id, setItem, setError){
             }else if(data.id){
                 console.log("item is set")
                 setItem(data);
+                resetSelected([]);
+                /* resetBtns(true);
+                resetBtns(false); */
             }
         })
         .catch(error => {
@@ -36,10 +38,9 @@ async function fetchPoster(id, setItem, setError){
 
 const IndividualPoster = () => {
     const [error, setError] = useState(false)
-    //const [content, setContent] = useState("No info available")
     const [item, setItem] = useState([]);
-
     const [selected, setSelected] = useState([]);
+    const [reset, setReset] = useState(false)
 
     const params = useParams();
     const id = params.id;
@@ -49,17 +50,19 @@ const IndividualPoster = () => {
     const dispatch = useDispatch();
     let navigate = useNavigate();
 
+
     useEffect(()=>{
         //fetch and changes item to an object when id changes
-        fetchPoster(id, setItem, setError);
+        fetchPoster(id, setItem, setError, setSelected, setReset);
     }, [id]);
-
+    
     /* useEffect(()=>{
-        console.log("poster path", item.poster_path)
-    }, [item]) */
+        if(params.id != item.id){
+            setReset(true)
+        }
+    }, []) */
 
-    function addToSelected(poster, size, price) {
-
+    function addToSelected(poster, size, price){
         const item = {
             id: uuidv4(),
             name: poster.title,
@@ -69,8 +72,7 @@ const IndividualPoster = () => {
         }
 
         setSelected([...selected, item]);
-        console.log("item", item)
-        console.log("total items added ", selected.length + 1)
+        
     }
     function remove(size) {
         if (selected.length != 0) {
@@ -80,8 +82,7 @@ const IndividualPoster = () => {
             if (selected[index].id != null) {
                 const newArr = selected.filter((item) => item.id != selected[index].id);
                 //update cart
-                setSelected(newArr)
-                console.log("newArr:", newArr.length)
+                setSelected(newArr);
             }
         }
     }
@@ -122,7 +123,11 @@ const IndividualPoster = () => {
                 
             <div className="posterDetails">
                 <p>{item.overview}</p>
-                <CounterButton item={item} handleAdd={addToSelected} handleRemove={remove}/>
+                <CounterButton item={item} 
+                    handleAdd={addToSelected} 
+                    handleRemove={remove} 
+                    reset={reset} 
+                    handleReset={setReset}/>
 
                 <div className="downmenu">
                     <Link to='/'>
@@ -140,84 +145,14 @@ const IndividualPoster = () => {
 
         </div>
     )
-    /* 
-    //sugestions code
-    const [posts, setPosts] = useState([]);
-    const [currentPage, setCurrentPage]= useState(1)
-    const [postPerPage, setPostPerPage]= useState(5)
-
-    useEffect(()=>{
-
-        fetch(urlBase)
-        .then(res => res.json())
-        .then(data => {
-            setPosts(data.results)
-        })
-        .catch(err => console.log("sugestion error", err))
-
-    }, []);
-
-    //get current posts
-    const indexOfLastPost = currentPage * postPerPage;
-    const indexOfFirstPost = indexOfLastPost - postPerPage;
-    const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost)
- */
 
     return (
         <div className="indivPosterDiv">
             {error ? errorContainer : container}
-            {/* <Suggestion posts={currentPosts}/> */}
             <Review filmID={id}/>
-            <Suggestion />
+            <Suggestion resetBtns={setReset}/>
         </div>
     )
 }
-
-/* .catch((error)=>setError(error)) */
-/* fetch(api)
-  .then(res => res.json())
-  .then(data => data.record) //setData()
-  .catch((error)=> setError(error))
-  .finally(()=>{})  */
-
-/* <label>
-    <input type="radio" 
-        onClick={()=> {setSize(SMALL); setPrice(10)}}/>Small size. 10$
-                        
-        <input type="radio" 
-            onClick={() => addToCart(item, SMALL, 10)}/>
-            Small size. 10$ {selected.length}
-    </label> */
-
-
-/* const arr1 = [1, 2, 3]
-const arr2 = [...arr1]
-arr2[2] = 4
-console.log(arr1) // [1, 2, 3]
-console.log(arr2) // [1, 2, 4]
-
-const arr1 = [1, 2, 3]
-const arr2 = [4, 5, 6]
-const arr3 = [...arr1, ...arr2]
-console.log(arr3) // [1, 2, 3, 4, 5, 6]
-
-const arr1 = [1, 2, 3]
-const arr2 = [0, ...arr1]
-const arr3 = [...arr1, 4]
-console.log(arr2) // [0, 1, 2, 3]
-console.log(arr3) // [1, 2, 3, 4] */
-
-// switch(size){
-//     case SMALL:
-//         addToCart(item, size, price);
-//         break;
-//     case MEDIUM:
-//         addToCart(item, size, price);
-//         break;
-//     case LARGE:
-//         addToCart(item, size, price);
-//         break;
-// }
-//with size/price, create an object and adds to selectedItems[]
 
 export default IndividualPoster;

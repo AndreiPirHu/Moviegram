@@ -1,6 +1,4 @@
 .indivPosterDiv{ /* link and poster */
-    /* display: grid;
-    grid-template-rows: row; */
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -18,7 +16,6 @@
 /* justify-content = on the main axix. default is flex-start (aligns up at the start edge of container) */
 /* justify-items is ignored in flex */
 .posterDiv img{
-    /* height: 450px; */
     width: 350px;
     margin: 0;
     padding: 10px;
@@ -49,11 +46,6 @@
 .posterDetails p{
     max-width: 610px;
 }
-/* .buttonLink, #addtocart{
-    padding : 5px;
-    border : 2px solid black;
-    border-radius: 5px;
-} */
 .downmenu{
     margin: 5px;
     display: flex;
@@ -64,14 +56,16 @@
 }
 .countbutton{
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
-    
 }
+/* .countbutton div:nth-of-type(1){
+    margin-left: 30px;
+} */
 
 .countbutton button{
     padding: 0;
-    width: 30px;
+    width: 40px;
     height: 30px;
     font-weight: bold;
     border-radius: 10px;
@@ -104,38 +98,6 @@
 }
 
 
-
-/* buttons CSS */
-/* .countbutton button{
-  border-radius: 56px;
-  font-size: 15px;
-  font-weight: 600;
-  outline: 0;
-  padding: 16px 21px;
-  text-decoration: none;
-  transition: all .3s;
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: manipulation;
-}
-
-.countbutton button{
-  background-color: initial;
-  background-image: linear-gradient(#fff 0, rgba(255, 255, 255, 0) 100%);
-  border-radius: 125px;
-  height: 10px;
-  left: 4%;
-  opacity: .5;
-  transition: all .3s;
-  width: 10px;
-}
-
-.countbutton button{
-  box-shadow: rgba(255, 255, 255, .2) 0 3px 15px inset, rgba(0, 0, 0, .1) 0 3px 5px, rgba(0, 0, 0, .1) 0 10px 13px;
-  transform: scale(1.05);
-} */
-
-
 /* when screen gets big */
 /* inches = in */
 /* ipad 10.9in */
@@ -154,12 +116,8 @@
         justify-content: start;
         align-items: center;
     }
-    /* .posterDiv  .review{
-        display: flex;
-        flex-flow: column;
-    } */
     .posterDetails{
-        width: 350px;
+        width: 320px;
         box-shadow: 0 0 20px #363530;
     }
     .posterDiv img{
