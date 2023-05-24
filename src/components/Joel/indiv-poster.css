@@ -56,14 +56,16 @@
 }
 .countbutton{
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
-    
 }
+/* .countbutton div:nth-of-type(1){
+    margin-left: 30px;
+} */
 
 .countbutton button{
     padding: 0;
-    width: 30px;
+    width: 40px;
     height: 30px;
     font-weight: bold;
     border-radius: 10px;
@@ -115,7 +117,7 @@
         align-items: center;
     }
     .posterDetails{
-        width: 350px;
+        width: 320px;
         box-shadow: 0 0 20px #363530;
     }
     .posterDiv img{

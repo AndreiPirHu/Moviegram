@@ -71,8 +71,8 @@ const Review = (props) => {
 
 
     return (
-        <div className="review">
-            {isLoggedIn ? "Tell us what you think:" : "Log in to leave a comment!"}
+        <div className="review" style={{ height: reviewed ? 240 : 360 }}>
+            {isLoggedIn ? <h3 style={{margin:0}}>Tell us what you think:</h3> : <h2>Log in to leave a comment!</h2>}
 
             {/* read from firebase */}
 

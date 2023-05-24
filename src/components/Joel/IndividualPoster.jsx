@@ -12,8 +12,7 @@ import Suggestion from "./Suggestion";
 const apiKey = 'b5f72212d28ab0fe02704865f4b72213';
 const urlBase = `https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&language=en-US&page=1`;
 
-async function fetchPoster(id, setItem, setError){
-    
+async function fetchPoster(id, setItem, setError, resetSelected, resetBtns){
     const apiKey = 'b5f72212d28ab0fe02704865f4b72213';
     const idEndPoint = `https://api.themoviedb.org/3/movie/${id}?api_key=${apiKey}&language=en-US`;
 
@@ -27,6 +26,9 @@ async function fetchPoster(id, setItem, setError){
             }else if(data.id){
                 console.log("item is set")
                 setItem(data);
+                resetSelected([]);
+                /* resetBtns(true);
+                resetBtns(false); */
             }
         })
         .catch(error => {
@@ -37,8 +39,8 @@ async function fetchPoster(id, setItem, setError){
 const IndividualPoster = () => {
     const [error, setError] = useState(false)
     const [item, setItem] = useState([]);
-
     const [selected, setSelected] = useState([]);
+    const [reset, setReset] = useState(false)
 
     const params = useParams();
     const id = params.id;
@@ -48,14 +50,19 @@ const IndividualPoster = () => {
     const dispatch = useDispatch();
     let navigate = useNavigate();
 
+
     useEffect(()=>{
         //fetch and changes item to an object when id changes
-        fetchPoster(id, setItem, setError);
+        fetchPoster(id, setItem, setError, setSelected, setReset);
     }, [id]);
+    
+    /* useEffect(()=>{
+        if(params.id != item.id){
+            setReset(true)
+        }
+    }, []) */
 
-
-    function addToSelected(poster, size, price) {
-
+    function addToSelected(poster, size, price){
         const item = {
             id: uuidv4(),
             name: poster.title,
@@ -65,8 +72,7 @@ const IndividualPoster = () => {
         }
 
         setSelected([...selected, item]);
-        //console.log("item", item)
-        //console.log("total items added ", selected.length + 1)
+        
     }
     function remove(size) {
         if (selected.length != 0) {
@@ -117,7 +123,11 @@ const IndividualPoster = () => {
                 
             <div className="posterDetails">
                 <p>{item.overview}</p>
-                <CounterButton item={item} handleAdd={addToSelected} handleRemove={remove}/>
+                <CounterButton item={item} 
+                    handleAdd={addToSelected} 
+                    handleRemove={remove} 
+                    reset={reset} 
+                    handleReset={setReset}/>
 
                 <div className="downmenu">
                     <Link to='/'>
@@ -140,7 +150,7 @@ const IndividualPoster = () => {
         <div className="indivPosterDiv">
             {error ? errorContainer : container}
             <Review filmID={id}/>
-            <Suggestion />
+            <Suggestion resetBtns={setReset}/>
         </div>
     )
 }

@@ -37,22 +37,29 @@ const Suggestion = (props) => {
     }, []);
 
     const currentPosts = posts.slice(1, 20)
+    
+    function updatePage(){
+        props.resetBtns(true);
+        console.log("resetBTNS")
+        //navigate("/single/"+post.id)
+    }
 
   return (
     <div className='suggestions-container'>
-
-    <div className='suggestions-items' >
-        {currentPosts.map((post, index) =>{
-            return(
-                <img src={`https://image.tmdb.org/t/p/w500${post.poster_path}`} 
-                    alt="no pic available"
-                    key={index}
-                    onClick={() => {
-                        navigate("/single/" + post.id);
-                    }}/>
-        )
-        })}
-    </div>
+        <h3>Get one of this great posters too!!</h3>
+        <div className='suggestions-items' >
+            {currentPosts.map((post, index) =>{
+                return(
+                    <img src={`https://image.tmdb.org/t/p/w500${post.poster_path}`} 
+                        alt="no pic available"
+                        key={index}
+                        onClick={()=>{
+                            //updatePage(); 
+                            navigate("/single/"+post.id)
+                        }}/>
+            )
+            })}
+        </div>
 </div>
   )
 }
