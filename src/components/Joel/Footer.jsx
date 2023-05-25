@@ -20,6 +20,7 @@ const Footer = () => {
             break;
         default:
             content = (<div className="aboutus">
+
                 <p>We are a start-up that sells your favorite movie posters</p>
                 {/* <div className="aboutuspics">
                     <img src="src/assets/delivery.png" alt="no pic" />
@@ -27,6 +28,7 @@ const Footer = () => {
                     <img src="src/assets/payement.png" alt="no pic" />
                 </div> */}
             </div>);
+
     };
 
     return (

@@ -4,7 +4,9 @@ import { auth, collection, db, doc, getDocs, setDoc } from '../../firebase';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { actions as cartActions } from '../../features/cartitems';
+import { actions as loginActions } from '../../features/login';
 import { v4 as uuidv4 } from 'uuid';
+import { getDoc } from 'firebase/firestore';
 
 export const Profile = () => {
   const [orders, setOrders] = useState([]);
@@ -83,10 +85,11 @@ export const Profile = () => {
         await setDoc(userDocRef, userData, { merge: true });
         console.log(`User info successfully added to firestore`);
         setEditingInfo(false)
+        handleUserInfoDownload(userID)
       } catch (e) {
         console.error('Error adding user info to document:', e)
       }
-
+      
     }
 
 
@@ -94,15 +97,42 @@ export const Profile = () => {
 
 
   const getUserInfo = () => {
+    if (userInfo){
     setName(userInfo.name)
     setAddress(userInfo.address)
     setEmail(userInfo.email)
+    }
+    
+    
   }
+
+  //downloads userinfo from user firestore document when logged in
+  const handleUserInfoDownload = (user) => {
+    /* console.log(user) */
+    const docRef = doc(db, "users", user);
+    getDoc(docRef)
+      .then((doc) => {
+        if (doc.exists()) {
+          const userData = doc.data();
+
+          dispatch(loginActions.loginFetchInfo(userData))
+          //console.log(userData)
+          getUserInfo()
+        } else {
+          console.log("Could not retrieve user info");
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+
 
   useEffect(() => {
     const timeoutId = setTimeout(() => {
       getOrderHistory()
-    }, 50);
+    }, 100);
     return () => clearTimeout(timeoutId);
   }, [])
 
@@ -121,6 +151,7 @@ export const Profile = () => {
     }, 100);
     return () => clearTimeout(timeoutId);
   }, [userInfo]);
+
 
 
   return (
