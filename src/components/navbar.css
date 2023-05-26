@@ -30,6 +30,7 @@
     align-items: center;
     width: 100%;
     max-width: 80rem;
+    max-height: fit-content;
 }
 
 .moviegram {
@@ -37,13 +38,15 @@
     align-items: center;
     gap: 0.5;
     text-decoration: none;
+    max-height: fit-content;
 }
 
 .moviegram .logoImg {
     margin-left: 20px;
     width: 20rem;
-    height: 20rem;
+    height: 100%;
     object-fit: contain;
+    max-height: fit-content;
 }
 
 .moviegramp {
